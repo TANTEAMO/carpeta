@@ -63,3 +63,46 @@ nav {
 .menu li:hover {
     background: #3a4149; /* Gris más oscuro al pasar el mouse */
 }
+
+/* Estilos para el menú JS */
+.nav-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.menu li {
+    margin-bottom: 12px;
+    background: #495057;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.menu li:hover {
+    background: #3a4149;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Ajuste para el contenido principal */
+body {
+    padding-right: 240px !important;
+}
