@@ -1,23 +1,9 @@
-/* Reset total */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f9fa;
-    color: #333;
-    padding: 40px 20px 20px 120px; /* Ajuste para el menú */
-}
-
-/* Menú vertical derecho */
+/* ----- MENÚ VERTICAL ----- */
 nav {
     position: fixed;
     right: 20px;
     top: 20px;
-    width: 100px;
+    width: 120px;
 }
 
 .navbar-tabs {
@@ -30,23 +16,22 @@ nav {
 
 .navbar-tabs a {
     display: block;
-    background: #495057;
+    background: #495057; /* Gris oscuro */
     color: white !important;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    width: 100%;
 }
 
-/* Contenido principal */
-main {
-    max-width: 800px;
-    margin: 0 auto;
+/* ----- CONTENIDO PRINCIPAL ----- */
+body {
+    font-family: Arial;
+    background: #f8f9fa;
+    padding: 40px 20px 20px 120px;
 }
 
 h1 {
     color: #6c5ce7;
-    margin-bottom: 20px;
 }
