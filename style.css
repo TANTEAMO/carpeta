@@ -1,23 +1,26 @@
 body {
     font-family: Arial;
     background: #f8f9fa;
-    color: #333;
-    text-align: center;
+    margin: 0;
     padding: 20px;
 }
-h1 { 
-    color: #6c5ce7; 
-}
+
 .navbar-tabs {
     display: flex;
     gap: 10px;
-    justify-content: flex-end; /* Mueve el menú a la derecha */
+    justify-content: flex-end;
     padding-right: 20px;
+    list-style: none;
 }
 
 .navbar-tabs li {
-    background: #f0f0f0; /* Rectángulos grises */
+    background: #e9ecef;
     padding: 8px 15px;
     border-radius: 5px;
-    list-style: none;
+}
+
+.navbar-tabs a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
 }
