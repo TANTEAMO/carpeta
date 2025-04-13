@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="arte.html">ART</a></li>
                 <li><a href="ciencia.html">SCI-TECH</a></li>
-                <li><a href="vida.html">LIVING</a></li>
+                <li><a href="vida.html">VIDA</a></li>
             </ul>
         </nav>
     </div>
