@@ -57,8 +57,10 @@ body {
 .menu-toggle {
     display: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 15px 10px 20px; /* Más padding a la izquierda */;
     z-index: 1001;
+    position: relative;
+    margin-right: -10px; /* Compensa el padding extra */
 }
 
 .menu-toggle span {
