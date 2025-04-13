@@ -200,3 +200,55 @@ main h1:first-child {
         height: 32px;
     }
 }
+
+/* Estilos para el blog feed */
+.blog-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.post-preview {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.post-preview:hover {
+    transform: translateY(-5px);
+}
+
+.post-preview img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.post-excerpt {
+    padding: 20px;
+}
+
+.post-excerpt h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    color: #333;
+}
+
+.read-more {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#post-container {
+    max-width: 800px;
+    margin: 40px auto;
+}
