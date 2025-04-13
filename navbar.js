@@ -56,4 +56,55 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth <= 768) {
         document.body.style.paddingRight = '0';
     }
-});
+// =============================================
+    // [CÓDIGO NUEVO - CARGADOR DE POSTS BLOG]
+    // =============================================
+    const loadPost = async (postFile) => {
+        try {
+            const response = await fetch(postFile);
+            if (!response.ok) throw new Error('Post no encontrado');
+            return await response.text();
+        } catch (error) {
+            console.error('Error cargando el post:', error);
+            return '<div class="error-message" style="padding: 20px; background: #ffebee; border-radius: 8px; color: #c62828;">Error al cargar el post. Intenta nuevamente.</div>';
+        }
+    };
+
+    const showPost = (postHTML) => {
+        const blogFeed = document.querySelector('.blog-feed');
+        const postContainer = document.getElementById('post-container');
+        
+        blogFeed.style.display = 'none';
+        postContainer.innerHTML = `
+            <button id="back-button" class="back-button">
+                ← Volver al blog
+            </button>
+            ${postHTML}
+        `;
+        postContainer.style.display = 'block';
+
+        // Botón de volver
+        document.getElementById('back-button').addEventListener('click', () => {
+            postContainer.style.display = 'none';
+            postContainer.innerHTML = '';
+            blogFeed.style.display = 'grid';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    };
+
+    // Eventos para tarjetas de posts
+    document.querySelectorAll('.post-preview, .read-more').forEach(element => {
+        element.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const postFile = element.closest('.post-preview').dataset.post;
+            const postHTML = await loadPost(postFile);
+            showPost(postHTML);
+            
+            // Scroll suave
+            window.scrollTo({
+                top: document.getElementById('post-container').offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+    });
+}); // FIN DEL DOMContentLoaded
