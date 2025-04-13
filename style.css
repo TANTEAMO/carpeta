@@ -50,7 +50,7 @@ nav {
 }
 
 .menu li {
-    margin-bottom: 6px;  /* espacio entre botones */
+    margin-bottom: 4px;  /* espacio entre botones */
     background: #495057; /* Gris oscuro */
     color: white;
     padding: 10px 15px;
