@@ -74,6 +74,7 @@ nav {
     padding: 20px;
     background: white;
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    text-align: right; /* Alineación general a la derecha */
 }
 
 .menu {
@@ -90,10 +91,14 @@ nav {
     border-radius: 4px;
     text-align: right;
     transition: background 0.3s;
+    padding-right: 20px; /* Mayor espacio a la derecha */
 }
 
 .menu li:hover {
     background: #3a4149;
+}
+.menu li a {
+    display: inline-block; /* Permite alineación correcta */
 }
 
 .menu a {
