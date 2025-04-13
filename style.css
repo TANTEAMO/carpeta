@@ -10,7 +10,6 @@ body {
 header {
     text-align: center;
     padding: 20px 0;
-    border-bottom: 1px solid #eaeaea;
 }
 
 header h1 {
@@ -27,7 +26,7 @@ header h1 {
     padding: 20px;
 }
 
-/* Contenido principal (izquierda) */
+/* Contenido principal */
 main {
     flex: 1;
     padding: 20px;
@@ -38,7 +37,7 @@ main p {
     line-height: 1.6;
 }
 
-/* Menú de navegación (derecha) */
+/* Menú de navegación - CAJITAS GRIS OSCURO */
 nav {
     width: 200px;
     padding: 20px;
@@ -51,12 +50,16 @@ nav {
 }
 
 .menu li {
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+    margin-bottom: 12px;
+    background: #495057; /* Gris oscuro */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-align: center;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: background 0.2s;
 }
 
 .menu li:hover {
-    color: #666;
+    background: #3a4149; /* Gris más oscuro al pasar el mouse */
 }
