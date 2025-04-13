@@ -55,7 +55,7 @@ nav {
     color: white;
     padding: 10px 15px;
     border-radius: 4px;
-    text-align: center;
+    text-align: right;
     cursor: pointer;
     transition: background 0.2s;
 }
