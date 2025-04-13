@@ -112,7 +112,7 @@ main h1:first-child {
     background: #495057; /* Gris oscuro */
     padding: 12px 20px;
     border-radius: 4px;
-    border-left: 3px solid #FFD700; /* Borde amarillo */
+    border-left: 3px solid white; /* Borde amarillo */
     transition: background-color 0.3s ease;
     text-align: right;
     /*box-shadow: 0 1px 3px rgba(0,0,0,0.1);*/
@@ -120,6 +120,7 @@ main h1:first-child {
 
 .menu li:hover {
     background: #3a4048; /* Gris más oscuro al hover / #f0f0f0;(mas claro) */
+    border-left: 3px solid #FFD700; /* Borde amarillo */
 }
 
 .menu a {
