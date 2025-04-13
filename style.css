@@ -37,7 +37,7 @@ body {
 }
 
 .site-title:hover {
-    color: #6c5ce7; /* Color morado al hover */
+    color: #FFD700; /* Color amarillo al hover */
 }
 
 .logo-container {
@@ -100,7 +100,7 @@ main h1:first-child {
     box-shadow: -2px 0 10px rgba(0,0,0,0.05);
     border-left: 1px solid #e0e0e0;
     z-index: 999;
-    /*transition: transform 0.3s ease;*/
+ 
 }
 .menu {
     list-style: none; /* Elimina los bullets */
@@ -115,7 +115,7 @@ main h1:first-child {
     border-left: 3px solid white; /* Borde amarillo */
     transition: background-color 0.3s ease;
     text-align: right;
-    /*box-shadow: 0 1px 3px rgba(0,0,0,0.1);*/
+   
 }
 
 .menu li:hover {
@@ -145,11 +145,23 @@ main h1:first-child {
     
     .menu-toggle {
         display: block;
+        order: 1; /* Nuevo: Posiciona a la derecha */
+    }
+    
+    .logo-container {
+        order: 0; /* Nuevo: Posiciona a la izquierda */
+        flex-grow: 1; /* Nuevo: Ocupa espacio disponible */
+    }
+    
+    .main-header {
+        padding: 15px 10px 15px 20px !important; /* Ajustado */
     }
     
     .nav-container {
         width: 280px;
         transform: translateX(100%);
+        top: 50px; /* Ajustado por altura del header */
+        height: calc(100vh - 50px); /* Ajustado por altura del header */
     }
     
     .nav-container.active {
@@ -179,7 +191,7 @@ main h1:first-child {
         width: 100%;
     }
     
-    .main-header h1 {
+    .site-title { /* Cambiado de .main-header h1 a .site-title */
         font-size: 1.5rem;
     }
     
