@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <header class="main-header">
         <div class="logo-container">
             <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
-            <h1>TANTEAMO</h1>
+             <a href="index.html" class="site-title">TANTEAMO</a>
         </div>
         <div class="menu-toggle">
             <span></span>
