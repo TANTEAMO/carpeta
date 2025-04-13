@@ -3,56 +3,60 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: space-between;
     background-color: #f8f8f8;
     color: #333;
 }
 
-/* Menú DERECHO */
-nav {
-    width: 200px;
-    padding: 30px 20px;
-    position: fixed;
-    right: 0;
-    height: 100vh;
-    border-left: 1px solid #eaeaea; /* Línea divisoria izquierda */
+header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eaeaea;
 }
 
-nav h1 {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
+header h1 {
+    font-size: 1.8rem;
+    margin: 0;
     color: #222;
-    text-align: right; /* Alineación a la derecha */
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Contenido principal (izquierda) */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+main p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Menú de navegación (derecha) */
+nav {
+    width: 200px;
+    padding: 20px;
 }
 
 .menu {
     list-style: none;
     padding: 0;
-    text-align: right; /* Texto alineado a la derecha */
+    margin: 0;
 }
 
 .menu li {
     margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .menu li:hover {
     color: #666;
-}
-
-/* Contenido principal */
-main {
-    margin-right: 240px; /* Ajuste para el menú derecho */
-    padding: 40px;
-    max-width: 800px;
-    width: 100%;
-}
-
-main h2 {
-    font-weight: normal;
-    font-size: 1.3rem;
-    color: #444;
 }
