@@ -1,13 +1,13 @@
-// Carga el menú en todas las páginas
 document.addEventListener('DOMContentLoaded', function() {
     document.body.insertAdjacentHTML('afterbegin', `
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="arte.html">ART</a></li>
-            <li><a href="ciencia.html">SCI-TECH</a></li>
-            <!-- Añade más enlaces -->
-        </ul>
-    </nav>
+    <div class="nav-container">
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="arte.html">ARTE</a></li>
+                <li><a href="vivir.html">VIVIR</a></li>
+            </ul>
+        </nav>
+    </div>
     `);
 });
