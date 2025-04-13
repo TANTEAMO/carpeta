@@ -25,6 +25,20 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+/* Estilo para el título clickable */
+.site-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #333;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.site-title:hover {
+    color: #6c5ce7; /* Color morado al hover */
+}
 
 .logo-container {
     display: flex;
@@ -38,14 +52,6 @@ body {
     object-fit: contain;
 }
 
-.main-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: #333;
-    margin: 0;
-    letter-spacing: 1px;
-}
 
 /* ===== BOTÓN HAMBURGUESA ===== */
 .menu-toggle {
