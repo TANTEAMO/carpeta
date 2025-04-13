@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.insertAdjacentHTML('afterbegin', `
     <header class="main-header">
         <div class="logo-container">
-            <img src="images/colibri-logo.png" alt="Logo Tanteamo" class="logo">
+            <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
             <h1>TANTEAMO</h1>
         </div>
     </header>
