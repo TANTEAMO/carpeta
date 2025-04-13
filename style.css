@@ -1,49 +1,52 @@
-/* Estilos generales */
-body {
-    font-family: 'Arial', sans-serif;
-    background: #f8f9fa;
-    color: #333;
+/* Reset total */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Menú vertical a la derecha */
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    padding: 40px 20px 20px 120px; /* Ajuste para el menú */
+}
+
+/* Menú vertical derecho */
 nav {
     position: fixed;
     right: 20px;
     top: 20px;
+    width: 100px;
 }
 
 .navbar-tabs {
     list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .navbar-tabs li {
-    width: 120px;
+    margin-bottom: 10px;
 }
 
 .navbar-tabs a {
     display: block;
-    background: #495057; /* Gris oscuro */
-    color: white;
-    text-align: center;
+    background: #495057;
+    color: white !important;
     padding: 10px;
+    text-align: center;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    width: 100%;
 }
 
 /* Contenido principal */
 main {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 40px 20px;
 }
 
 h1 {
     color: #6c5ce7;
+    margin-bottom: 20px;
 }
