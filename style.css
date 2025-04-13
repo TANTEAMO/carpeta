@@ -2,7 +2,7 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 80px 240px 0 0 !important;
+    padding: 100px 240px 0 40px !important; /* Más espacio arriba y a la izquierda */
     background-color: #f8f8f8;
     color: #333;
     min-height: 100vh;
@@ -11,6 +11,7 @@ body {
 /* ===== ENCABEZADO ===== */
 .main-header {
     position: fixed;
+    height: 80px; /* Altura fija */
     top: 0;
     left: 0;
     width: 100%;
@@ -45,13 +46,24 @@ body {
     margin: 0;
     letter-spacing: 1px;
 }
+/* Ajuste específico para el primer h1 */
+main h1:first-child {
+    margin-top: 0;
+    padding-top: 30px; /* Espacio adicional */
+    position: relative;
+    z-index: 1;
+}
 
 /* ===== CONTENIDO PRINCIPAL ===== */
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 20px 40px;
     position: relative;
+    background-color: #fff; /* Fondo blanco para mejor contraste */
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    margin-top: 20px; /* Separación del header */
 }
 
 main p {
