@@ -4,28 +4,32 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: space-between;
     background-color: #f8f8f8;
     color: #333;
 }
 
-/* Menú izquierdo */
+/* Menú DERECHO */
 nav {
     width: 200px;
     padding: 30px 20px;
     position: fixed;
+    right: 0;
     height: 100vh;
-    border-right: 1px solid #eaeaea;
+    border-left: 1px solid #eaeaea; /* Línea divisoria izquierda */
 }
 
 nav h1 {
     font-size: 1.5rem;
     margin-bottom: 30px;
     color: #222;
+    text-align: right; /* Alineación a la derecha */
 }
 
 .menu {
     list-style: none;
     padding: 0;
+    text-align: right; /* Texto alineado a la derecha */
 }
 
 .menu li {
@@ -41,9 +45,10 @@ nav h1 {
 
 /* Contenido principal */
 main {
-    margin-left: 240px;
+    margin-right: 240px; /* Ajuste para el menú derecho */
     padding: 40px;
     max-width: 800px;
+    width: 100%;
 }
 
 main h2 {
