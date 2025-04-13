@@ -85,7 +85,8 @@ main p {
 }
 
 .menu li:hover {
-    background: #3a4149;
+    background: #6c757d; /* Gris medio */
+    border-left: 3px solid #6c5ce7; /* Borde izquierdo morado */
 }
 
 .menu a {
