@@ -2,116 +2,12 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 80px 240px 0 0 !important;
     background-color: #f8f8f8;
     color: #333;
 }
 
-header {
-    text-align: center;
-    padding: 20px 0;
-}
-
-header h1 {
-    font-size: 1.8rem;
-    margin: 0;
-    color: #222;
-}
-
-/* Contenedor principal */
-.container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Contenido principal */
-main {
-    flex: 1;
-    padding: 20px;
-}
-
-main p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-/* Menú de navegación - CAJITAS GRIS OSCURO */
-nav {
-    width: 200px;
-    padding: 20px;
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    margin-bottom: 4px;  /* espacio entre botones */
-    background: #495057; /* Gris oscuro */
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-align: right;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.menu li:hover {
-    background: #3a4149; /* Gris más oscuro al pasar el mouse */
-}
-
-/* Estilos para el menú JS */
-.nav-container {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 200px;
-    height: 100vh;
-    padding: 20px;
-    background: white;
-    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    text-align: right; /* Alineación general a la derecha */
-}
-
-.menu {
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
-}
-
-.menu li {
-    margin-bottom: 12px;
-    background: #495057;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-align: right;
-    transition: background 0.3s;
-    padding-right: 20px; /* Mayor espacio a la derecha */
-}
-
-.menu li:hover {
-    background: #3a4149;
-}
-.menu li a {
-    display: inline-block; /* Permite alineación correcta */
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-/* Ajuste para el contenido principal */
-body {
-    padding-right: 240px !important;
-}
-/* Encabezado elegante */
+/* Encabezado */
 .main-header {
     position: fixed;
     top: 0;
@@ -120,7 +16,7 @@ body {
     padding: 15px 30px;
     background: white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    border-bottom: 1px solid #eee; /* Línea sutil inferior */
+    border-bottom: 1px solid #eee;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -139,7 +35,7 @@ body {
 }
 
 .main-header h1 {
-    font-family: 'Playfair Display', serif; /* Elegante */
+    font-family: 'Playfair Display', serif;
     font-weight: 700;
     font-size: 1.8rem;
     color: #333;
@@ -147,8 +43,53 @@ body {
     letter-spacing: 1px;
 }
 
-/* Ajuste para el contenido principal */
-body {
-    padding-top: 80px !important; /* Espacio para el header */
-    padding-right: 240px !important;
+/* Contenido principal */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+main p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Menú de navegación */
+.nav-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+    text-align: right;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.menu li {
+    margin-bottom: 4px;
+    background: #495057;
+    color: white;
+    padding: 10px 20px 10px 15px;
+    border-radius: 4px;
+    text-align: right;
+    transition: background 0.3s;
+}
+
+.menu li:hover {
+    background: #3a4149;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
 }
