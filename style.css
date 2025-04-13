@@ -1,37 +1,53 @@
-/* ----- MENÚ VERTICAL ----- */
-nav {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    width: 120px;
-}
-
-.navbar-tabs {
-    list-style: none;
-}
-
-.navbar-tabs li {
-    margin-bottom: 10px;
-}
-
-.navbar-tabs a {
-    display: block;
-    background: #495057; /* Gris oscuro */
-    color: white !important;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* ----- CONTENIDO PRINCIPAL ----- */
+/* Estilos generales */
 body {
-    font-family: Arial;
-    background: #f8f9fa;
-    padding: 40px 20px 20px 120px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #f8f8f8;
+    color: #333;
 }
 
-h1 {
-    color: #6c5ce7;
+/* Menú izquierdo */
+nav {
+    width: 200px;
+    padding: 30px 20px;
+    position: fixed;
+    height: 100vh;
+    border-right: 1px solid #eaeaea;
+}
+
+nav h1 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.menu li:hover {
+    color: #666;
+}
+
+/* Contenido principal */
+main {
+    margin-left: 240px;
+    padding: 40px;
+    max-width: 800px;
+}
+
+main h2 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    color: #444;
 }
