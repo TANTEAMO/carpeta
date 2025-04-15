@@ -7,54 +7,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Crear estructura
     const header = `
-    <header class="main-header">
-        <div class="logo-container">
-            <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
-            <a href="index.html" class="site-title">TANTEAMO</a>
-        </div>
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
-    <div class="nav-container">
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="arte.html">ART</a></li>
-                <li><a href="ciencia.html">SCI-TECH</a></li>
-                <li><a href="vida.html">VIDA</a></li>
-            </ul>
-        </nav>
-    </div>`;
-
+        <header class="main-header">
+            <div class="logo-container">
+                <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
+                <a href="index.html" class="site-title">TANTEAMO</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </header>
+        <div class="nav-container">
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="arte.html">ART</a></li>
+                    <li><a href="ciencia.html">SCI-TECH</a></li>
+                    <li><a href="vida.html">VIDA</a></li>
+                </ul>
+            </nav>
+        </div>`;
+    
+    // Insertar el header en el body
     document.body.insertAdjacentHTML('afterbegin', header);
 
     // Funcionalidad del menú
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-container');
-    
-    toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
-        nav.classList.toggle('hidden');
-        document.body.style.overflow = nav.classList.contains('hidden') ? 'hidden' : '';
-    });
+
+    const toggleMenu = () => {
+        const isHidden = nav.classList.contains('hidden');
+  
+    if (isHidden) {
+        nav.classList.remove('hidden');
+        nav.classList.add('show');
+        document.body.classList.add('menu-open'); // Opcional: bloquea scroll
+    } else {
+        nav.classList.remove('show');
+        nav.classList.add('hidden');
+        document.body.classList.remove('menu-open'); // Opcional: desbloquea scroll
+    }
+    };
+
+    toggle.addEventListener('click', toggleMenu);
 
     // Cerrar menú al hacer clic en enlace
     document.querySelectorAll('.menu a').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth <= 768) {
-                toggle.classList.remove('active');
-                nav.classList.remove('active');
-                document.body.style.overflow = '';
+                toggleMenu(); // Cerrar el menú si es móvil
             }
         });
     });
 
-    // Ajustar padding del body al cargar
+    // Ajustar el estado inicial del menú
     if (window.innerWidth <= 768) {
-        document.body.style.paddingRight = '0';
+        nav.classList.add('hidden');
     }
 
     // =============================================
@@ -74,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const showPost = (postHTML) => {
         const blogFeed = document.querySelector('.blog-feed');
         const postContainer = document.getElementById('post-container');
-        
+
         blogFeed.style.display = 'none';
         postContainer.innerHTML = `
             <button id="back-button-top" class="back-button">← Volver</button>
@@ -101,22 +110,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const postFile = element.closest('.post-preview').dataset.post;
             const postHTML = await loadPost(postFile);
             showPost(postHTML);
-            
+
             window.scrollTo({
                 top: document.getElementById('post-container').offsetTop - 80,
                 behavior: 'smooth'
             });
         });
     });
-    window.addEventListener('resize', () => {
-        const nav = document.querySelector('.nav-container');
-        const toggle = document.querySelector('.menu-toggle');
-    
+
+    // Función de ajuste al redimensionar la ventana
+    const handleResize = () => {
+        console.log('handleResize() llamado, ancho:', window.innerWidth);
         if (window.innerWidth > 768) {
             nav.classList.remove('active', 'hidden');
             toggle.classList.remove('active');
             document.body.style.overflow = '';
+        } else {
+            nav.classList.add('hidden');
         }
-    });
-    
+        console.log('Clases después de resize:', nav.classList);
+    };
+
+    window.addEventListener('resize', handleResize);
 });

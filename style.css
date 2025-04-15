@@ -7,8 +7,12 @@ body {
     color: #333;
     min-height: 100vh;
     transition: padding 0.3s ease;
+    overflow-x: hidden; /* Evita el desbordamiento horizontal */
+    overflow-y: auto;  /* Permite el desplazamiento vertical */
 }
-
+body.menu-open {
+    overflow: hidden;
+}
 /* ===== ENCABEZADO RESPONSIVO ===== */
 .main-header {
     position: fixed;
@@ -106,6 +110,8 @@ main {
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     position: relative;
     margin-right: 50px;
+    width: 100%;  /* Aseguramos que el ancho se adapte */
+    box-sizing: border-box;  /* Asegura que el padding no afecte el ancho */
 }
 
 main h1:first-child {
@@ -131,6 +137,11 @@ main h1:first-child {
 /* Menú oculto inicialmente */
 .nav-container.hidden {
     transform: translateX(100%);
+    transition: transform 0.3s ease; 
+}
+.nav-container.show {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
 }
 
 /* Estilo de los enlaces del menú lateral */
@@ -236,6 +247,8 @@ main h1:first-child {
         box-shadow: none;
         border-left: none;
         padding: 10px;
+        transform: translateX(100%); /* Oculta el menú inicialmente */
+        transition: transform 0.3s ease; /* Asegura una transición suave */
     }
 
     .nav-container nav ul.menu {
@@ -243,6 +256,9 @@ main h1:first-child {
         border-radius: 8px;
         padding: 10px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .nav-container.hidden {
+        transform: translateX(100%); /* Mantiene el menú oculto cuando tiene la clase 'hidden' */
     }
 }
 
