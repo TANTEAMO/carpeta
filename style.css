@@ -2,7 +2,7 @@
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
-    padding: 100px 40px 0 40px !important;
+    padding: 0px 40px 0 40px !important;
     background-color: #f8f8f8;
     color: #333;
     min-height: 100vh;
@@ -109,7 +109,7 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     position: relative;
-    margin-right: 50px;
+    margin-right: 0px;
     width: 100%;  /* Aseguramos que el ancho se adapte */
     box-sizing: border-box;  /* Asegura que el padding no afecte el ancho */
 }
