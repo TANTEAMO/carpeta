@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         blogFeed.style.display = 'none';
         postContainer.innerHTML = `
             <button id="back-button" class="back-button">
-                ← Volver al blog
+                ← Volver
             </button>
             ${postHTML}
         `;

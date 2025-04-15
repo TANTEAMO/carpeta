@@ -1,6 +1,6 @@
 /* ===== ESTILOS GENERALES ===== */
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 100px 40px 0 40px !important;
     background-color: #f8f8f8;
@@ -25,19 +25,43 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-/* Estilo para el título clickable */
+/* Estilo para el título principal */
 .site-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: #333;
+    font-family: 'Montserrat', Arial, serif;
+    font-weight: 600; /* Usamos un peso más fuerte para mayor impacto */
+    font-size: 1.5rem; /* Aumentamos el tamaño del texto */
+    color: #333; /* Color oscuro para un contraste fuerte */
+    letter-spacing: 2px; /* Aumentamos el espaciado entre letras para darle un toque elegante */
+    text-transform: uppercase; /* Texto en mayúsculas para mayor presencia */
     text-decoration: none;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
+    position: relative; /* Necesario para aplicar efectos como sombras */
+    transition: all 0.3s ease;
 }
 
+/* Efecto hover */
 .site-title:hover {
-    color: #FFD700; /* Color amarillo al hover */
+    color: #FFD700; /* Color dorado al pasar el mouse para darle vida */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15); /* Agregar sombra sutil */
+}
+
+/* Subrayado elegante con transición */
+.site-title:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #FFD700; /* Línea dorada */
+    bottom: 0; /* Posiciona la línea debajo del texto */
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+/* Efecto hover para subrayado */
+.site-title:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 .logo-container {
@@ -88,14 +112,14 @@ main h1:first-child {
     padding-top: 0;
 }
 
-/* ===== MENÚ LATERAL ===== */
+/* ===== MENÚ LATERAL Derecho===== */
 .nav-container {
     position: fixed;
     right: 0;
     top: 80px;
-    width: 200px;
+    width: 150px;
     height: calc(100vh - 80px);
-    padding: 25px 20px;
+    padding: 12px 2px; /* espacio entre botones y borde */
     background: #f5f5f5;
     box-shadow: -2px 0 10px rgba(0,0,0,0.05);
     border-left: 1px solid #e0e0e0;
@@ -110,7 +134,9 @@ main h1:first-child {
 .menu li {
     margin-bottom: 8px;
     background: #495057; /* Gris oscuro */
-    padding: 12px 20px;
+    max-width: 160px;
+    margin-left: auto; /* para que se alinee a la derecha */
+    padding: 10px 12px;
     border-radius: 4px;
     border-left: 3px solid white; /* Borde amarillo */
     transition: background-color 0.3s ease;
@@ -214,12 +240,12 @@ main h1:first-child {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .post-preview:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .post-preview img {
@@ -251,4 +277,28 @@ main h1:first-child {
 #post-container {
     max-width: 800px;
     margin: 40px auto;
+}
+/* Estilo del botón de "Volver" */
+.back-button {
+    background-color: #6c5ce7; /* Fondo morado */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado dentro del botón */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    font-weight: bold;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+/* Efecto hover */
+.back-button:hover {
+    background-color: #4e4bff; /* Fondo morado más oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Efecto focus (cuando se hace clic o se selecciona el botón) */
+.back-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #FFD700; /* Sombra dorada */
 }
