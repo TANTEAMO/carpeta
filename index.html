@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TANTEAMO</title>
     <link rel="stylesheet" href="style.css">
-   
 </head>
 <body>
     <header>
@@ -17,24 +16,104 @@
         <main>
             <p></p>
             
-        <section class="blog-feed">
-    <article class="post-preview" data-post="post/decretos.html">
-        <img border="0" width="800" data-original-height="120" data-original-width="1024" src="images/decreto%20de%20poder.png" alt="Decreto de Prosperidad">
-        <div class="post-excerpt">
-            <h2>🔱 Decreto Supremo de Prosperidad</h2>
-            <p>Todo es un portal hacia lo infinito: Cada palabra, pensamiento y acción redefine la realidad...</p>
-            <button class="read-more">Leer más</button>
-        </div>
-    </article>
-    
-    <!-- Más posts pueden agregarse con la misma estructura -->
-</section>
+            <section class="blog-feed" id="blog-feed"></section>
 
-<div id="post-container" style="display: none;"></div>
+            <div id="post-container" style="display: none;"></div>
         </main>
-
-       
     </div>
+
     <script src="navbar.js"></script>
+
+    <!-- Blog Feeds -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('posts.json');  <!-- Ruta ajustada -->
+                if (!res.ok) {
+                    throw new Error('Error al cargar los posts');
+                }
+                const posts = await res.json();
+        
+                const blogFeed = document.getElementById('blog-feed');
+                blogFeed.innerHTML = posts.map(post => `
+                    <article class="post-preview" data-post="${post.post}">
+                        <img src="${post.image}" alt="${post.title}" class="post-image">
+                        <div class="post-excerpt">
+                            <h2>${post.title}</h2>
+                            <p>${post.description}</p>
+                            <button class="read-more">Leer más</button>
+                        </div>
+                    </article>
+                `).join('');
+        
+                // Manejar el evento de clic en el botón "Leer más"
+                const readMoreButtons = document.querySelectorAll('.read-more');
+                readMoreButtons.forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        e.preventDefault(); // Prevenir la acción por defecto del enlace
+                        
+                        const postElement = button.closest('.post-preview');
+                        const postFile = postElement.dataset.post;
+                        
+                        const postRes = await fetch(postFile);
+                        const postHTML = await postRes.text();
+        
+                        // Mostrar el contenido del post en el contenedor
+                        const postContainer = document.getElementById('post-container');
+                        postContainer.innerHTML = `
+                            <button id="back-button" class="back-button">Volver al blog</button>
+                            ${postHTML}
+                        `;
+                        postContainer.style.display = 'block';
+        
+                        // Añadir el evento de clic al botón de "Volver al blog"
+                        document.getElementById('back-button').addEventListener('click', () => {
+                            // Restaurar el layout de los feeds cuando volvemos
+                            postContainer.style.display = 'none';
+                            blogFeed.style.display = 'grid';  // Reestablecer el estilo de grid
+                            blogFeed.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))'; // Asegurarnos de que el feed use múltiples columnas
+                        });
+        
+                        // Ocultar el feed y mostrar el post
+                        blogFeed.style.display = 'none';
+                    });
+                });
+
+                // Manejar el evento de clic en la imagen
+                const postImages = document.querySelectorAll('.post-image');
+                postImages.forEach(image => {
+                    image.addEventListener('click', async (e) => {
+                        const postElement = image.closest('.post-preview');
+                        const postFile = postElement.dataset.post;
+                        
+                        const postRes = await fetch(postFile);
+                        const postHTML = await postRes.text();
+        
+                        // Mostrar el contenido del post en el contenedor
+                        const postContainer = document.getElementById('post-container');
+                        postContainer.innerHTML = `
+                            <button id="back-button" class="back-button">Volver al blog</button>
+                            ${postHTML}
+                        `;
+                        postContainer.style.display = 'block';
+        
+                        // Añadir el evento de clic al botón de "Volver al blog"
+                        document.getElementById('back-button').addEventListener('click', () => {
+                            // Restaurar el layout de los feeds cuando volvemos
+                            postContainer.style.display = 'none';
+                            blogFeed.style.display = 'grid';  // Reestablecer el estilo de grid
+                            blogFeed.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))'; // Asegurarnos de que el feed use múltiples columnas
+                        });
+        
+                        // Ocultar el feed y mostrar el post
+                        blogFeed.style.display = 'none';
+                    });
+                });
+        
+            } catch (error) {
+                console.error('Error al cargar los posts:', error);
+            }
+        });
+    </script>
 </body>
 </html>
