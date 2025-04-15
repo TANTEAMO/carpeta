@@ -308,3 +308,6 @@ main h1:first-child {
     outline: none;
     box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.4);
 }
+* {
+    box-sizing: border-box;
+  }
