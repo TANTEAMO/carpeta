@@ -11,7 +11,9 @@ body {
     overflow-y: auto;  /* Permite el desplazamiento vertical */
 }
 body.menu-open {
-    overflow: hidden;
+    position: fixed;  /* ✅ Fija el body sin cambiar el ancho */
+    width: 100%;     /* Mantiene el ancho consistente */
+    overflow-y: scroll; /* Permite medir el scrollbar */
 }
 /* ===== ENCABEZADO RESPONSIVO ===== */
 .main-header {

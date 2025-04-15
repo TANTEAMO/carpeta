@@ -37,17 +37,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.nav-container');
 
     const toggleMenu = () => {
-        const isHidden = nav.classList.contains('hidden');
-  
-    if (isHidden) {
-        nav.classList.remove('hidden');
-        nav.classList.add('show');
-        document.body.classList.add('menu-open'); // Opcional: bloquea scroll
+        const body = document.body;
+    const isMenuOpen = body.classList.contains('menu-open');
+    
+    if (!isMenuOpen) {
+        // Guarda la posición del scroll antes de abrir el menú
+        body.style.top = `-${window.scrollY}px`;
+        body.classList.add('menu-open');
     } else {
-        nav.classList.remove('show');
-        nav.classList.add('hidden');
-        document.body.classList.remove('menu-open'); // Opcional: desbloquea scroll
+        // Restaura la posición al cerrar
+        const scrollY = Math.abs(parseInt(body.style.top || '0'));
+        body.classList.remove('menu-open');
+        window.scrollTo(0, scrollY);
+        body.style.top = '';
     }
+    
+    nav.classList.toggle('hidden');
+    nav.classList.toggle('show');
     };
 
     toggle.addEventListener('click', toggleMenu);
