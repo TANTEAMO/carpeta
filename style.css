@@ -84,7 +84,7 @@ body {
     padding: 10px 15px 10px 20px;
     z-index: 1001;
     position: relative;
-    margin-right: -10px;
+    margin-right: 10px;
 }
 
 .menu-toggle span {
@@ -105,6 +105,7 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     position: relative;
+    margin-right: 50px;
 }
 
 main h1:first-child {
@@ -112,7 +113,7 @@ main h1:first-child {
     padding-top: 0;
 }
 
-/* ===== MENÚ LATERAL Derecho===== */
+/* ===== MENÚ LATERAL DERECHO ===== */
 .nav-container {
     position: fixed;
     right: 0;
@@ -124,8 +125,15 @@ main h1:first-child {
     box-shadow: -2px 0 10px rgba(0,0,0,0.05);
     border-left: 1px solid #e0e0e0;
     z-index: 999;
+    transition: transform 0.3s ease;
 }
 
+/* Menú oculto inicialmente */
+.nav-container.hidden {
+    transform: translateX(100%);
+}
+
+/* Estilo de los enlaces del menú lateral */
 .menu {
     list-style: none;
     padding: 0;
@@ -156,81 +164,10 @@ main h1:first-child {
     font-weight: 500;
 }
 
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 1024px) {
-    body {
-        padding-right: 40px !important;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding-right: 0 !important;
-        padding-left: 20px !important;
-    }
-
-    .menu-toggle {
-        display: block;
-        order: 1;
-    }
-
-    .logo-container {
-        order: 0;
-        flex-grow: 1;
-    }
-
-    .main-header {
-        padding: 15px 10px 15px 20px !important;
-    }
-
-    .nav-container {
-        width: 280px;
-        transform: translateX(100%);
-        top: 50px;
-        height: calc(100vh - 50px);
-    }
-
-    .nav-container.active {
-        transform: translateX(0);
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    main {
-        padding: 20px;
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .nav-container {
-        width: 100%;
-    }
-
-    .site-title {
-        font-size: 1.5rem;
-    }
-
-    .logo {
-        width: 32px;
-        height: 32px;
-    }
-}
-
-/* Estilos para el blog feed */
+/* ===== BLOG FEED ===== */
 .blog-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajuste automático pero con un tamaño mínimo */
     gap: 30px;
     margin-top: 40px;
 }
@@ -242,6 +179,9 @@ main h1:first-child {
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     transition: box-shadow 0.3s ease;
     cursor: pointer;
+    width: 100%;
+    max-width: 280px; /* Limita el ancho máximo de cada tarjeta */
+    min-width: 280px; /* Asegura que cada tarjeta tenga un tamaño mínimo */
 }
 
 .post-preview:hover {
@@ -274,21 +214,59 @@ main h1:first-child {
     margin-top: 15px;
 }
 
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+    .blog-feed {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Reducimos el tamaño mínimo en pantallas más pequeñas */
+        gap: 20px;
+    }
+
+    /* Menú lateral como botón de hamburguesa */
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        position: fixed; /* En lugar de fixed */
+        top: 80px;
+        right: 0;
+        width: auto;
+        height: auto;
+        background: transparent; /* o ningún fondo si querés */
+        box-shadow: none;
+        border-left: none;
+        padding: 10px;
+    }
+
+    .nav-container nav ul.menu {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-feed {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Ajustamos aún más en pantallas muy pequeñas */
+        gap: 15px;
+    }
+}
+
+/* ===== ESTILOS PARA EL POST INDIVIDUAL ===== */
 #post-container {
     max-width: 800px;
     margin: 40px auto;
     padding-bottom: 50px; /* Asegura espacio suficiente al final para el botón inferior */
 }
-/* Estilo para las imágenes en los posts */
+
 #post-container img {
-    max-width: 100%;  /* Limita el tamaño máximo al 100% del contenedor */
-    height: auto;     /* Mantiene la proporción de la imagen */
-    display: block;   /* Evita que la imagen tenga espacio en blanco debajo */
-    margin: 0 auto;   /* Centra la imagen */
+    max-width: 100%;  
+    height: auto;     
+    display: block;   
+    margin: 0 auto;   
 }
 
-/* Estilo del botón de "Volver" */
-/* Estilo del botón de "Volver" */
 .back-button {
     background-color: #6c5ce7;
     color: white;
@@ -305,49 +283,12 @@ main h1:first-child {
     font-size: 1rem; /* Ajustamos el tamaño de la fuente */
 }
 
-/* Efecto hover */
 .back-button:hover {
     background-color: #4e4bff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Efecto focus (cuando se hace clic o se selecciona el botón) */
 .back-button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #FFD700;
+    box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.4);
 }
-
-/* Contenedor para el botón inferior */
-#back-button-bottom-container {
-    position: fixed;  /* Fijamos el botón en la parte inferior */
-    bottom: 20px;     /* Distancia desde la parte inferior */
-    left: 50%;
-    transform: translateX(-50%); /* Centrado horizontal */
-    z-index: 9999; /* Aseguramos que esté por encima de otros elementos */
-}
-
-/* Estilo para el botón con la flecha */
-#back-button-bottom-container a {
-    color: white;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #6c5ce7;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Flecha */
-#back-button-bottom-container a::after {
-    content: " ←"; /* Agregamos la flecha hacia la izquierda */
-    margin-left: 8px;
-}
-
-/* Efecto hover */
-#back-button-bottom-container a:hover {
-    background-color: #4e4bff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-

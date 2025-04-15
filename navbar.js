@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
-        nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        nav.classList.toggle('hidden');
+        document.body.style.overflow = nav.classList.contains('hidden') ? 'hidden' : '';
     });
 
     // Cerrar menú al hacer clic en enlace
@@ -108,4 +108,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+    window.addEventListener('resize', () => {
+        const nav = document.querySelector('.nav-container');
+        const toggle = document.querySelector('.menu-toggle');
+    
+        if (window.innerWidth > 768) {
+            nav.classList.remove('active', 'hidden');
+            toggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
 });
