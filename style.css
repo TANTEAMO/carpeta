@@ -25,23 +25,24 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
 /* Estilo para el título principal */
 .site-title {
     font-family: 'Montserrat', Arial, serif;
-    font-weight: 600; /* Usamos un peso más fuerte para mayor impacto */
-    font-size: 1.5rem; /* Aumentamos el tamaño del texto */
-    color: #333; /* Color oscuro para un contraste fuerte */
-    letter-spacing: 2px; /* Aumentamos el espaciado entre letras para darle un toque elegante */
-    text-transform: uppercase; /* Texto en mayúsculas para mayor presencia */
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
     text-decoration: none;
-    position: relative; /* Necesario para aplicar efectos como sombras */
+    position: relative;
     transition: all 0.3s ease;
 }
 
 /* Efecto hover */
 .site-title:hover {
-    color: #FFD700; /* Color dorado al pasar el mouse para darle vida */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15); /* Agregar sombra sutil */
+    color: #b0e0e6;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Subrayado elegante con transición */
@@ -50,8 +51,8 @@ body {
     position: absolute;
     width: 100%;
     height: 3px;
-    background-color: #FFD700; /* Línea dorada */
-    bottom: 0; /* Posiciona la línea debajo del texto */
+    background-color: #b0e0e6;
+    bottom: 0;
     left: 0;
     transform: scaleX(0);
     transform-origin: bottom right;
@@ -76,15 +77,14 @@ body {
     object-fit: contain;
 }
 
-
 /* ===== BOTÓN HAMBURGUESA ===== */
 .menu-toggle {
     display: none;
     cursor: pointer;
-    padding: 10px 15px 10px 20px; /* Más padding a la izquierda */;
+    padding: 10px 15px 10px 20px;
     z-index: 1001;
     position: relative;
-    margin-right: -10px; /* Compensa el padding extra */
+    margin-right: -10px;
 }
 
 .menu-toggle span {
@@ -119,38 +119,38 @@ main h1:first-child {
     top: 80px;
     width: 150px;
     height: calc(100vh - 80px);
-    padding: 12px 2px; /* espacio entre botones y borde */
+    padding: 12px 2px;
     background: #f5f5f5;
     box-shadow: -2px 0 10px rgba(0,0,0,0.05);
     border-left: 1px solid #e0e0e0;
     z-index: 999;
- 
 }
+
 .menu {
-    list-style: none; /* Elimina los bullets */
+    list-style: none;
     padding: 0;
     margin: 0;
 }
+
 .menu li {
     margin-bottom: 8px;
-    background: #495057; /* Gris oscuro */
+    background: #495057;
     max-width: 160px;
-    margin-left: auto; /* para que se alinee a la derecha */
+    margin-left: auto;
     padding: 10px 12px;
     border-radius: 4px;
-    border-left: 3px solid white; /* Borde amarillo */
+    border-left: 3px solid white;
     transition: background-color 0.3s ease;
     text-align: right;
-   
 }
 
 .menu li:hover {
-    background: #3a4048; /* Gris más oscuro al hover / #f0f0f0;(mas claro) */
-    border-left: 3px solid #FFD700; /* Borde amarillo */
+    background: #3a4048;
+    border-left: 3px solid #FFD700;
 }
 
 .menu a {
-    color: white !important; /* Texto blanco */
+    color: white !important;
     text-decoration: none;
     display: block;
     font-weight: 500;
@@ -168,44 +168,44 @@ main h1:first-child {
         padding-right: 0 !important;
         padding-left: 20px !important;
     }
-    
+
     .menu-toggle {
         display: block;
-        order: 1; /* Nuevo: Posiciona a la derecha */
+        order: 1;
     }
-    
+
     .logo-container {
-        order: 0; /* Nuevo: Posiciona a la izquierda */
-        flex-grow: 1; /* Nuevo: Ocupa espacio disponible */
+        order: 0;
+        flex-grow: 1;
     }
-    
+
     .main-header {
-        padding: 15px 10px 15px 20px !important; /* Ajustado */
+        padding: 15px 10px 15px 20px !important;
     }
-    
+
     .nav-container {
         width: 280px;
         transform: translateX(100%);
-        top: 50px; /* Ajustado por altura del header */
-        height: calc(100vh - 50px); /* Ajustado por altura del header */
+        top: 50px;
+        height: calc(100vh - 50px);
     }
-    
+
     .nav-container.active {
         transform: translateX(0);
     }
-    
+
     .menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
-    
+
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
     }
-    
+
     main {
         padding: 20px;
         margin-top: 10px;
@@ -216,11 +216,11 @@ main h1:first-child {
     .nav-container {
         width: 100%;
     }
-    
-    .site-title { /* Cambiado de .main-header h1 a .site-title */
+
+    .site-title {
         font-size: 1.5rem;
     }
-    
+
     .logo {
         width: 32px;
         height: 32px;
@@ -277,28 +277,77 @@ main h1:first-child {
 #post-container {
     max-width: 800px;
     margin: 40px auto;
+    padding-bottom: 50px; /* Asegura espacio suficiente al final para el botón inferior */
 }
+/* Estilo para las imágenes en los posts */
+#post-container img {
+    max-width: 100%;  /* Limita el tamaño máximo al 100% del contenedor */
+    height: auto;     /* Mantiene la proporción de la imagen */
+    display: block;   /* Evita que la imagen tenga espacio en blanco debajo */
+    margin: 0 auto;   /* Centra la imagen */
+}
+
+/* Estilo del botón de "Volver" */
 /* Estilo del botón de "Volver" */
 .back-button {
-    background-color: #6c5ce7; /* Fondo morado */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado dentro del botón */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cursor de mano */
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+    width: auto;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem; /* Ajustamos el tamaño de la fuente */
 }
 
 /* Efecto hover */
 .back-button:hover {
-    background-color: #4e4bff; /* Fondo morado más oscuro */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #4e4bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Efecto focus (cuando se hace clic o se selecciona el botón) */
 .back-button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #FFD700; /* Sombra dorada */
+    box-shadow: 0 0 0 2px #FFD700;
 }
+
+/* Contenedor para el botón inferior */
+#back-button-bottom-container {
+    position: fixed;  /* Fijamos el botón en la parte inferior */
+    bottom: 20px;     /* Distancia desde la parte inferior */
+    left: 50%;
+    transform: translateX(-50%); /* Centrado horizontal */
+    z-index: 9999; /* Aseguramos que esté por encima de otros elementos */
+}
+
+/* Estilo para el botón con la flecha */
+#back-button-bottom-container a {
+    color: white;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #6c5ce7;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Flecha */
+#back-button-bottom-container a::after {
+    content: " ←"; /* Agregamos la flecha hacia la izquierda */
+    margin-left: 8px;
+}
+
+/* Efecto hover */
+#back-button-bottom-container a:hover {
+    background-color: #4e4bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <header class="main-header">
         <div class="logo-container">
             <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
-             <a href="index.html" class="site-title">TANTEAMO</a>
+            <a href="index.html" class="site-title">TANTEAMO</a>
         </div>
         <div class="menu-toggle">
             <span></span>
@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.innerWidth <= 768) {
         document.body.style.paddingRight = '0';
     }
-// =============================================
+
+    // =============================================
     // [CÓDIGO NUEVO - CARGADOR DE POSTS BLOG]
     // =============================================
     const loadPost = async (postFile) => {
@@ -76,20 +77,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         blogFeed.style.display = 'none';
         postContainer.innerHTML = `
-            <button id="back-button" class="back-button">
-                ← Volver
-            </button>
+            <button id="back-button-top" class="back-button">← Volver</button>
             ${postHTML}
+            <button id="back-button-bottom" class="back-button">← Volver</button>
         `;
         postContainer.style.display = 'block';
 
-        // Botón de volver
-        document.getElementById('back-button').addEventListener('click', () => {
+        const goBack = () => {
             postContainer.style.display = 'none';
             postContainer.innerHTML = '';
             blogFeed.style.display = 'grid';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        };
+
+        document.getElementById('back-button-top').addEventListener('click', goBack);
+        document.getElementById('back-button-bottom').addEventListener('click', goBack);
     };
 
     // Eventos para tarjetas de posts
@@ -100,11 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const postHTML = await loadPost(postFile);
             showPost(postHTML);
             
-            // Scroll suave
             window.scrollTo({
                 top: document.getElementById('post-container').offsetTop - 80,
                 behavior: 'smooth'
             });
         });
     });
-}); // FIN DEL DOMContentLoaded
+});
