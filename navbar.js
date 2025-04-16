@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <nav>
                 <ul class="menu">
                     <li><a href="index.html">PRACTICA</a></li>
-                    <li><a href="">PREGUNTA</a></li>
-                    <li><a href="">BUSCA</a></li>
-                    <li><a href="">COMENTA</a></li>
+                    <li><a href="">EXPLORA</a></li>
+                     <li><a href="">COMPARTE</a></li>
                 </ul>
             </nav>
         </div>`;
