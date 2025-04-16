@@ -1,0 +1,287 @@
+<div class="post-content">
+    <!-- Encabezado -->
+    <div class="post-section">
+      <h1 class="post-title">Análisis Completo de Pickups 4×4</h1>
+      <div class="separator">
+        <img alt="Pickups 4×4" src="images/pickups-ventas.jpg" class="post-image"/>
+      </div>
+      <p class="post-text note">Comparativa 2025-2026 • Modelos • Precios • Recomendaciones</p>
+    </div>
+  
+    <!-- Introducción -->
+    <div class="post-section">
+      <h2 class="section-title">Introducción</h2>
+      <p class="post-text">Para proyectos exigentes (minería, construcción, agroindustria), una pickup 4×4 debe cumplir tres pilares:</p>
+      <ul class="list">
+        <li><strong>Confiabilidad:</strong> Resistencia en trochas y carga pesada.</li>
+        <li><strong>Repuestos:</strong> Disponibilidad y costo accesible en Perú.</li>
+        <li><strong>Rentabilidad:</strong> Demanda y valor de reventa.</li>
+      </ul>
+      <p class="post-text">Comparamos 8 modelos clave del mercado peruano con datos de 2025.</p>
+    </div>
+  
+    <!-- Comparativa -->
+    <div class="post-section">
+      <h2 class="section-title">Comparativa de Modelos 4×4</h2>
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Precio (S/)</th>
+            <th>Ranking</th>
+            <th>Reventa (3 años)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hilux</td>
+            <td>Toyota</td>
+            <td>145K-150K</td>
+            <td>#1</td>
+            <td>85%</td>
+          </tr>
+          <tr>
+            <td>Frontier</td>
+            <td>Nissan</td>
+            <td>125K-130K</td>
+            <td>#2</td>
+            <td>75%</td>
+          </tr>
+          <tr>
+            <td>L200 Triton</td>
+            <td>Mitsubishi</td>
+            <td>130K-135K</td>
+            <td>#3</td>
+            <td>70%</td>
+          </tr>
+          <tr>
+            <td>Ranger</td>
+            <td>Ford</td>
+            <td>140K-145K</td>
+            <td>Top 5</td>
+            <td>65%</td>
+          </tr>
+          <tr>
+            <td>BT-50</td>
+            <td>Mazda</td>
+            <td>135K-140K</td>
+            <td>Fuera Top 5</td>
+            <td>60%</td>
+          </tr>
+          <tr>
+            <td>D-Max</td>
+            <td>Chevrolet</td>
+            <td>120K-125K</td>
+            <td>Fuera Top 5</td>
+            <td>60%</td>
+          </tr>
+          <tr>
+            <td>Poer</td>
+            <td>Great Wall</td>
+            <td>90K-95K</td>
+            <td>Top 5 China</td>
+            <td>50%</td>
+          </tr>
+          <tr>
+            <td>T8 Pro</td>
+            <td>JAC</td>
+            <td>95K-100K</td>
+            <td>Top 5 China</td>
+            <td>45%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="post-text note">Precios referenciales para versiones 4×4 doble cabina. Varían según equipamiento.</p>
+    </div>
+  
+    <!-- Gráfico de Ventas -->
+    <div class="post-section">
+      <h2 class="section-title">Participación de Mercado (2019-2025)</h2>
+      <canvas id="pickupChart"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const ctx = document.getElementById('pickupChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Toyota Hilux', 'Nissan Frontier', 'Ford Ranger', 'Mitsubishi L200', 'Mazda BT-50', 'Chevrolet D-Max', 'JAC T8/T6', 'Great Wall Poer'],
+            datasets: [{
+              label: 'Ventas Acumuladas',
+              data: [70000, 40000, 32000, 28000, 18000, 16000, 15000, 12000],
+              backgroundColor: ['#FF5733', '#33C1FF', '#FFD700', '#90EE90', '#C08CFF', '#FFA07A', '#FFB6C1', '#A9A9A9'],
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              title: { display: true, text: 'Ventas de Pickups en Perú', font: { size: 16 } }
+            },
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      </script>
+      <ul class="list">
+        <li>Toyota Hilux: 40% mercado</li>
+        <li>Nissan Frontier: 22%</li>
+        <li>Ford Ranger: 15%</li>
+        <li>Otras: 23%</li>
+      </ul>
+    </div>
+  
+    <!-- Análisis Detallado -->
+    <div class="post-section">
+      <h2 class="section-title">Análisis por Modelo</h2>
+  
+      <!-- Toyota Hilux -->
+      <div class="post-section">
+        <h3 class="section-title">1. Toyota Hilux 🏆</h3>
+        <p class="post-text">Líder indiscutible en Perú.</p>
+        <ul class="list">
+          <li><strong>Ventajas:</strong> 40% mercado, red de repuestos nacional, 85% reventa, ideal para minería.</li>
+          <li><strong>Desventajas:</strong> Precio alto (S/145K+), robos frecuentes, seguros costosos.</li>
+        </ul>
+        <div class="separator">
+          <img alt="Toyota Hilux" src="images/toyota-hilux.jpg" class="post-image"/>
+        </div>
+        <div class="section-effect">
+          <p><strong>Recomendación:</strong> Para proyectos serios. Alta inversión, pero retorno garantizado.</p>
+        </div>
+      </div>
+  
+      <!-- Nissan Frontier -->
+      <div class="post-section">
+        <h3 class="section-title">2. Nissan Frontier 🥈</h3>
+        <p class="post-text">Mejor relación precio-calidad.</p>
+        <ul class="list">
+          <li><strong>Ventajas:</strong> 15% más barata (S/125K+), motor Renault eficiente, buena red de servicio, suspensión reforzada, interior cómodo.</li>
+          <li><strong>Desventajas:</strong> Reventa 10-15% menor, menor durabilidad extrema, repuestos especializados demoran, menos aceptada en minería.</li>
+        </ul>
+        <div class="separator">
+          <img alt="Nissan Frontier" src="images/nissan-frontier.jpg" class="post-image"/>
+        </div>
+        <div class="section-effect">
+          <p><strong>Recomendación:</strong> Excelente para costos operativos bajos.</p>
+        </div>
+      </div>
+  
+      <!-- Mitsubishi L200 -->
+      <div class="post-section">
+        <h3 class="section-title">3. Mitsubishi L200 Triton 💪</h3>
+        <ul class="list">
+          <li><strong>Ventajas:</strong> Motor 3.2L para carga, sistema 4x4 versátil, precio competitivo (S/130K+).</li>
+          <li><strong>Desventajas:</strong> Red de repuestos limitada, reventa baja.</li>
+        </ul>
+        <div class="separator">
+          <img alt="Mitsubishi L200" src="images/l200-triton.jpg" class="post-image"/>
+        </div>
+      </div>
+  
+      <!-- Ford Ranger -->
+      <div class="post-section">
+        <h3 class="section-title">4. Ford Ranger 🚀</h3>
+        <ul class="list">
+          <li><strong>Ventajas:</strong> Motor 3.2L Diesel robusto.</li>
+          <li><strong>Desventajas:</strong> Repuestos 30% más caros, disponibilidad limitada fuera de Lima.</li>
+        </ul>
+        <div class="separator">
+          <img alt="Ford Ranger" src="images/ford-ranger.jpg" class="post-image"/>
+        </div>
+      </div>
+  
+      <!-- Mazda BT-50 -->
+      <div class="post-section">
+        <h3 class="section-title">5. Mazda BT-50 🔎</h3>
+        <ul class="list">
+          <li>Motor potente (similar a Ranger).</li>
+          <li>Repuestos escasos.</li>
+          <li>Precio competitivo, pero bajas ventas.</li>
+        </ul>
+        <div class="separator">
+          <img alt="Mazda BT-50" src="images/mazda-bt50.jpg" class="post-image"/>
+        </div>
+      </div>
+  
+      <!-- Chevrolet D-Max -->
+      <div class="post-section">
+        <h3 class="section-title">6. Chevrolet D-Max 💡</h3>
+        <ul class="list">
+          <li>Motor Isuzu confiable.</li>
+          <li>Poco usado en minería.</li>
+          <li>Precio atractivo (S/120K+).</li>
+        </ul>
+      </div>
+  
+      <!-- Modelos Chinos -->
+      <div class="post-section">
+        <h3 class="section-title">Opciones Chinas: Great Wall Poer & JAC T8 Pro</h3>
+        <p class="post-text">Crecen un 15% anual por precios bajos, pero con limitaciones.</p>
+        <ul class="list">
+          <li><strong>Ventajas:</strong> Desde S/90K, equipamiento moderno.</li>
+          <li><strong>Riesgos:</strong> Durabilidad dudosa, repuestos solo en Lima/Arequipa, reventa 40-50% menor, poca aceptación formal.</li>
+        </ul>
+        <div class="section-effect">
+          <p><strong>Recomendación:</strong> Solo para uso urbano con talleres cercanos.</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Recomendaciones Finales -->
+    <div class="post-section">
+      <h2 class="section-title">Recomendaciones por Proyecto</h2>
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>Prioridad</th>
+            <th>Mejor Opción</th>
+            <th>Razón</th>
+            <th>Inversión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Confiabilidad</td>
+            <td>Toyota Hilux</td>
+            <td>Mejor soporte y reventa.</td>
+            <td>Alta</td>
+          </tr>
+          <tr>
+            <td>Presupuesto</td>
+            <td>Nissan Frontier</td>
+            <td>Balance costo-beneficio.</td>
+            <td>Media</td>
+          </tr>
+          <tr>
+            <td>Control</td>
+            <td>Mitsubishi L200</td>
+            <td>Rendimiento a menor costo.</td>
+            <td>Media</td>
+          </tr>
+          <tr>
+            <td>Bajo Costo</td>
+            <td>Great Wall Poer</td>
+            <td>Viable en zonas urbanas.</td>
+            <td>Baja</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Conclusión -->
+    <div class="post-conclusion">
+      <h2 class="section-title">Conclusión: ¿Qué Elegir?</h2>
+      <ul class="list">
+        <li><strong>Máxima rentabilidad:</strong> Toyota Hilux. Alta inversión, pero reventa y repuestos aseguran retorno.</li>
+        <li><strong>Presupuesto ajustado:</strong> Nissan Frontier. Equilibrio ideal para proyectos rurales.</li>
+        <li><strong>Mínimo costo:</strong> Great Wall/JAC. Solo para ciudades con talleres.</li>
+      </ul>
+      <div class="powerful-quote">
+        <p class="post-text">"Una camioneta parada por repuestos no genera. Invierte en disponibilidad."</p>
+      </div>
+      <p class="post-text final">¿Usas estas pickups? Comparte tu experiencia para enriquecer esta guía.</p>
+    </div>
+  </div>

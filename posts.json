@@ -6,10 +6,29 @@
       "post": "post/decretos.html"
     },
     {
-      "title": "💡 Receta de la Gracia",
+      "title": "🌱 Sana a Tu Niño Interior",
+      "description": "Liberación y Reparentalización...",
+      "image": "images/sanar.jpg",
+      "post": "post/sana-nino-interior.html"
+    },
+    {
+      "title": "👁️ Atención Plena: Camino a la Plenitud",
+      "description": "La verdadera abundancia comienza en el ahora....",
+      "image": "images/atencion.jpg",
+      "post": "post/atencion-plena.html"
+    },
+    
+    {
+      "title": "🍲 Receta de la Gracia",
       "description": "Cuando callás, abrís canales nuevos. No es ausencia: es atención pura.",
       "image": "images/gracia.jpg",
       "post": "post/gracia.html"
+    },
+    {
+      "title": "🛻 ¿Qué Camioneta 4x4 Comprar para Proyectos en Perú?",
+      "description": "Guía Definitiva",
+      "image": "images/toyota-hilux.jpg",
+      "post": "post/pickup.html"
     }
   ]
   

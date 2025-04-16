@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="nav-container hidden">
             <nav>
                 <ul class="menu">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="arte.html">ART</a></li>
-                    <li><a href="ciencia.html">SCI-TECH</a></li>
-                    <li><a href="vida.html">VIDA</a></li>
+                    <li><a href="index.html">PRACTICA</a></li>
+                    <li><a href="">PREGUNTA</a></li>
+                    <li><a href="">BUSCA</a></li>
+                    <li><a href="">COMENTA</a></li>
                 </ul>
             </nav>
         </div>`;
