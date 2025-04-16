@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span></span>
             </div>
         </header>
-        <div class="nav-container">
+        <div class="nav-container hidden">
             <nav>
                 <ul class="menu">
                     <li><a href="index.html">HOME</a></li>
@@ -35,42 +35,60 @@ document.addEventListener('DOMContentLoaded', function() {
     // Funcionalidad del menú
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-container');
+    const body = document.body;
 
     const toggleMenu = () => {
-        const body = document.body;
-    const isMenuOpen = body.classList.contains('menu-open');
-    
-    if (!isMenuOpen) {
-        // Guarda la posición del scroll antes de abrir el menú
-        body.style.top = `-${window.scrollY}px`;
-        body.classList.add('menu-open');
-    } else {
-        // Restaura la posición al cerrar
-        const scrollY = Math.abs(parseInt(body.style.top || '0'));
-        body.classList.remove('menu-open');
-        window.scrollTo(0, scrollY);
-        body.style.top = '';
-    }
-    
-    nav.classList.toggle('hidden');
-    nav.classList.toggle('show');
+        const isMenuOpen = body.classList.contains('menu-open');
+        
+        if (!isMenuOpen) {
+            // No fijamos el body, permitimos scroll natural
+            body.classList.add('menu-open');
+            toggle.classList.add('active');
+            nav.classList.remove('hidden');
+            nav.classList.add('show');
+        } else {
+            body.classList.remove('menu-open');
+            toggle.classList.remove('active');
+            nav.classList.remove('show');
+            nav.classList.add('hidden');
+        }
     };
 
-    toggle.addEventListener('click', toggleMenu);
+    if (toggle) {
+        toggle.addEventListener('click', toggleMenu);
+    }
 
     // Cerrar menú al hacer clic en enlace
     document.querySelectorAll('.menu a').forEach(link => {
         link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                toggleMenu(); // Cerrar el menú si es móvil
+            if (window.innerWidth <= 820) {
+                toggleMenu();
             }
         });
     });
 
     // Ajustar el estado inicial del menú
-    if (window.innerWidth <= 768) {
-        nav.classList.add('hidden');
-    }
+    const setInitialMenuState = () => {
+        if (window.innerWidth <= 820) {
+            nav.classList.add('hidden');
+            nav.classList.remove('show');
+            toggle.classList.remove('active');
+            body.classList.remove('menu-open');
+        } else {
+            nav.classList.remove('hidden', 'show');
+            toggle.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+    };
+
+    setInitialMenuState();
+
+    // Función de ajuste al redimensionar la ventana
+    const handleResize = () => {
+        setInitialMenuState();
+    };
+
+    window.addEventListener('resize', handleResize);
 
     // =============================================
     // [CÓDIGO NUEVO - CARGADOR DE POSTS BLOG]
@@ -123,19 +141,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-
-    // Función de ajuste al redimensionar la ventana
-    const handleResize = () => {
-        console.log('handleResize() llamado, ancho:', window.innerWidth);
-        if (window.innerWidth > 768) {
-            nav.classList.remove('active', 'hidden');
-            toggle.classList.remove('active');
-            document.body.style.overflow = '';
-        } else {
-            nav.classList.add('hidden');
-        }
-        console.log('Clases después de resize:', nav.classList);
-    };
-
-    window.addEventListener('resize', handleResize);
 });

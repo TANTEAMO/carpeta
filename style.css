@@ -1,4 +1,8 @@
 /* ===== ESTILOS GENERALES ===== */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
@@ -7,14 +11,16 @@ body {
     color: #333;
     min-height: 100vh;
     transition: padding 0.3s ease;
-    overflow-x: hidden; /* Evita el desbordamiento horizontal */
-    overflow-y: auto;  /* Permite el desplazamiento vertical */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
+
 body.menu-open {
-    position: fixed;  /* ✅ Fija el body sin cambiar el ancho */
-    width: 100%;     /* Mantiene el ancho consistente */
-    overflow-y: scroll; /* Permite medir el scrollbar */
+    width: 100%;
+    /* Eliminamos position: fixed para permitir scroll */
+    /* overflow-y: auto se hereda de body */
 }
+
 /* ===== ENCABEZADO RESPONSIVO ===== */
 .main-header {
     position: fixed;
@@ -102,6 +108,19 @@ body.menu-open {
     transition: all 0.3s ease;
 }
 
+/* Animación para el botón hamburguesa al abrir/cerrar */
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* ===== CONTENIDO PRINCIPAL ===== */
 main {
     max-width: 1200px;
@@ -111,9 +130,12 @@ main {
     border-radius: 8px;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     position: relative;
-    margin-right: 0px;
-    width: 100%;  /* Aseguramos que el ancho se adapte */
-    box-sizing: border-box;  /* Asegura que el padding no afecte el ancho */
+    width: calc(100% - 80px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 100px); /* Asegura que main tenga altura suficiente para scroll */
 }
 
 main h1:first-child {
@@ -132,18 +154,18 @@ main h1:first-child {
     background: #f5f5f5;
     box-shadow: -2px 0 10px rgba(0,0,0,0.05);
     border-left: 1px solid #e0e0e0;
-    z-index: 999;
+    z-index: 1002;
     transition: transform 0.3s ease;
 }
 
 /* Menú oculto inicialmente */
 .nav-container.hidden {
     transform: translateX(100%);
-    transition: transform 0.3s ease; 
 }
+
+/* Menú visible */
 .nav-container.show {
     transform: translateX(0);
-    transition: transform 0.3s ease;
 }
 
 /* Estilo de los enlaces del menú lateral */
@@ -180,9 +202,12 @@ main h1:first-child {
 /* ===== BLOG FEED ===== */
 .blog-feed {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ajuste automático pero con un tamaño mínimo */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     margin-top: 40px;
+    width: 100%;
+    justify-content: center;
+    justify-items: center;
 }
 
 .post-preview {
@@ -193,8 +218,8 @@ main h1:first-child {
     transition: box-shadow 0.3s ease;
     cursor: pointer;
     width: 100%;
-    max-width: 280px; /* Limita el ancho máximo de cada tarjeta */
-    min-width: 280px; /* Asegura que cada tarjeta tenga un tamaño mínimo */
+    max-width: 280px;
+    min-width: 280px;
 }
 
 .post-preview:hover {
@@ -227,62 +252,18 @@ main h1:first-child {
     margin-top: 15px;
 }
 
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 768px) {
-    .blog-feed {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Reducimos el tamaño mínimo en pantallas más pequeñas */
-        gap: 20px;
-    }
-
-    /* Menú lateral como botón de hamburguesa */
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-container {
-        position: fixed; /* En lugar de fixed */
-        top: 80px;
-        right: 0;
-        width: auto;
-        height: auto;
-        background: transparent; /* o ningún fondo si querés */
-        box-shadow: none;
-        border-left: none;
-        padding: 10px;
-        transform: translateX(100%); /* Oculta el menú inicialmente */
-        transition: transform 0.3s ease; /* Asegura una transición suave */
-    }
-
-    .nav-container nav ul.menu {
-        background: #f5f5f5;
-        border-radius: 8px;
-        padding: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    .nav-container.hidden {
-        transform: translateX(100%); /* Mantiene el menú oculto cuando tiene la clase 'hidden' */
-    }
-}
-
-@media (max-width: 480px) {
-    .blog-feed {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Ajustamos aún más en pantallas muy pequeñas */
-        gap: 15px;
-    }
-}
-
 /* ===== ESTILOS PARA EL POST INDIVIDUAL ===== */
 #post-container {
     max-width: 800px;
     margin: 40px auto;
-    padding-bottom: 50px; /* Asegura espacio suficiente al final para el botón inferior */
+    padding-bottom: 50px;
 }
 
 #post-container img {
-    max-width: 100%;  
-    height: auto;     
-    display: block;   
-    margin: 0 auto;   
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .back-button {
@@ -298,7 +279,7 @@ main h1:first-child {
     width: auto;
     display: inline-block;
     margin-top: 20px;
-    font-size: 1rem; /* Ajustamos el tamaño de la fuente */
+    font-size: 1rem;
 }
 
 .back-button:hover {
@@ -310,6 +291,76 @@ main h1:first-child {
     outline: none;
     box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.4);
 }
-* {
-    box-sizing: border-box;
-  }
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 820px) {
+    main {
+        width: calc(100% - 40px);
+    }
+
+    .blog-feed {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        position: fixed;
+        top: 80px;
+        right: 0;
+        width: 200px;
+        height: auto;
+        background: #f5f5f5;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        border-left: 1px solid #e0e0e0;
+        padding: 15px;
+        z-index: 1002;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-container nav ul.menu {
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .nav-container.hidden {
+        transform: translateX(100%);
+    }
+
+    .nav-container.show {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 20px;
+        width: calc(100% - 20px);
+    }
+
+    .blog-feed {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+    }
+
+    .nav-container {
+        width: 180px;
+    }
+}
+
+@media (min-width: 1400px) {
+    main {
+        width: calc(100% - 200px);
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    .blog-feed {
+        justify-content: center;
+        justify-items: center;
+    }
+}
