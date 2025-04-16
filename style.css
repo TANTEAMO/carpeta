@@ -6,7 +6,7 @@
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
-    padding: 0px !important;
+    padding: 0 !important;
     background-color: #f8f8f8;
     color: #333;
     min-height: 100vh;
@@ -36,7 +36,6 @@ body.menu-open {
     align-items: center;
 }
 
-/* Estilo para el título principal */
 .site-title {
     font-family: 'Montserrat', Arial, serif;
     font-weight: 600;
@@ -49,13 +48,11 @@ body.menu-open {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover */
 .site-title:hover {
     color: #b0e0e6;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Subrayado elegante con transición */
 .site-title:after {
     content: '';
     position: absolute;
@@ -69,7 +66,6 @@ body.menu-open {
     transition: transform 0.3s ease-out;
 }
 
-/* Efecto hover para subrayado */
 .site-title:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
@@ -106,7 +102,6 @@ body.menu-open {
     transition: all 0.3s ease;
 }
 
-/* Animación para el botón hamburguesa al abrir/cerrar */
 .menu-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -156,17 +151,14 @@ main h1:first-child {
     transition: transform 0.3s ease;
 }
 
-/* Menú oculto inicialmente */
 .nav-container.hidden {
     transform: translateX(100%);
 }
 
-/* Menú visible */
 .nav-container.show {
     transform: translateX(0);
 }
 
-/* Estilo de los enlaces del menú lateral */
 .menu {
     list-style: none;
     padding: 0;
@@ -310,11 +302,13 @@ main h1:first-child {
 }
 
 .post-image {
-    max-width: 100%;
+    max-width: 600px;
+    max-height: 400px;
     height: auto;
     display: block;
     margin: 0 auto;
     border-radius: 4px;
+    object-fit: contain;
 }
 
 .post-title {
@@ -350,6 +344,10 @@ main h1:first-child {
     border-left: 4px solid #e74c3c;
 }
 
+.post-section.recipe {
+    border-left: 4px solid #4a8b6b;
+}
+
 .section-title {
     font-size: 20px;
     margin-top: 0;
@@ -368,14 +366,21 @@ main h1:first-child {
     color: #e74c3c;
 }
 
-.section-subtitle {
-    font-size: 14px;
-    color: #777;
+.post-section.recipe .section-title {
+    color: #4a8b6b;
 }
 
-.section-text {
-    font-size: 16px;
-    margin-bottom: 10px;
+.highlight {
+    font-size: 14px;
+    color: #777;
+    font-style: italic;
+    background: #f0f7ff;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.post-text strong {
+    color: #333;
 }
 
 .section-effect {
@@ -393,6 +398,10 @@ main h1:first-child {
     background: #ffebee;
 }
 
+.post-section.recipe .section-effect {
+    background: #e8f5e9;
+}
+
 .powerful-quote {
     background: #2c3e50;
     padding: 25px;
@@ -402,13 +411,11 @@ main h1:first-child {
     margin-bottom: 30px;
 }
 
-.quote-title {
-    margin-top: 0;
-    font-size: 18px;
+.powerful-quote .section-title {
     color: #f1c40f;
 }
 
-.quote-text {
+.powerful-quote .post-text {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -421,38 +428,101 @@ main h1:first-child {
     border-left: 4px solid #9b59b6;
 }
 
-.conclusion-title {
-    margin-top: 0;
+.post-conclusion .section-title {
     color: #9b59b6;
-    font-size: 20px;
 }
 
-.conclusion-text {
-    font-size: 15px;
-    margin-bottom: 15px;
+.post-conclusion .post-text.final {
+    text-align: center;
+    font-weight: bold;
 }
 
-.next-step-title {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
-}
-
-.next-step-list {
+.list {
     padding-left: 20px;
     font-size: 15px;
     margin-bottom: 15px;
 }
 
-.conclusion-text.final {
+.list li {
+    margin-bottom: 10px;
+}
+
+/* Estilos específicos para posts tipo receta */
+.post-section.recipe .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.post-section.recipe .list li {
+    background: #e8f5e9;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.post-section.recipe .list li::before {
+    content: '▢';
+    color: #7ab89a;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.post-section.recipe .list strong {
+    color: #3a6b55;
+    font-size: 15px;
+}
+
+.post-section.recipe .list span {
+    color: #7a9b8b;
+    font-size: 13px;
+}
+
+.post-section.recipe .post-text.note {
+    font-style: italic;
     text-align: center;
+    color: #7a9b8b;
+}
+
+.post-section.recipe .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e8f5e9;
+}
+
+.post-section.recipe .step:last-child {
+    border-bottom: none;
+}
+
+.post-section.recipe .step::before {
+    content: attr(data-step);
+    background: #4a8b6b;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.post-section.recipe .step .highlight {
+    background: #e8f5e9;
+    font-style: italic;
 }
 
 /* ===== MEDIA QUERIES ===== */
 @media (max-width: 820px) {
     main {
-        width: calc(100% - 20px); /* Reducido para maximizar ancho */
+        width: calc(100% - 20px);
         padding: 20px 10px;
     }
 
@@ -497,8 +567,8 @@ main h1:first-child {
         max-width: 100%;
         margin: 0;
         padding: 15px 10px;
-        border-radius: 0; /* Elimina bordes redondeados para usar todo el ancho */
-        box-shadow: none; /* Simplifica en móviles */
+        border-radius: 0;
+        box-shadow: none;
     }
 
     .post-section {
@@ -514,13 +584,17 @@ main h1:first-child {
         font-size: 18px;
     }
 
-    .post-text, .section-text, .conclusion-text {
+    .post-text {
         font-size: 15px;
     }
 
     .post-image {
         width: 100%;
         max-width: 100%;
+    }
+
+    .post-section.recipe .list {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -555,11 +629,11 @@ main h1:first-child {
         font-size: 16px;
     }
 
-    .post-text, .section-text, .conclusion-text {
+    .post-text {
         font-size: 14px;
     }
 
-    .section-effect, .quote-title, .quote-text {
+    .section-effect, .powerful-quote .post-text {
         font-size: 13px;
     }
 
@@ -578,5 +652,70 @@ main h1:first-child {
     .blog-feed {
         justify-content: center;
         justify-items: center;
+    }
+}
+
+/* Mejora del espaciado en la sección de preparación */
+.post-section.recipe .list li[data-step] {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    display: block;
+}
+
+/* Mejor visibilidad del número de paso */
+.post-section.recipe .list li[data-step]::before {
+    content: attr(data-step);
+    background: #4a8b6b;
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Subtítulos de cada paso */
+.post-section.recipe .list li[data-step] h3.section-title {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+/* Efectos especiales dentro de cada paso */
+.post-section.recipe .list li[data-step] .section-effect {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+/* Anulando el display flex para los pasos específicamente */
+.post-section.recipe .list li[data-step] {
+    display: block;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 480px) {
+    .post-section.recipe .list li[data-step] {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .post-section.recipe .list li[data-step]::before {
+        width: 30px;
+        height: 30px;
+        top: -12px;
+        left: -12px;
+        font-size: 14px;
     }
 }

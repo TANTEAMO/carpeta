@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = `
         <header class="main-header">
             <div class="logo-container">
-                <img src="images/colibri-logo.jpg" alt="Logo Tanteamo" class="logo">
-                <a href="index.html" class="site-title">TANTEAMO</a>
+                <img src="images/colibri-logo.jpg" alt="Logo Tantema" class="logo">
+                <a href="index.html" class="site-title">TANTEMA</a>
             </div>
             <div class="menu-toggle">
                 <span></span>
