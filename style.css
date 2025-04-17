@@ -206,7 +206,7 @@ main ul li ol {
 
 .post-preview {
   background: rgba(242, 248, 249, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   box-shadow: var(--shadow-light);
   transition: all 0.3s ease;
@@ -288,6 +288,32 @@ main ul li ol {
   margin: 15px auto;
   border-radius: 4px;
   object-fit: contain;
+}
+.read-more {
+  background: rgba(129, 204, 217, 0.305);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 22px; /* Aumento del padding para hacerlo más grande */
+  
+}
+.back-button {
+  background: rgba(129, 204, 217, 0.305);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 22px; /* Aumento del padding para hacerlo más grande */
+  
 }
 
 /* Estilos adicionales para pickup.html */
