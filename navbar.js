@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul class="menu">
                     <li><a href="index.html">PRACTICA</a></li>
                     <li><a href="">EXPLORA</a></li>
-                     <li><a href="">COMPARTE</a></li>
+                    <li><a href="mailto:tucucus@gmail.com" class="btn-comparte">
+COMPARTE</a></li>
                 </ul>
             </nav>
         </div>`;
