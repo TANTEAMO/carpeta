@@ -357,12 +357,17 @@ h3 {
     border-radius: 6px;
   }
 
-/* para TABLE por ejemplo en pickup.html */
+/* Contenedor para la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll horizontal en móviles */
+  margin: 15px 0;
+}
 
+/* Estilos para la tabla */
 .highlight {
   width: 100%;
   border-collapse: collapse;
-  margin: 15px 0;
   background: var(--bg-color);
   box-shadow: var(--shadow-light);
 }
@@ -372,6 +377,7 @@ h3 {
   padding: 12px;
   border: var(--border-light);
   text-align: left;
+  min-width: 100px; /* Asegura un ancho mínimo para celdas */
 }
 
 .highlight th {
@@ -538,3 +544,10 @@ h3 {
 .form-section button:hover {
   background-color: #4338ca;
 }
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 600px) {
+  .highlight th,
+  .highlight td {
+    padding: 8px; /* Reduce el padding en móviles */
+    font-size: 14px; /* Reduce el tamaño de fuente */
+  }
