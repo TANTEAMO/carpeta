@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="nav-container hidden">
             <nav>
                 <ul class="menu">
-                    <li><a href="index.html">PRACTICA</a></li>
-                    <li><a href="">EXPLORA</a></li>
-                    <li><a href="mailto:tucucus@gmail.com" class="btn-comparte">
-COMPARTE</a></li>
+                 <a href="explora.html"><li>EXPLORA</li></a>
+                   <a href="practica.html"><li>PRACTICA</li></a>
+                    <a href="comparte.html"><li>COMPARTE</li></a>
                 </ul>
             </nav>
         </div>`;

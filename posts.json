@@ -3,38 +3,44 @@
       "title": "🔱 Decreto Supremo de Prosperidad",
       "description": "Todo es un portal hacia lo infinito: Cada palabra, pensamiento y acción redefine la realidad...",
       "image": "images/decreto-poder.jpg",
-      "post": "post/decretos.html"
+      "post": "post/decretos.html",
+      "label": "practica"
     },
     {
       "title": "🌱 Sana a Tu Niño Interior",
       "description": "Liberación y Reparentalización...",
       "image": "images/sanar.jpg",
-      "post": "post/sana-nino-interior.html"
+      "post": "post/sana-nino-interior.html",
+      "label": "practica"
     },
     {
       "title": "👁️ Atención Plena: Camino a la Plenitud",
       "description": "La verdadera abundancia comienza en el ahora....",
       "image": "images/atencion.jpg",
-      "post": "post/atencion-plena.html"
+      "post": "post/atencion-plena.html",
+      "label": "practica"
     },
     
     {
       "title": "🍲 Receta de la Gracia",
-      "description": "Cuando callás, abrís canales nuevos. No es ausencia: es atención pura.",
+      "description": "El manjar espiritual que ya está en tu cocina interior",
       "image": "images/gracia.jpg",
-      "post": "post/gracia.html"
+      "post": "post/gracia.html",
+      "label": "practica"
     },
     {
-      "title": "Relación económica entre Corea del Sur y Perú",
-      "description": "Análisis y perspectivas 2025",
+      "title": "Relación entre Corea del Sur y Perú",
+      "description": "Análisis y perspectivas",
       "image": "images/tanque.jpg",
-      "post": "post/corea2025-04.html"
+      "post": "post/corea2025-04.html",
+      "label": "explora"
     },
     {
-      "title": "🛻 ¿Qué Camioneta 4x4 Comprar para Proyectos en Perú?",
-      "description": "Guía Definitiva",
+      "title": "🛻 ¿Qué Camioneta 4x4 Comprar?",
+      "description": "Guía Definitiva  para Proyectos en Perú",
       "image": "images/toyota-hilux.jpg",
-      "post": "post/pickup.html"
+      "post": "post/pickup.html",
+      "label": "explora"
     }
 
   ]
