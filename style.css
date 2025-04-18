@@ -362,14 +362,17 @@ h3 {
   width: 100%;
   overflow-x: auto; /* Permite scroll horizontal en móviles */
   margin: 15px 0;
+  -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
 }
 
 /* Estilos para la tabla */
 .highlight {
   width: 100%;
   border-collapse: collapse;
+  margin: 15px 0;
   background: var(--bg-color);
   box-shadow: var(--shadow-light);
+  table-layout: auto; /* Ajusta columnas al contenido */
 }
 
 .highlight th,
@@ -377,7 +380,8 @@ h3 {
   padding: 12px;
   border: var(--border-light);
   text-align: left;
-  min-width: 100px; /* Asegura un ancho mínimo para celdas */
+  word-break: break-word; /* Divide texto largo */
+  white-space: normal; /* Permite ajuste en varias líneas */
 }
 
 .highlight th {
@@ -388,7 +392,6 @@ h3 {
 .highlight tr:nth-child(even) {
   background: rgba(242, 248, 249, 0.8);
 }
-
 /* Botón hamburguesa */
 .menu-toggle {
   display: none;
@@ -546,8 +549,27 @@ h3 {
 }
 /* Media query para dispositivos móviles */
 @media screen and (max-width: 600px) {
+  .table-container {
+    margin: 10px 0;
+    padding: 0;
+  }
+
   .highlight th,
   .highlight td {
-    padding: 8px; /* Reduce el padding en móviles */
-    font-size: 14px; /* Reduce el tamaño de fuente */
+    padding: 6px; /* Reduce padding */
+    font-size: 13px; /* Reduce tamaño de fuente */
+    line-height: 1.4; /* Mejora legibilidad */
   }
+
+  .highlight {
+    font-size: 0.85rem; /* Asegura tabla más compacta */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .highlight th,
+  .highlight td {
+    padding: 4px; /* Padding mínimo */
+    font-size: 12px; /* Fuente más pequeña */
+  }
+}
