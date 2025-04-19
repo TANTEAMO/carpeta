@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA3</title>
-  <link rel="stylesheet" href="/remember/style.css" />
+  <title>TANTEMA1</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-17SDCHQMC8');
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-17SDCHQMC8');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -22,17 +23,21 @@
       <div id="post-container" style="display: none;"></div>
     </main>
   </div>
-  <script src="/remember/navbar.js"></script>
+
+  <!-- Scripts -->
+  <script src="navbar.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
-        const res = await fetch('/remember/posts.json');
+        const res = await fetch('posts.json');
         if (!res.ok) throw new Error('Error al cargar los posts');
         const posts = await res.json();
+
         const blogFeed = document.getElementById('blog-feed');
         blogFeed.innerHTML = posts.map(post => `
-          <article class="post-preview" data-post='${JSON.stringify(post)}'>
-            <img src="/remember/${post.image}" alt="${post.title}" class="post-image">
+          <article class="post-preview" data-post="${post.post}">
+            <img src="${post.image}" alt="${post.title}" class="post-image">
             <div class="post-excerpt">
               <h2>${post.title}</h2>
               <p>${post.description}</p>
@@ -40,56 +45,78 @@
             </div>
           </article>
         `).join('');
+
+        // Eventos de clic para leer el post (imagen o botón)
         document.querySelectorAll('.post-preview').forEach(preview => {
-          preview.addEventListener('click', async e => {
+          preview.addEventListener('click', async (e) => {
             e.preventDefault();
-            const post = JSON.parse(preview.dataset.post);
-            const postHtmlRes = await fetch(`/remember/${post.post}`);
-            const postHTML = postHtmlRes.ok ? await postHtmlRes.text() : '<p>Error al cargar el post.</p>';
-            const container = document.getElementById('post-container');
+
+            const postFile = preview.dataset.post;
+            const postRes = await fetch(postFile);
+            if (!postRes.ok) throw new Error('Post no encontrado');
+            const postHTML = await postRes.text();
+
+            const postContainer = document.getElementById('post-container');
             blogFeed.style.display = 'none';
-            container.innerHTML = `
-              <button id="back-top" class="back-button">← Volver</button>
+            postContainer.innerHTML = `
+              <button id="back-button-top" class="back-button">← Volver</button>
               ${postHTML}
-              <button id="back-bottom" class="back-button">← Volver</button>
+              <button id="back-button-bottom" class="back-button">← Volver</button>
             `;
-            container.style.display = 'block';
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(postHTML, 'text/html');
-            const scripts = doc.querySelectorAll('script');
-            scripts.forEach(script => {
-              if (script.src) {
-                const newScript = document.createElement('script');
-                newScript.src = script.src.startsWith('/') ? script.src : `/remember/${script.src}`;
-                newScript.onerror = () => console.error(`Error al cargar script: ${newScript.src}`);
-                document.body.appendChild(newScript);
-              } else {
-                const newScript = document.createElement('script');
-                newScript.textContent = script.textContent;
-                document.body.appendChild(newScript);
-              }
-            });
-            if (Array.isArray(post.charts) && post.charts.length) {
-              const s = document.createElement('script');
-              s.src = '/remember/post/pickup-chart.js';
-              s.onerror = () => console.error('Error al cargar pickup-chart.js');
-              document.body.appendChild(s);
-            }
-            const goBack = () => {
-              container.style.display = 'none';
-              container.innerHTML = '';
+            // Ejecutar script del gráfico si el post lo incluye
+setTimeout(() => {
+  const canvas = document.getElementById('miGrafico');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Rojo', 'Azul', 'Amarillo', 'Verde', 'Púrpura', 'Naranja'],
+        datasets: [{
+          label: 'Colores más usados',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+}, 0);
+            postContainer.style.display = 'block';
+
+            // Scroll suave
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Volver desde arriba o abajo
+            const volver = () => {
+              postContainer.style.display = 'none';
+              postContainer.innerHTML = '';
               blogFeed.style.display = 'grid';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             };
-            document.getElementById('back-top').onclick = goBack;
-            document.getElementById('back-bottom').onclick = goBack;
+
+            document.getElementById('back-button-top').addEventListener('click', volver);
+            document.getElementById('back-button-bottom').addEventListener('click', volver);
           });
         });
-      } catch (err) {
-        console.error(err);
-        document.getElementById('blog-feed').innerHTML = '<p>Error cargando posts.</p>';
+
+      } catch (error) {
+        console.error('Error al cargar los posts:', error);
       }
     });
   </script>
-</body>
+ </body>
 </html>
