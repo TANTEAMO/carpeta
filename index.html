@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA1</title>
+  <title>TANTEMA2</title>
   <link rel="stylesheet" href="/remember/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
@@ -61,6 +61,7 @@
               if (script.src) {
                 const newScript = document.createElement('script');
                 newScript.src = script.src.startsWith('/') ? script.src : `/remember/${script.src}`;
+                newScript.onerror = () => console.error(`Error al cargar script: ${newScript.src}`);
                 document.body.appendChild(newScript);
               } else {
                 const newScript = document.createElement('script');
@@ -71,6 +72,7 @@
             if (Array.isArray(post.charts) && post.charts.length) {
               const s = document.createElement('script');
               s.src = '/remember/post/pickup-chart.js';
+              s.onerror = () => console.error('Error al cargar pickup-chart.js');
               document.body.appendChild(s);
             }
             const goBack = () => {
