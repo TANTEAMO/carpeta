@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA2</title>
+  <title>TANTEMA</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Google tag (gtag.js) -->
@@ -65,14 +65,26 @@
             `;
             postContainer.style.display = 'block';
 
-            // Cargar pickup-chart.js solo si el post es pickup.html
-            if (postFile.includes('pickup.html')) {
-              const script = document.createElement('script');
-              script.src = '/remember/scripts/pickup-chart.js';
-              script.async = true;
-              script.onload = () => console.log('pickup-chart.js cargado correctamente');
-              script.onerror = () => console.error('Error al cargar pickup-chart.js');
-              document.body.appendChild(script);
+            // Cargar gráficos si el post tiene charts definidos en posts.json
+            const postData = posts.find(post => post.post === postFile);
+            if (postData && postData.charts && postData.charts.length > 0) {
+              postData.charts.forEach(chart => {
+                const script = document.createElement('script');
+                script.innerHTML = `
+                  setTimeout(() => {
+                    const canvas = document.getElementById('${chart.id}');
+                    if (canvas) {
+                      const ctx = canvas.getContext('2d');
+                      new Chart(ctx, {
+                        type: '${chart.type}',
+                        data: ${JSON.stringify(chart.data)},
+                        options: ${JSON.stringify(chart.options)}
+                      });
+                    }
+                  }, 100);
+                `;
+                document.body.appendChild(script);
+              });
             }
 
             // Scroll suave
