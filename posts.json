@@ -4,21 +4,24 @@
       "description": "Todo es un portal hacia lo infinito: Cada palabra, pensamiento y acción redefine la realidad...",
       "image": "images/decreto-poder.jpg",
       "post": "post/decretos.html",
-      "label": "practica"
+      "label": "practica",
+      "charts": []
     },
     {
       "title": "🌱 Sana a Tu Niño Interior",
       "description": "Liberación y Reparentalización...",
       "image": "images/sanar.jpg",
       "post": "post/sana-nino-interior.html",
-      "label": "practica"
+      "label": "practica",
+      "charts": []
     },
     {
       "title": "👁️ Atención Plena: Camino a la Plenitud",
       "description": "La verdadera abundancia comienza en el ahora....",
       "image": "images/atencion.jpg",
       "post": "post/atencion-plena.html",
-      "label": "practica"
+      "label": "practica",
+      "charts": []
     },
     
     {
@@ -26,23 +29,53 @@
       "description": "El manjar espiritual que ya está en tu cocina interior",
       "image": "images/gracia.jpg",
       "post": "post/gracia.html",
-      "label": "practica"
+      "label": "practica",
+      "charts": []
     },
     {
       "title": "Relación entre Corea del Sur y Perú",
       "description": "Análisis y perspectivas",
       "image": "images/tanque.jpg",
       "post": "post/corea2025-04.html",
-      "label": "explora"
+      "label": "explora",
+      "charts": []
     },
     {
       "title": "🛻 ¿Qué Camioneta 4x4 Comprar?",
       "description": "Guía Definitiva  para Proyectos en Perú",
       "image": "images/toyota-hilux.jpg",
       "post": "post/pickup.html",
-      "label": "explora"
+      "label": "explora",
+      "charts": [
+        {
+          "type": "bar",
+          "id": "pickupChart",
+          "data": {
+            "labels": ["Toyota Hilux", "Nissan Frontier", "Ford Ranger", "Mitsubishi L200 Triton", "Mazda BT-50", "Chevrolet D-Max", "Great Wall Poer", "JAC T8 Pro"],
+            "datasets": [{
+              "label": "Participación de Mercado (%)",
+              "data": [40, 22, 15, 10, 5, 5, 3, 1],
+              "backgroundColor": ["#ff5733", "#33c1ff", "gold", "#2c3e50", "#f39c12", "#8e44ad", "#27ae60", "#e67e22"],
+              "borderColor": ["#c0392b", "#2980b9", "#f39c12", "#34495e", "#f1c40f", "#8e44ad", "#27ae60", "#e67e22"],
+              "borderWidth": 1
+            }]
+          },
+          "options": {
+            "responsive": true,
+            "scales": {
+              "y": {
+                "beginAtZero": true
+              }
+            }
+          }
+        }
+      ]
     }
-
   ]
+    
+   
+
+
+  
   
   

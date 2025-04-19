@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Explora - TANTEMA</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Google tag (gtag.js) -->
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,20 +13,17 @@
     gtag('js', new Date());
     gtag('config', 'G-17SDCHQMC8');
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div>
     <main>
-      <header>
-        <!--h2>Explora</h2>
-        <p>Información útil para tomar decisiones con claridad.</p-->
-      </header>
+      <header></header>
       <section class="blog-feed" id="blog-feed"></section>
       <div id="post-container" style="display: none;"></div>
     </main>
   </div>
 
-  <!-- Scripts -->
   <script src="navbar.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
@@ -36,7 +32,6 @@
         if (!res.ok) throw new Error('Error al cargar los posts');
         const posts = await res.json();
 
-        // Filtrar posts con label "explora" (string o en array)
         const exploraPosts = posts.filter(post => 
           post.label === 'explora' || 
           (Array.isArray(post.label) && post.label.includes('explora'))
@@ -49,8 +44,8 @@
         }
 
         blogFeed.innerHTML = exploraPosts.map(post => `
-          <article class="post-preview" data-post="${post.post}">
-            <img src="${post.image}" alt="${post.title}" class="post-image">
+          <article class="post-preview" data-post='${JSON.stringify(post)}'>
+            <img src="${post.image}" alt="${post.title}" class="post-image" />
             <div class="post-excerpt">
               <h2>${post.title}</h2>
               <p>${post.description}</p>
@@ -59,13 +54,11 @@
           </article>
         `).join('');
 
-        // Eventos de clic para leer el post
         document.querySelectorAll('.post-preview').forEach(preview => {
           preview.addEventListener('click', async (e) => {
             e.preventDefault();
-
-            const postFile = preview.dataset.post;
-            const postRes = await fetch(postFile);
+            const post = JSON.parse(preview.dataset.post);
+            const postRes = await fetch(post.post);
             if (!postRes.ok) throw new Error('Post no encontrado');
             const postHTML = await postRes.text();
 
@@ -78,10 +71,31 @@
             `;
             postContainer.style.display = 'block';
 
-            // Scroll suave
+            // Re-ejecutar scripts incrustados en el HTML del post
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(postHTML, 'text/html');
+            const scripts = doc.querySelectorAll('script');
+            scripts.forEach(script => {
+              if (script.src) {
+                const newScript = document.createElement('script');
+                newScript.src = script.src;
+                document.body.appendChild(newScript);
+              } else {
+                const newScript = document.createElement('script');
+                newScript.textContent = script.textContent;
+                document.body.appendChild(newScript);
+              }
+            });
+
+            // Si el post tiene charts, inyecta el script del gráfico
+            if (Array.isArray(post.charts) && post.charts.length) {
+              const s = document.createElement('script');
+              s.src = '/scripts/pickup-chart.js';
+              document.body.appendChild(s);
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Volver desde arriba o abajo
             const volver = () => {
               postContainer.style.display = 'none';
               postContainer.innerHTML = '';

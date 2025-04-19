@@ -5,74 +5,21 @@
           
       <p>Comparativa 2025-2026 • Modelos • Precios • Recomendaciones</p>
 </div>
-  <!-- Introducción -->
-     <!--Agrega este script en la parte superior o inferior de tu entrada-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<h2 style="text-align:center; font-size: 24px; margin-top: 0;">Participación de Mercado (2019–2025)</h2>
+<canvas id="pickupChart" style="max-width: 100%; height: 400px;"></canvas>
 
-<canvas id="pickupChart" style="height: 400px; max-width: 100%;"></canvas>
-
-<script>
-const ctx = document.getElementById('pickupChart').getContext('2d');
-const pickupChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: [
-      'Toyota Hilux', 
-      'Nissan Frontier', 
-      'Ford Ranger', 
-      'Mitsubishi L200',
-      'Mazda BT-50', 
-      'Chevrolet D-Max', 
-      'JAC T8/T6', 
-      'Great Wall Poer'
-    ],
-    datasets: [{
-      label: 'Ventas Acumuladas',
-      data: [70000, 40000, 32000, 28000, 18000, 16000, 15000, 12000],
-      backgroundColor: [
-        '#FF5733', '#33C1FF', '#FFD700', '#90EE90',
-        '#C08CFF', '#FFA07A', '#FFB6C1', '#A9A9A9'
-      ],
-      borderRadius: 8,
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Ventas Acumuladas de Pickups en Perú',
-        font: { size: 18 }
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `${context.dataset.label}: ${context.parsed.y.toLocaleString()} unidades`
-        }
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: function(value) {
-            return value.toLocaleString();
-          }
-        }
-      }
-    }
-  }
-});
-</script>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px;">
-      <span style="background-color: #ff5733; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Toyota Hilux: 40% mercado</span>
-      <span style="background-color: #33c1ff; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Nissan Frontier: 22%</span>
-      <span style="background-color: gold; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Ford Ranger: 15%</span>
-      <span style="background-color: #2c3e50; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Otras: 23%</span>
-    </div>
+  <!-- Leyenda de los porcentajes -->
+  <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px;">
+    <span style="background-color: #ff5733; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Toyota Hilux: 40% mercado</span>
+    <span style="background-color: #33c1ff; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Nissan Frontier: 22%</span>
+    <span style="background-color: gold; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Ford Ranger: 15%</span>
+    <span style="background-color: #2c3e50; border-radius: 4px; color: white; font-size: 12px; padding: 5px 10px;">Otras: 23%</span>
   </div>
-  <img alt="Pickups 4×4 en acción" src="images/ventas-pickups.jpg" class="post-image"/>
+</div>
+
+  
+
+  
     <h2>Introducción</h2>
     <div class="post-section">
     <p>Una pickup 4×4 para proyectos exigentes (minería, construcción, agroindustria) debe cumplir tres pilares:</p>
@@ -294,9 +241,7 @@ const pickupChart = new Chart(ctx, {
       </tbody>
     </table>
   </div>
- 
-
-  <!-- Conclusión -->
+   <!-- Conclusión -->
   <div class="post-conclusion" id="conclusion">
     <h2>Conclusión: ¿Qué Elegir?</h2>
     <ul>
@@ -308,5 +253,5 @@ const pickupChart = new Chart(ctx, {
       <p>“Una camioneta parada por repuestos no genera. Invierte en disponibilidad.”</p>
     </blockquote>
     <p class="cta">¿Usas estas pickups? Comparte tu experiencia para enriquecer esta guía.</p>
-  </section>
-</div>
+ </div>
+

@@ -735,4 +735,9 @@ main ul li ol {
     padding: 20px;
     width: 100%;
   }
+  #pickupChart {
+    width: 100% !important;
+    height: 400px !important;
+  }
+  
 }

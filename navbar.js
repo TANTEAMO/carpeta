@@ -1,143 +1,163 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Cargar fuente
+    // —————————————————————————————————————————
+    // Menú principal
+    // —————————————————————————————————————————
     const fontLink = document.createElement('link');
     fontLink.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap';
     fontLink.rel = 'stylesheet';
     document.head.appendChild(fontLink);
-
-    // Crear estructura
+  
     const header = `
-        <header class="main-header">
-            <div class="logo-container">
-                <img src="images/colibri-logo.jpg" alt="Logo Tantema" class="logo">
-                <a href="index.html" class="site-title">TANTEMA</a>
-            </div>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </header>
-        <div class="nav-container hidden">
-            <nav>
-                <ul class="menu">
-                 <a href="explora.html"><li>EXPLORA</li></a>
-                   <a href="practica.html"><li>PRACTICA</li></a>
-                    <a href="comparte.html"><li>COMPARTE</li></a>
-                </ul>
-            </nav>
-        </div>`;
-    
-    // Insertar el header en el body
+      <header class="main-header">
+        <div class="logo-container">
+          <img src="images/colibri-logo.jpg" alt="Logo Tantema" class="logo">
+          <a href="index.html" class="site-title">TANTEMA</a>
+        </div>
+        <div class="menu-toggle">
+          <span></span><span></span><span></span>
+        </div>
+      </header>
+      <div class="nav-container hidden">
+        <nav>
+          <ul class="menu">
+            <a href="explora.html"><li>EXPLORA</li></a>
+            <a href="practica.html"><li>PRACTICA</li></a>
+            <a href="comparte.html"><li>COMPARTE</li></a>
+          </ul>
+        </nav>
+      </div>`;
     document.body.insertAdjacentHTML('afterbegin', header);
-
-    // Funcionalidad del menú
+  
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav-container');
     const body = document.body;
-
+  
     const toggleMenu = () => {
-        const isMenuOpen = body.classList.contains('menu-open');
-        
-        if (!isMenuOpen) {
-            // No fijamos el body, permitimos scroll natural
-            body.classList.add('menu-open');
-            toggle.classList.add('active');
-            nav.classList.remove('hidden');
-            nav.classList.add('show');
-        } else {
-            body.classList.remove('menu-open');
-            toggle.classList.remove('active');
-            nav.classList.remove('show');
-            nav.classList.add('hidden');
-        }
+      const open = body.classList.toggle('menu-open');
+      toggle.classList.toggle('active', open);
+      nav.classList.toggle('show', open);
+      nav.classList.toggle('hidden', !open);
     };
-
-    if (toggle) {
-        toggle.addEventListener('click', toggleMenu);
-    }
-
-    // Cerrar menú al hacer clic en enlace
-    document.querySelectorAll('.menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 820) {
-                toggleMenu();
-            }
-        });
+    toggle.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (window.innerWidth <= 820) toggleMenu();
+      });
     });
-
-    // Ajustar el estado inicial del menú
     const setInitialMenuState = () => {
-        if (window.innerWidth <= 820) {
-            nav.classList.add('hidden');
-            nav.classList.remove('show');
-            toggle.classList.remove('active');
-            body.classList.remove('menu-open');
-        } else {
-            nav.classList.remove('hidden', 'show');
-            toggle.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
+      if (window.innerWidth <= 820) {
+        nav.classList.add('hidden');
+        nav.classList.remove('show');
+        toggle.classList.remove('active');
+        body.classList.remove('menu-open');
+      } else {
+        nav.classList.remove('hidden', 'show');
+        toggle.classList.remove('active');
+        body.classList.remove('menu-open');
+      }
     };
-
+    window.addEventListener('resize', setInitialMenuState);
     setInitialMenuState();
-
-    // Función de ajuste al redimensionar la ventana
-    const handleResize = () => {
-        setInitialMenuState();
+  
+    // —————————————————————————————————————————
+    // Helper para cargar un post
+    // —————————————————————————————————————————
+    const loadPost = async path => {
+      try {
+        const res = await fetch(path);
+        if (!res.ok) throw new Error('Post no encontrado');
+        return await res.text();
+      } catch {
+        return '<div style="padding:20px;background:#fee;border-radius:8px;color:#c00;">Error al cargar el post.</div>';
+      }
     };
-
-    window.addEventListener('resize', handleResize);
-
-    // =============================================
-    // [CÓDIGO NUEVO - CARGADOR DE POSTS BLOG]
-    // =============================================
-    const loadPost = async (postFile) => {
-        try {
-            const response = await fetch(postFile);
-            if (!response.ok) throw new Error('Post no encontrado');
-            return await response.text();
-        } catch (error) {
-            console.error('Error cargando el post:', error);
-            return '<div class="error-message" style="padding: 20px; background: #ffebee; border-radius: 8px; color: #c62828;">Error al cargar el post. Intenta nuevamente.</div>';
-        }
-    };
-
-    const showPost = (postHTML) => {
-        const blogFeed = document.querySelector('.blog-feed');
-        const postContainer = document.getElementById('post-container');
-
-        blogFeed.style.display = 'none';
-        postContainer.innerHTML = `
-            <button id="back-button-top" class="back-button">← Volver</button>
-            ${postHTML}
-            <button id="back-button-bottom" class="back-button">← Volver</button>
-        `;
-        postContainer.style.display = 'block';
-
-        const goBack = () => {
-            postContainer.style.display = 'none';
-            postContainer.innerHTML = '';
-            blogFeed.style.display = 'grid';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        document.getElementById('back-button-top').addEventListener('click', goBack);
-        document.getElementById('back-button-bottom').addEventListener('click', goBack);
-    };
-
-    // Eventos para tarjetas de posts
-    document.querySelectorAll('.post-preview, .read-more').forEach(element => {
-        element.addEventListener('click', async (e) => {
-            e.preventDefault();
-            const postFile = element.closest('.post-preview').dataset.post;
-            const postHTML = await loadPost(postFile);
-            showPost(postHTML);
-
-            window.scrollTo({
-                top: document.getElementById('post-container').offsetTop - 80,
-                behavior: 'smooth'
-            });
+  
+    // —————————————————————————————————————————
+    // Render de gráficos inline
+    // —————————————————————————————————————————
+    const renderCharts = charts => {
+      charts.forEach(chart => {
+        const canvas = document.getElementById(chart.id);
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+          type: chart.type,
+          data: chart.data,
+          options: chart.options
         });
-    });
-});
+      });
+    };
+  
+    // —————————————————————————————————————————
+    // Mostrar el post
+    // —————————————————————————————————————————
+    const showPost = (html, charts) => {
+      const feed = document.getElementById('blog-feed');
+      const container = document.getElementById('post-container');
+      feed.style.display = 'none';
+      container.innerHTML = `
+        <button id="back-top" class="back-button">← Volver</button>
+        ${html}
+        <button id="back-bottom" class="back-button">← Volver</button>
+      `;
+      container.style.display = 'block';
+  
+      // Ahora que el HTML del post (con <canvas id="pickupChart">) está en el DOM:
+      renderCharts(charts);
+  
+      const goBack = () => {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        feed.style.display = 'grid';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      document.getElementById('back-top').onclick = goBack;
+      document.getElementById('back-bottom').onclick = goBack;
+    };
+  
+    // —————————————————————————————————————————
+    // Inicializar feed de posts
+    // —————————————————————————————————————————
+    (async () => {
+      try {
+        const res = await fetch('posts.json');
+        if (!res.ok) throw new Error('Error al cargar los posts');
+        const posts = await res.json();
+  
+        const explora = posts.filter(p =>
+          p.label === 'explora' ||
+          (Array.isArray(p.label) && p.label.includes('explora'))
+        );
+  
+        const feed = document.getElementById('blog-feed');
+        if (explora.length === 0) {
+          feed.innerHTML = '<p>No hay posts en Explora.</p>';
+          return;
+        }
+        feed.innerHTML = explora.map(post => `
+          <article class="post-preview" data-post='${JSON.stringify(post)}'>
+            <img src="${post.image}" alt="${post.title}" class="post-image">
+            <div class="post-excerpt">
+              <h2>${post.title}</h2>
+              <p>${post.description}</p>
+              <button class="read-more">Leer más</button>
+            </div>
+          </article>
+        `).join('');
+  
+        document.querySelectorAll('.post-preview').forEach(preview => {
+          preview.addEventListener('click', async e => {
+            e.preventDefault();
+            const post = JSON.parse(preview.dataset.post);
+            const html = await loadPost(post.post);
+            const charts = Array.isArray(post.charts) ? post.charts : [];
+            showPost(html, charts);
+          });
+        });
+      } catch (err) {
+        console.error(err);
+        document.getElementById('blog-feed').innerHTML = '<p>Error cargando posts.</p>';
+      }
+    })();
+  });
+  

@@ -6,27 +6,33 @@
   <title>TANTEMA</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-17SDCHQMC8');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-17SDCHQMC8');
+  </script>
+
+  <!-- Chart.js disponible globalmente -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
     <main>
+      <!-- Aquí se inyectará el listado de posts -->
       <section class="blog-feed" id="blog-feed"></section>
+      <!-- Aquí se inyectará el contenido de cada post -->
       <div id="post-container" style="display: none;"></div>
     </main>
   </div>
 
-  <!-- Scripts -->
+  <!-- Menú y navegación -->
   <script src="navbar.js"></script>
 
+  <!-- Loader del feed (posts.json) -->
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
@@ -36,7 +42,7 @@
 
         const blogFeed = document.getElementById('blog-feed');
         blogFeed.innerHTML = posts.map(post => `
-          <article class="post-preview" data-post="${post.post}">
+          <article class="post-preview" data-post='${JSON.stringify(post)}'>
             <img src="${post.image}" alt="${post.title}" class="post-image">
             <div class="post-excerpt">
               <h2>${post.title}</h2>
@@ -46,43 +52,61 @@
           </article>
         `).join('');
 
-        // Eventos de clic para leer el post (imagen o botón)
+        // Al hacer clic en un post, lo cargamos y mostramos
         document.querySelectorAll('.post-preview').forEach(preview => {
-          preview.addEventListener('click', async (e) => {
+          preview.addEventListener('click', async e => {
             e.preventDefault();
+            const post = JSON.parse(preview.dataset.post);
+            const postHtmlRes = await fetch(post.post);
+            const postHTML = postHtmlRes.ok ? await postHtmlRes.text() : '<p>Error al cargar el post.</p>';
 
-            const postFile = preview.dataset.post;
-            const postRes = await fetch(postFile);
-            if (!postRes.ok) throw new Error('Post no encontrado');
-            const postHTML = await postRes.text();
-
-            const postContainer = document.getElementById('post-container');
+            const container = document.getElementById('post-container');
             blogFeed.style.display = 'none';
-            postContainer.innerHTML = `
-              <button id="back-button-top" class="back-button">← Volver</button>
+            container.innerHTML = `
+              <button id="back-top" class="back-button">← Volver</button>
               ${postHTML}
-              <button id="back-button-bottom" class="back-button">← Volver</button>
+              <button id="back-bottom" class="back-button">← Volver</button>
             `;
-            postContainer.style.display = 'block';
+            container.style.display = 'block';
 
-            // Scroll suave
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Re-ejecutar scripts incrustados en el HTML del post
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(postHTML, 'text/html');
+            const scripts = doc.querySelectorAll('script');
+            scripts.forEach(script => {
+              if (script.src) {
+                const newScript = document.createElement('script');
+                newScript.src = script.src;
+                document.body.appendChild(newScript);
+              } else {
+                const newScript = document.createElement('script');
+                newScript.textContent = script.textContent;
+                document.body.appendChild(newScript);
+              }
+            });
 
-            // Volver desde arriba o abajo
-            const volver = () => {
-              postContainer.style.display = 'none';
-              postContainer.innerHTML = '';
+            // Si el post tiene charts, inyecta el script del gráfico
+            if (Array.isArray(post.charts) && post.charts.length) {
+              const s = document.createElement('script');
+              s.src = '/scripts/pickup-chart.js'; // Ruta corregida
+              document.body.appendChild(s);
+            }
+
+            // Volver al feed
+            const goBack = () => {
+              container.style.display = 'none';
+              container.innerHTML = '';
               blogFeed.style.display = 'grid';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             };
-
-            document.getElementById('back-button-top').addEventListener('click', volver);
-            document.getElementById('back-button-bottom').addEventListener('click', volver);
+            document.getElementById('back-top').onclick = goBack;
+            document.getElementById('back-bottom').onclick = goBack;
           });
         });
 
-      } catch (error) {
-        console.error('Error al cargar los posts:', error);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('blog-feed').innerHTML = '<p>Error cargando posts.</p>';
       }
     });
   </script>
