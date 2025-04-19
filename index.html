@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA1</title>
+  <title>TANTEMA</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-17SDCHQMC8');
-</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-17SDCHQMC8');
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -53,7 +53,7 @@
 
             const postFile = preview.dataset.post;
             const postRes = await fetch(postFile);
-            if (!postRes.ok) throw new Error('Post no encontrado');
+            if (!res.ok) throw new Error('Post no encontrado');
             const postHTML = await postRes.text();
 
             const postContainer = document.getElementById('post-container');
@@ -63,39 +63,15 @@
               ${postHTML}
               <button id="back-button-bottom" class="back-button">← Volver</button>
             `;
-            // Ejecutar script del gráfico si el post lo incluye
-setTimeout(() => {
-  const canvas = document.getElementById('miGrafico');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Rojo', 'Azul', 'Amarillo', 'Verde', 'Púrpura', 'Naranja'],
-        datasets: [{
-          label: 'Colores más usados',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255, 0.6)',
-            'rgba(255, 159, 64, 0.6)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
-  }
-}, 0);
             postContainer.style.display = 'block';
+
+            // Cargar pickup-chart.js solo si el post es pickup.html
+            if (postFile.includes('pickup.html')) {
+              const script = document.createElement('script');
+              script.src = '/scripts/pickup-chart.js';
+              script.async = true;
+              document.body.appendChild(script);
+            }
 
             // Scroll suave
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -118,5 +94,5 @@ setTimeout(() => {
       }
     });
   </script>
- </body>
+</body>
 </html>
