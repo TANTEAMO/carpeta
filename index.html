@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA</title>
+  <title>TANTEMA2</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Google tag (gtag.js) -->
@@ -53,7 +53,7 @@
 
             const postFile = preview.dataset.post;
             const postRes = await fetch(postFile);
-            if (!res.ok) throw new Error('Post no encontrado');
+            if (!postRes.ok) throw new Error('Post no encontrado');
             const postHTML = await postRes.text();
 
             const postContainer = document.getElementById('post-container');
@@ -68,8 +68,10 @@
             // Cargar pickup-chart.js solo si el post es pickup.html
             if (postFile.includes('pickup.html')) {
               const script = document.createElement('script');
-              script.src = '/scripts/pickup-chart.js';
+              script.src = '/remember/scripts/pickup-chart.js';
               script.async = true;
+              script.onload = () => console.log('pickup-chart.js cargado correctamente');
+              script.onerror = () => console.error('Error al cargar pickup-chart.js');
               document.body.appendChild(script);
             }
 
