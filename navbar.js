@@ -159,5 +159,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('blog-feed').innerHTML = '<p>Error cargando posts.</p>';
       }
     })();
+    // —————————————————————————————————————————
+// Cargar post directamente desde URL (?post=nombre)
+// —————————————————————————————————————————
+const params = new URLSearchParams(window.location.search);
+const postId = params.get("post");
+if (postId) {
+  loadPost(`post/${postId}.html`).then(html => {
+    showPost(html, []);
+  });
+}
   });
   
