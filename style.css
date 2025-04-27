@@ -418,12 +418,19 @@ main ul li ol {
 }
 
 .highlight th {
-  background: var(--link-color);
-  color: #FFFFFF;
+  background-color: #f2f2f2;
+  
+  color: #000000;
 }
 
 .highlight tr:nth-child(even) {
   background: rgba(242, 248, 249, 0.8);
+}
+.highlight a:link {
+  color: #007BFF; /* Azul */
+}
+.highlight a:visited {
+  color: #007BFF; /* Púrpura */
 }
 
 /* Botón hamburguesa */

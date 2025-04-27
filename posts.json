@@ -5,7 +5,8 @@
       "image": "images/decreto-poder.jpg",
       "post": "post/decretos.html",
       "label": "practica",
-      "charts": []
+      "charts": [],
+      "visibleInIndex": false
     },
     {
       "title": "🌱 Sana a Tu Niño Interior",
@@ -13,7 +14,8 @@
       "image": "images/sanar.jpg",
       "post": "post/sana-nino-interior.html",
       "label": "practica",
-      "charts": []
+      "charts": [],
+      "visibleInIndex": false
     },
     {
       "title": "👁️ ¡ATENCIÓN!: El Enfoque: Tu Poder Supremo",
@@ -21,7 +23,8 @@
       "image": "images/atencion.jpg",
       "post": "post/atencion.html",
       "label": "practica",
-      "charts": []
+      "charts": [],
+      "visibleInIndex": false
     },
     
     {
@@ -30,7 +33,8 @@
       "image": "images/gracia.jpg",
       "post": "post/gracia.html",
       "label": "practica",
-      "charts": []
+      "charts": [],
+      "visibleInIndex": false
     },
     {
       "title": "Relación entre Corea del Sur y Perú",
@@ -41,8 +45,8 @@
       "charts": []
     },
     {
-      "title": "🛻 ¿Qué Camioneta 4x4 Comprar?",
-      "description": "Guía Definitiva  para Proyectos en Perú",
+      "title": "La Mejor Camioneta 4x4 para tu Proyecto en Perú",
+      "description": "Guía comparativa para elegir con inteligencia y proteger tu inversión",
       "image": "images/toyota-hilux.jpg",
       "post": "post/pickup.html",
       "label": "explora",
@@ -76,6 +80,14 @@
       "description": "Análisis Actualizado",
       "image": "images/tao-1.jpg",
       "post": "post/tao-01.html",
+      "label": "explora",
+      "charts": []
+    },
+    {
+      "title": "Escucha Música y nutre el alma",
+      "description": "La música que atraviesa los universos",
+      "image": "images/guitar.jpg",
+      "post": "post/songs.html",
       "label": "explora",
       "charts": []
     }
