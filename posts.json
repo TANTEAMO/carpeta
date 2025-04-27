@@ -70,5 +70,13 @@
           }
         }
       ]
+    },
+    {
+      "title": "Tao Te Ching - Capítulo 1",
+      "description": "Análisis Actualizado",
+      "image": "images/tanque.jpg",
+      "post": "post/tao-01.html",
+      "label": "explora",
+      "charts": []
     }
   ]

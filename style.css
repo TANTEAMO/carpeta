@@ -739,5 +739,35 @@ main ul li ol {
     width: 100% !important;
     height: 400px !important;
   }
-  
+  .feed-separator {
+    width: 100%;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eaeaea;
+    grid-column: 1 / -1;  /* Asegura que ocupe todo el ancho en un layout grid */
+}
+
+.feed-separator h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo para los posts de RSS para diferenciarlos de los estáticos */
+.post-preview.rss-post {
+    border: 1px solid #f0f0f0;
+    background-color: #fafafa;
+}
+
+/* Para mejorar la presentación de errores */
+.error-message {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-radius: 4px;
+    text-align: center;
+    grid-column: 1 / -1;  /* Asegura que ocupe todo el ancho en un layout grid */
+}
 }
