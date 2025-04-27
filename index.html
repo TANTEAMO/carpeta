@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -73,7 +73,9 @@
                 postContainer.style.display = 'block';
 
                 // Cargar gráficos si existen
-                const postData = posts.find(post => post.post === postFile);
+                const postData = posts.find(post => post.post === postFile
+
+);
                 if (postData?.charts?.length) {
                   postData.charts.forEach(chart => {
                     const script = document.createElement('script');
@@ -124,45 +126,58 @@
           const data = await response.json();
 
           if (data.status === 'ok' && data.items.length > 0) {
-            data.items.forEach(item => {
-              // Intentar extraer imagen de múltiples fuentes
-              let imageSrc = '';
-              if (item.enclosure?.link) {
-                imageSrc = item.enclosure.link;
-                console.log(`Imagen encontrada en enclosure: ${imageSrc}`);
-              } else if (item.description) {
-                // Usar DOMParser para buscar <img>
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(item.description, 'text/html');
-                const img = doc.querySelector('img');
-                if (img?.src) {
-                  imageSrc = img.src;
-                  console.log(`Imagen encontrada en description: ${imageSrc}`);
-                } else {
-                  // Usar expresión regular como respaldo
-                  const imgMatch = item.description.match(/<img[^>]+src=["'](.*?)["']/i);
-                  if (imgMatch?.[1]) {
-                    imageSrc = imgMatch[1];
-                    console.log(`Imagen encontrada con regex: ${imageSrc}`);
+            const threeMonthsAgo = new Date();
+            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+            const recentItems = data.items.filter(item => {
+              const pubDate = new Date(item.pubDate);
+              return pubDate >= threeMonthsAgo;
+            });
+
+            if (recentItems.length > 0) {
+              recentItems.forEach(item => {
+                // Intentar extraer imagen
+                let imageSrc = '';
+                if (item.enclosure?.link) {
+                  imageSrc = item.enclosure.link;
+                  console.log(`Imagen encontrada en enclosure para "${item.title}": ${imageSrc}`);
+                } else if (item.description) {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(item.description, 'text/html');
+                  const img = doc.querySelector('img');
+                  if (img?.src) {
+                    imageSrc = img.src;
+                    console.log(`Imagen encontrada en description para "${item.title}": ${imageSrc}`);
+                  } else {
+                    const imgMatch = item.description.match(/<img[^>]+src=["'](.*?)["']/i);
+                    if (imgMatch?.[1]) {
+                      imageSrc = imgMatch[1];
+                      console.log(`Imagen encontrada con regex para "${item.title}": ${imageSrc}`);
+                    }
                   }
                 }
-              }
+                if (!imageSrc) {
+                  console.log(`No se encontró imagen para "${item.title}"`);
+                }
 
-              // Si no hay imagen, ocultar el elemento img (o usar placeholder si prefieres)
-              const imageHtml = imageSrc ? `<img src="${imageSrc}" alt="${item.title}" class="post-image">` : '';
+                // Omitir imagen si no está disponible
+                const imageHtml = imageSrc ? `<img src="${imageSrc}" alt="${item.title}" class="post-image">` : '';
 
-              blogFeed.insertAdjacentHTML('beforeend', `
-                <article class="post-preview">
-                  ${imageHtml}
-                  <div class="post-excerpt">
-                    <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
-                    <p>${item.description?.replace(/<[^>]+>/g, '').substring(0, 150) || 'Sin descripción disponible'}...</p>
-                    <p class="meta">Publicado: ${new Date(item.pubDate).toLocaleDateString('es-PE', { dateStyle: 'medium' })} | Fuente: ${item.author || 'Google News'}</p>
-                    <button class="read-more" onclick="window.open('${item.link}', '_blank')">Leer más</button>
-                  </div>
-                </article>
-              `);
-            });
+                blogFeed.insertAdjacentHTML('beforeend', `
+                  <article class="post-preview">
+                    ${imageHtml}
+                    <div class="post-excerpt">
+                      <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
+                      <p>${item.description?.replace(/<[^>]+>/g, '').substring(0, 150) || 'Sin descripción disponible'}...</p>
+                      <p class="meta">Publicado: ${new Date(item.pubDate).toLocaleDateString('es-PE', { dateStyle: 'medium' })} | Fuente: ${item.author || 'Google News'}</p>
+                      <button class="read-more" onclick="window.open('${item.link}', '_blank')">Leer más</button>
+                    </div>
+                  </article>
+                `);
+              });
+            } else {
+              blogFeed.insertAdjacentHTML('beforeend', '<p class="error">No se encontraron noticias recientes de los últimos 3 meses.</p>');
+            }
           } else {
             blogFeed.insertAdjacentHTML('beforeend', '<p class="error">No se encontraron noticias recientes.</p>');
           }
