@@ -4,7 +4,7 @@
     </div>
     <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 100%;">
       <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: 20%; height: auto; flex: 1 1 150px;" src="images/guitar.jpg" class="inline-block" />
-      <iframe id="youtube-player" style="max-width: 60%; height: auto; aspect-ratio: 16/9; flex: 2 1 300px;" src="https://www.youtube.com/embed/videoseries?list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="inline-block"></iframe>
+      <iframe id="youtube-player" width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: 20%; height: auto; flex: 1 1 150px;" src="images/guitar.jpg" class="inline-block" />
     </div>
 </div>
@@ -41,7 +41,7 @@
         <!--tr><td>AC/DC</td><td>Love Song, Ride Song, Rock 'N' Roll Damnation, Kicked In The Teeth</td><td></td></tr-->
         <tr><td>Al Green</td><td><a href="#" class="play-in-frame" data-video-id="RmJVjzmhH1s">Stop & Check Myself</a>  </td><td>Desde el primer golpe del bombo con el clash, la canción te exige detenerte. Los vientos y cuerdas te invitan a la serenidad, al enfoque al interior. Es un llamado a salir del piloto automático, a hacer una pausa en el flujo constante de la vida. Al Green lo afirma en primera persona: '<i>TENGO QUE PARAR Y CHEQUEARME A MÍ MISMO</i>', es el observador hablando. Y el coro lo reafirma desde la subconsciencia, como un eco de verdad interna.</td></tr>
         <tr><td>Al Di Meola</td><td><a href="#" class="play-in-frame" data-video-id="WfRWVYUZT7E" rel="noopener noreferrer">Bianca's Midnight Lullaby</a>, African Night, Orange And Blue, Heru Mertar  Don't Go So Far Away</td><td></td></tr>
-        <tr><td>Amalia Rodriguez</td><td><<a href="#" class="play-in-frame" data-video-id="J2mkW3FKT80" rel="noopener noreferrer">Meia-noite e uma guitarra</a></td><td><b>Medianoche y una guitarra</b>: la purga. (1954 por Jorge Fernando)
+        <tr><td>Amalia Rodriguez</td><td><a href="#" class="play-in-frame" data-video-id="J2mkW3FKT80" rel="noopener noreferrer">Meia-noite e uma guitarra</a></td><td><b>Medianoche y una guitarra</b>: la purga. (1954 por Jorge Fernando)
   Un instante suspendido: la <i>medianoche</i>, el punto medio de la vida, entre lo vivido y lo que queda por vivir.
   La <i>guitarra</i> es el alma desnuda.
   
@@ -209,19 +209,72 @@
   
 
   <script>
-    document.querySelectorAll('a.play-in-frame').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault(); // Esto detiene completamente la navegación
-        
-        const videoId = this.getAttribute('data-video-id');
-        const iframe = document.getElementById('youtube-player');
-        
-        // Cambia la fuente del iframe para cargar el nuevo video
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-        
-        // Opcional: desplázate suavemente al reproductor
-        iframe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Carga la API de YouTube
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    
+    let ytPlayer;
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('youtube-player', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+    
+    function onPlayerReady() {
+      console.log('Reproductor listo');
+      setupSongLinks();
+    }
+    
+    function onPlayerStateChange(event) {
+      // Puedes agregar lógica adicional cuando cambia el estado del reproductor
+    }
+    
+    function setupSongLinks() {
+      document.querySelectorAll('.play-in-frame').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const videoId = this.getAttribute('data-video-id') || extractVideoId(this.href);
+          
+          if (videoId && ytPlayer) {
+            ytPlayer.loadVideoById(videoId);
+            document.getElementById('youtube-player').scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }
+        });
+      });
+    }
+    
+    function extractVideoId(url) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+    
+    // Configuración alternativa para enlaces sin API
+    document.addEventListener('DOMContentLoaded', function() {
+      const fallbackPlayer = document.getElementById('youtube-player');
+      const links = document.querySelectorAll('.play-in-frame');
+      
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (!ytPlayer) { // Si la API no está cargada
+            e.preventDefault();
+            const videoId = this.getAttribute('data-video-id') || extractVideoId(this.href);
+            if (videoId) {
+              fallbackPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
+              fallbackPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }
+        });
       });
     });
     </script>
+
  
