@@ -1,7 +1,7 @@
 <title>Música para nutrir el alma</title>
 <div>
     <div class="post-header">
-      <h1>Música para nutrir el alma22</h1>
+      <h1>Música para nutrir el alma</h1>
     </div>
     <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
     
@@ -227,6 +227,7 @@ let ytPlayer = null;
 let videoQueue = null;
 
 function onYouTubeIframeAPIReady() {
+    console.log('API de YouTube cargada');
     ytPlayer = new YT.Player('youtube-player', {
         playerVars: {
             listType: 'playlist',
@@ -245,8 +246,6 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady(event) {
     console.log('Reproductor de YouTube listo');
-    setupSongLinks();
-
     if (videoQueue) {
         playVideoById(videoQueue);
         videoQueue = null;
@@ -255,11 +254,16 @@ function onPlayerReady(event) {
 
 function setupSongLinks() {
     const links = document.querySelectorAll('.play-in-frame');
-    console.log('Enlaces encontrados:', links.length);
-    links.forEach(link => {
+    console.log('Enlaces .play-in-frame encontrados:', links.length);
+    if (links.length === 0) {
+        console.warn('No se encontraron enlaces con la clase .play-in-frame. Verifica el HTML.');
+    }
+
+    links.forEach((link, index) => {
+        console.log(`Configurando enlace ${index + 1}:`, link.href, link.getAttribute('data-video-id'));
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Clic en enlace:', this);
+            console.log('Clic detectado en enlace:', this.href);
 
             let videoId = this.getAttribute('data-video-id');
             if (!videoId) {
@@ -269,57 +273,12 @@ function setupSongLinks() {
             }
 
             if (!videoId) {
-                console.error('No se pudo extraer el ID del video desde el enlace:', this.href);
-                alert('No se pudo identificar el video. Por favor, verifica el enlace.');
+                console.error('No se pudo extraer el ID del video:', this.href);
+                alert('No se pudo identificar el video. Verifica el enlace.');
                 return;
             }
 
-            console.log('Intentando reproducir video con ID:', videoId);
+            console.log('ID del video extraído:', videoId);
             if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-                playVideoById(videoId);
-            } else {
-                videoQueue = videoId;
-                console.log('Reproductor no listo, encolando video:', videoId);
-            }
-        });
-    });
-}
-
-function playVideoById(videoId) {
-    try {
-        ytPlayer.loadVideoById(videoId);
-        console.log('Reproduciendo video:', videoId);
-        
-        document.getElementById('youtube-player').scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
-    } catch (error) {
-        console.error('Error al reproducir el video:', error);
-        document.getElementById('youtube-player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
-    }
-}
-
-function onPlayerError(event) {
-    console.error('Error en el reproductor de YouTube:', event.data);
-    let errorMessage = 'No se pudo reproducir el video. ';
-    switch (event.data) {
-        case 2:
-            errorMessage += 'Parámetros inválidos.';
-            break;
-        case 5:
-            errorMessage += 'Error relacionado con HTML5.';
-            break;
-        case 100:
-            errorMessage += 'Video no encontrado.';
-            break;
-        case 101:
-        case 150:
-            errorMessage += 'El video no permite reproducción incrustada.';
-            break;
-        default:
-            errorMessage += 'Error desconocido.';
-    }
-    alert(errorMessage);
-}
+                console.log('Reproductor listo, intentando reproducir video...');
     </script>
