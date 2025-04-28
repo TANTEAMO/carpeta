@@ -785,3 +785,24 @@ main ul li ol {
     grid-column: 1 / -1;  /* Asegura que ocupe todo el ancho en un layout grid */
 }
 }
+.slogan-container {
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.slogan {
+  font-family: 'Roboto', sans-serif; /* Mismo tipo de fuente, pero diferente peso */
+  font-weight: 300; /* Ligero */
+  font-size: 18px; /* Un tamaño más pequeño */
+  color: #dcdcdc; /* Color plateado sutil */
+
+
+
+  color: #ffffff;
+ 
+  padding: 5px; /* Para separar el texto del borde */
+  border-radius: 5px; /* Esquinas redondeadas */
+}

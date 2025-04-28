@@ -10,9 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = `
       <header class="main-header">
         <div class="logo-container">
-          <img src="images/colibri-logo.jpg" alt="Logo Tantema" class="logo">
-          <a href="index.html" class="site-title">TANTEMA</a>
+       
+          <img src="images/komype-logo2.png" alt="Logo Tantema" class="logo">
+          <a href="index.html" class="site-title">KOMYPE</a>
         </div>
+        <div class="slogan-container">
+  <span class="slogan">Korea & Peru  |  Connecting Business Growth</span>
+</div>
+
         <div class="menu-toggle">
           <span></span><span></span><span></span>
         </div>
@@ -21,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <nav>
           <ul class="menu">
             <a href="index.html"><li>INICIO</li></a>
-            <a href="explora.html"><li>EXPLORA</li></a>
-            <a href="practica.html"><li>PRACTICA</li></a>
-            <a href="comparte.html"><li>COMPARTE</li></a>
+            <a href="services.html"><li>SERVICES</li></a>
+            <a href="growth.html"><li>GROWTH</li></a>
+            <a href="contact.html"><li>CONTACT</li></a>
           </ul>
         </nav>
       </div>`;

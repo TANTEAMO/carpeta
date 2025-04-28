@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TANTEMA</title>
+  <title>KOMYPE</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Google tag (gtag.js) -->
@@ -21,6 +21,57 @@
 <body>
   <div class="container">
     <main>
+      <section class="intro-section" style="position: relative; width: 100%; height: 500px; overflow: hidden;">
+        <img src="images/plant.jpg" alt="Energy construction plant" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;">
+          <h1>Connecting Korea and Peru through high-impact projects</h1>
+          <p>We facilitate strategic alliances, business opportunities, and expert local support services <br>to help growth-oriented businesses, from small enterprises to multinational corporations</p>
+        </div>
+      </section>
+      
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <h1 style="font-size: 1.5em; margin-bottom: 15px;">Our Services</h1>
+          <p>We provide a comprehensive suite of services designed to foster strategic partnerships and drive business success.</p>
+          <a href="/services" class="section-button">Explore Our Services</a>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <h1 style="font-size: 1.5em; margin-bottom: 15px;">Strategic Business Consulting</h1>
+          <p>We provide a comprehensive suite of services designed to foster strategic partnerships and drive business success.</p>
+        </div>
+       </div>
+       
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px;">
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <h1 style="font-size: 1.5em; margin-bottom: 15px;">Strategic Business Consulting</h1>
+          <p>We provide a comprehensive suite of services designed to foster strategic partnerships and drive business success.</p>
+        </div>
+       </div>
+
+
+      <!-- Growth Section -->
+      <section id="growth">
+        <div class="section-content">
+          <h1>Business <span class="highlight">Growth</span></h1>
+          <p>Empowering businesses to thrive in new markets with tailored solutions and expert guidance.</p>
+          <a href="/growth" class="section-button">Discover Growth Opportunities</a>
+        </div>
+      </section>
+    
+      <!-- Contact Section -->
+      <section id="contact">
+        <div class="section-content">
+          <h1>Contact <span class="highlight">Us</span></h1>
+          <p>Ready to get started? Reach out and let's begin creating opportunities for your business together.</p>
+          <a href="/contact" class="section-button">Get in Touch</a>
+        </div>
+      </section>
+      
       <section class="blog-feed" id="blog-feed"></section>
       <div id="post-container" style="display: none;"></div>
     </main>

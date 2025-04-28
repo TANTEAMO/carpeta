@@ -1,41 +1,6 @@
 [
-    {
-      "title": "🔱 Decreto Supremo de Prosperidad",
-      "description": "Todo es un portal hacia lo infinito: Cada palabra, pensamiento y acción redefine la realidad...",
-      "image": "images/decreto-poder.jpg",
-      "post": "post/decretos.html",
-      "label": "practica",
-      "charts": [],
-      "visibleInIndex": false
-    },
-    {
-      "title": "🌱 Sana a Tu Niño Interior",
-      "description": "Liberación y Reparentalización...",
-      "image": "images/sanar.jpg",
-      "post": "post/sana-nino-interior.html",
-      "label": "practica",
-      "charts": [],
-      "visibleInIndex": false
-    },
-    {
-      "title": "👁️ ¡ATENCIÓN!: El Enfoque: Tu Poder Supremo",
-      "description": "El Ciclo de la Manifestación",
-      "image": "images/atencion.jpg",
-      "post": "post/atencion.html",
-      "label": "practica",
-      "charts": [],
-      "visibleInIndex": false
-    },
-    
-    {
-      "title": "🍲 Receta de la Gracia",
-      "description": "El manjar espiritual que ya está en tu cocina interior",
-      "image": "images/gracia.jpg",
-      "post": "post/gracia.html",
-      "label": "practica",
-      "charts": [],
-      "visibleInIndex": false
-    },
+   
+
     {
       "title": "Relación entre Corea del Sur y Perú",
       "description": "Análisis y perspectivas",
@@ -74,21 +39,6 @@
           }
         }
       ]
-    },
-    {
-      "title": "Tao Te Ching - Capítulo 1",
-      "description": "Análisis Actualizado",
-      "image": "images/tao-1.jpg",
-      "post": "post/tao-01.html",
-      "label": "explora",
-      "charts": []
-    },
-    {
-      "title": "Escucha Música y nutre el alma",
-      "description": "La música que atraviesa los universos",
-      "image": "images/guitar.jpg",
-      "post": "post/songs.html",
-      "label": "explora",
-      "charts": []
     }
+   
   ]
