@@ -15,6 +15,8 @@
     gtag('config', 'G-17SDCHQMC8');
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Cargar API de YouTube -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
   <div class="container">
@@ -27,96 +29,167 @@
   <!-- Scripts -->
   <script src="navbar.js"></script>
   <script>
+    let ytPlayer = null;
+
+    function onYouTubeIframeAPIReady() {
+      console.log('API de YouTube cargada');
+    }
+
+    function setupYouTubePlayer(iframe) {
+      if (!iframe) {
+        console.error('No se encontró el iframe de YouTube');
+        return;
+      }
+      ytPlayer = new YT.Player(iframe, {
+        playerVars: {
+          autoplay: 0,
+          enablejsapi: 1
+        },
+        events: {
+          'onReady': () => {
+            console.log('Reproductor inicializado:', ytPlayer);
+            setupLinks();
+          }
+        }
+      });
+    }
+
+    function setupLinks() {
+      console.log('Configurando enlaces play-in-frame');
+      const links = document.querySelectorAll('.play-in-frame');
+      console.log('Enlaces encontrados:', links.length);
+      
+      links.forEach(link => {
+        if (link.dataset.listener) return;
+        
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Clic en enlace:', link.href, 'data-video-id:', link.dataset.videoId);
+          
+          const videoId = link.dataset.videoId || extractVideoId(link.href);
+          console.log('Video ID:', videoId);
+          
+          if (videoId && ytPlayer) {
+            console.log('Cargando video con ID:', videoId);
+            ytPlayer.loadVideoById(videoId);
+            document.getElementById('youtube-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            console.error('Error: No se pudo cargar el video', { videoId, ytPlayer });
+          }
+        });
+        
+        link.dataset.listener = 'true';
+      });
+    }
+
+    function extractVideoId(url) {
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+      return match ? match[1] : null;
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       const blogFeed = document.getElementById('blog-feed');
       const postContainer = document.getElementById('post-container');
 
+      // Observar cambios en postContainer para detectar inserción de songs.html
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.addedNodes.length) {
+            const youtubePlayer = postContainer.querySelector('#youtube-player');
+            if (youtubePlayer) {
+              console.log('iframe youtube-player detectado');
+              setupYouTubePlayer(youtubePlayer);
+            }
+          }
+        });
+      });
+      observer.observe(postContainer, { childList: true, subtree: true });
+
       // Cargar posts locales desde posts.json
       async function loadLocalPosts() {
-  try {
-    const res = await fetch('posts.json');
-    if (!res.ok) throw new Error('Error al cargar los posts');
-    const posts = await res.json();
-
-    blogFeed.innerHTML = ''; // Limpiar contenedor antes de añadir posts
-    // Filtrar posts con visibleInIndex: true
-    const filteredPosts = posts.filter(post => post.visibleInIndex ?? true);
-    filteredPosts.forEach(post => {
-      blogFeed.insertAdjacentHTML('beforeend', `
-        <article class="post-preview" data-post="${post.post}">
-          <img src="${post.image}" alt="${post.title}" class="post-image">
-          <div class="post-excerpt">
-            <h2>${post.title}</h2>
-            <p>${post.description}</p>
-            <button class="read-more">Leer más</button>
-          </div>
-        </article>
-      `);
-    });
-
-    // Añadir eventos para cargar posts completos (sin cambios)
-    document.querySelectorAll('.post-preview[data-post]').forEach(preview => {
-      preview.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const postFile = preview.dataset.post;
-        if (!postFile) return;
-
         try {
-          const postRes = await fetch(postFile);
-          if (!postRes.ok) throw new Error('Post no encontrado');
-          const postHTML = await postRes.text();
+          const res = await fetch('posts.json');
+          if (!res.ok) throw new Error('Error al cargar los posts');
+          const posts = await res.json();
 
-          blogFeed.style.display = 'none';
-          postContainer.innerHTML = `
-            <button id="back-button-top" class="back-button">← Volver</button>
-            ${postHTML}
-            <button id="back-button-bottom" class="back-button">← Volver</button>
-          `;
-          postContainer.style.display = 'block';
+          blogFeed.innerHTML = '';
+          const filteredPosts = posts.filter(post => post.visibleInIndex ?? true);
+          filteredPosts.forEach(post => {
+            blogFeed.insertAdjacentHTML('beforeend', `
+              <article class="post-preview" data-post="${post.post}">
+                <img src="${post.image}" alt="${post.title}" class="post-image">
+                <div class="post-excerpt">
+                  <h2>${post.title}</h2>
+                  <p>${post.description}</p>
+                  <button class="read-more">Leer más</button>
+                </div>
+              </article>
+            `);
+          });
 
-          // Cargar gráficos si existen
-          const postData = posts.find(post => post.post === postFile);
-          if (postData?.charts?.length) {
-            postData.charts.forEach(chart => {
-              const script = document.createElement('script');
-              script.text = `
-                setTimeout(() => {
-                  const canvas = document.getElementById('${chart.id}');
-                  if (canvas) {
-                    new Chart(canvas.getContext('2d'), {
-                      type: '${chart.type}',
-                      data: ${JSON.stringify(chart.data)},
-                      options: ${JSON.stringify(chart.options)}
-                    });
-                  }
-                }, 100);
-              `;
-              document.body.appendChild(script);
+          document.querySelectorAll('.post-preview[data-post]').forEach(preview => {
+            preview.addEventListener('click', async (e) => {
+              e.preventDefault();
+              const postFile = preview.dataset.post;
+              if (!postFile) return;
+
+              try {
+                const postRes = await fetch(postFile);
+                if (!postRes.ok) throw new Error('Post no encontrado');
+                const postHTML = await postRes.text();
+
+                blogFeed.style.display = 'none';
+                postContainer.innerHTML = `
+                  <button id="back-button-top" class="back-button">← Volver</button>
+                  ${postHTML}
+                  <button id="back-button-bottom" class="back-button">← Volver</button>
+                `;
+                postContainer.style.display = 'block';
+
+                // Cargar gráficos si existen
+                const postData = posts.find(post => post.post === postFile);
+                if (postData?.charts?.length) {
+                  postData.charts.forEach(chart => {
+                    const script = document.createElement('script');
+                    script.text = `
+                      setTimeout(() => {
+                        const canvas = document.getElementById('${chart.id}');
+                        if (canvas) {
+                          new Chart(canvas.getContext('2d'), {
+                            type: '${chart.type}',
+                            data: ${JSON.stringify(chart.data)},
+                            options: ${JSON.stringify(chart.options)}
+                          });
+                        }
+                      }, 100);
+                    `;
+                    document.body.appendChild(script);
+                  });
+                }
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                const volver = () => {
+                  postContainer.style.display = 'none';
+                  postContainer.innerHTML = '';
+                  blogFeed.style.display = 'grid';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                document.getElementById('back-button-top').addEventListener('click', volver);
+                document.getElementById('back-button-bottom').addEventListener('click', volver);
+              } catch (error) {
+                console.error('Error al cargar el post:', error);
+                postContainer.innerHTML = '<p class="error">Error al cargar el post.</p>';
+              }
             });
-          }
-
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-
-          const volver = () => {
-            postContainer.style.display = 'none';
-            postContainer.innerHTML = '';
-            blogFeed.style.display = 'grid';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          };
-
-          document.getElementById('back-button-top').addEventListener('click', volver);
-          document.getElementById('back-button-bottom').addEventListener('click', volver);
+          });
         } catch (error) {
-          console.error('Error al cargar el post:', error);
-          postContainer.innerHTML = '<p class="error">Error al cargar el post.</p>';
+          console.error('Error al cargar los posts:', error);
+          blogFeed.innerHTML = '<p class="error">Error al cargar los posts.</p>';
         }
-      });
-    });
-  } catch (error) {
-    console.error('Error al cargar los posts:', error);
-    blogFeed.innerHTML = '<p class="error">Error al cargar los posts.</p>';
-  }
-}
+      }
 
       // Cargar feeds de Google News
       async function loadNewsFeed() {
@@ -126,46 +199,44 @@
           const data = await response.json();
 
           if (data.status === 'ok' && data.items.length > 0) {
-      const sixMonthsAgo = new Date();
-      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+            const sixMonthsAgo = new Date();
+            sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
-      const recentItems = data.items
-        .filter(item => new Date(item.pubDate) >= sixMonthsAgo)
-        .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            const recentItems = data.items
+              .filter(item => new Date(item.pubDate) >= sixMonthsAgo)
+              .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-      if (recentItems.length > 0) {
-        recentItems.forEach(item => {
-          // Método mejorado para extraer imágenes
-          let imageSrc = '';
-if (item.enclosure?.link) {
-  imageSrc = item.enclosure.link;
-} else if (item.content) {
-  const imgMatch = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (imgMatch) imageSrc = imgMatch[1];
-} else if (item.description) {
-  const imgMatch = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (imgMatch) imageSrc = imgMatch[1];
-}
+            if (recentItems.length > 0) {
+              recentItems.forEach(item => {
+                let imageSrc = '';
+                if (item.enclosure?.link) {
+                  imageSrc = item.enclosure.link;
+                } else if (item.content) {
+                  const imgMatch = item.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+                  if (imgMatch) imageSrc = imgMatch[1];
+                } else if (item.description) {
+                  const imgMatch = item.description.match(/<img[^>]+src=["']([^"']+)["']/i);
+                  if (imgMatch) imageSrc = imgMatch[1];
+                }
 
-// Limpieza de URL
-if (imageSrc) {
-  imageSrc = imageSrc.split('?')[0].replace(/^http:\/\//i, 'https://');
-}
+                if (imageSrc) {
+                  imageSrc = imageSrc.split('?')[0].replace(/^http:\/\//i, 'https://');
+                }
 
-const imageHtml = imageSrc 
-  ? `<img src="${imageSrc}" alt="${item.title}" class="post-image" onerror="this.parentNode.innerHTML='<div class=\\'no-image-placeholder\\'>Imagen no disponible</div>'">`
-  : '<div class="no-image-placeholder" style="margin-top: 10px;"></div>';
+                const imageHtml = imageSrc 
+                  ? `<img src="${imageSrc}" alt="${item.title}" class="post-image" onerror="this.parentNode.innerHTML='<div class=\\'no-image-placeholder\\'>Imagen no disponible</div>'">`
+                  : '<div class="no-image-placeholder" style="margin-top: 10px;"></div>';
 
-          blogFeed.insertAdjacentHTML('beforeend', `
-            <article class="post-preview">
-              ${imageHtml}
-              <div class="post-excerpt">
-                <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
-                <p>${item.description?.replace(/<[^>]+>/g, '').substring(0, 150) || 'Sin descripción disponible'}...</p>
-                <p class="meta">Publicado: ${new Date(item.pubDate).toLocaleDateString('es-PE', { dateStyle: 'medium' })}</p>
-                <button class="read-more" onclick="window.open('${item.link}', '_blank')">Leer más</button>
-              </div>
-            </article>
+                blogFeed.insertAdjacentHTML('beforeend', `
+                  <article class="post-preview">
+                    ${imageHtml}
+                    <div class="post-excerpt">
+                      <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
+                      <p>${item.description?.replace(/<[^>]+>/g, '').substring(0, 150) || 'Sin descripción disponible'}...</p>
+                      <p class="meta">Publicado: ${new Date(item.pubDate).toLocaleDateString('es-PE', { dateStyle: 'medium' })}</p>
+                      <button class="read-more" onclick="window.open('${item.link}', '_blank')">Leer más</button>
+                    </div>
+                  </article>
                 `);
               });
             } else {
@@ -180,13 +251,10 @@ const imageHtml = imageSrc
         }
       }
 
-      // Cargar posts locales primero, luego noticias
       await loadLocalPosts();
       await loadNewsFeed();
 
-      // Recargar solo las noticias cada 30 minutos
       setInterval(async () => {
-        // Preservar posts locales
         const localPosts = document.querySelectorAll('.post-preview[data-post]');
         blogFeed.innerHTML = '';
         localPosts.forEach(post => blogFeed.appendChild(post));
