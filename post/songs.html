@@ -1,14 +1,14 @@
 <title>Música para nutrir el alma</title>
 <div>
     <div class="post-header">
-      <h1>Música para nutrir el alma</h1>
+      <h1>Música para nutrir el alma22</h1>
     </div>
     <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
     
       
       <div style="flex: 3 1 560px; max-width: 100%; min-width: 280px; position: relative; padding-bottom: 56.25%;">
         <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                src="https://www.youtube.com/embed/?enablejsapi=1" 
+                src="https://www.youtube.com/embed/videoseries?list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1&autoplay=0" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
@@ -218,22 +218,19 @@
   
 
   <script>
-    // 1. Cargar la API de YouTube
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
+const tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 2. Variables globales
 let ytPlayer = null;
 let videoQueue = null;
 
-// 3. Cuando la API esté lista
 function onYouTubeIframeAPIReady() {
     ytPlayer = new YT.Player('youtube-player', {
-        height: '100%',
-        width: '100%',
         playerVars: {
+            listType: 'playlist',
+            list: 'PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO',
             autoplay: 0,
             enablejsapi: 1,
             modestbranding: 1,
@@ -246,75 +243,83 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 4. Cuando el reproductor esté listo
 function onPlayerReady(event) {
-    console.log("Reproductor de YouTube listo");
+    console.log('Reproductor de YouTube listo');
     setupSongLinks();
 
-    // Reproduce el video en cola si existe
     if (videoQueue) {
         playVideoById(videoQueue);
         videoQueue = null;
     }
 }
 
-// 5. Configurar los enlaces de canciones
 function setupSongLinks() {
-    document.querySelectorAll('.play-in-frame').forEach(link => {
+    const links = document.querySelectorAll('.play-in-frame');
+    console.log('Enlaces encontrados:', links.length);
+    links.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            // Obtener el ID del video
+            console.log('Clic en enlace:', this);
+
             let videoId = this.getAttribute('data-video-id');
             if (!videoId) {
-                // Extraer el ID desde el href si no hay data-video-id
                 const url = this.href;
                 const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
                 videoId = match ? match[1] : null;
             }
 
             if (!videoId) {
-                console.error("No se pudo extraer el ID del video desde el enlace:", this.href);
+                console.error('No se pudo extraer el ID del video desde el enlace:', this.href);
+                alert('No se pudo identificar el video. Por favor, verifica el enlace.');
                 return;
             }
 
-            // Reproducir el video si el reproductor está listo, o encolarlo
+            console.log('Intentando reproducir video con ID:', videoId);
             if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
                 playVideoById(videoId);
             } else {
                 videoQueue = videoId;
-                console.log("Reproductor no listo, encolando video:", videoId);
+                console.log('Reproductor no listo, encolando video:', videoId);
             }
         });
     });
 }
 
-// 6. Función para reproducir video
 function playVideoById(videoId) {
     try {
         ytPlayer.loadVideoById(videoId);
-        console.log("Reproduciendo video:", videoId);
+        console.log('Reproduciendo video:', videoId);
         
-        // Desplazar la vista al reproductor
         document.getElementById('youtube-player').scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
     } catch (error) {
-        console.error("Error al reproducir el video:", error);
-        // Fallback: Cambiar la URL del iframe directamente
+        console.error('Error al reproducir el video:', error);
         document.getElementById('youtube-player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
     }
 }
 
-// 7. Manejar errores del reproductor
 function onPlayerError(event) {
-    console.error("Error en el reproductor de YouTube:", event.data);
-    // Posibles códigos de error:
-    // 2: Parámetros inválidos
-    // 5: Error relacionado con HTML5
-    // 100: Video no encontrado
-    // 101/150: Video no permitido para reproducción incrustada
-    alert("No se pudo reproducir el video. Es posible que no esté disponible o no permita reproducción incrustada.");
+    console.error('Error en el reproductor de YouTube:', event.data);
+    let errorMessage = 'No se pudo reproducir el video. ';
+    switch (event.data) {
+        case 2:
+            errorMessage += 'Parámetros inválidos.';
+            break;
+        case 5:
+            errorMessage += 'Error relacionado con HTML5.';
+            break;
+        case 100:
+            errorMessage += 'Video no encontrado.';
+            break;
+        case 101:
+        case 150:
+            errorMessage += 'El video no permite reproducción incrustada.';
+            break;
+        default:
+            errorMessage += 'Error desconocido.';
+    }
+    alert(errorMessage);
 }
     </script>
