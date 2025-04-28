@@ -1,11 +1,14 @@
+<title>Música para nutrir el alma</title>
 <div>
     <div class="post-header">
-      <h1>Música para nutrir el alma</h1>
+      <h1>Música para nutrir el alma1</h1>
     </div>
-    <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 100%;">
-      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: 20%; height: auto; flex: 1 1 150px;" src="images/guitar.jpg" class="inline-block" />
-      <iframe id="youtube-player" width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: 20%; height: auto; flex: 1 1 150px;" src="images/guitar.jpg" class="inline-block" />
+    <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
+      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: min(20%, 213px); min-width: 100px; height: auto; flex: 1 1 auto;" src="images/guitar.jpg" class="inline-block" />
+      <div style="flex: 3 1 560px; max-width: 100%; min-width: 280px; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+        <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/?listType=playlist&list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: min(20%, 213px); min-width: 100px; height: auto; flex: 1 1 auto;" src="images/guitar.jpg" class="inline-block" />
     </div>
 </div>
     
@@ -66,7 +69,7 @@
         <tr><td>Angel Olsen</td><td>Right Now</td><td></td></tr>
         <tr><td>Antonio Carlos Jobim</td><td>Manha De Carnaval, Pt. 2</td><td></td></tr>
         <tr><td>Arvo Pärt</td><td><a href="#" class="play-in-frame" data-video-id="FgAp-KrCxM0" rel="noopener noreferrer">Spiegel im Spiegel</a></td><td></td></tr>
-        <tr><td>Astor Piazzolla</td><td><a href="https://youtu.be/1e7_WE1tkSQ?si=pHI8cJyeUlB_Dsl3" class="play-in-frame" rel="noopener noreferrer">Finale (Tango Apasionado)</a>, Coral</td><td></td></tr>
+        <tr><td>Astor Piazzolla</td><td><a href="#" class="play-in-frame" data-video-id="1e7_WE1tkSQ" rel="noopener noreferrer">Finale (Tango Apasionado)</a>, Coral</td><td></td></tr>
   
         <!--tr><td>Beethoven</td><td></td><td></td></tr-->
         <!--tr><td>Beck</td><td>Lost Cause, Heart Is A Drum</td><td></td></tr>
@@ -74,7 +77,7 @@
         <tr><td>Belin</td><td>Take My Breath Away</td><td></td></tr-->
         <tr><td>Black Sabbath</td><td>Fluff</td><td></td></tr>
         <tr><td>Blondie</td><td>Saturday Girl, Heart Of Glass</td><td></td></tr>
-        <tr><td>Bob Dylan</td><td><a href="https://youtu.be/hUvcWXTIjcU?si=P8vNhPd6kVRMepjg" class="play-in-frame" rel="noopener noreferrer">Desolation Row</a></td><td>La desolación de Siddhartha al confrontar el sufrimiento fuera del palacio fue su toma de conciencia sobre la impermanencia y el dolor inherentes a la vida. 
+        <tr><td>Bob Dylan</td><td><a href="#" class="play-in-frame" data-video-id="hUvcWXTIjcU" rel="noopener noreferrer">Desolation Row</a></td><td>La desolación de Siddhartha al confrontar el sufrimiento fuera del palacio fue su toma de conciencia sobre la impermanencia y el dolor inherentes a la vida. 
   Este momento es crucial en su camino hacia la iluminación, pues lo impulsa a buscar respuestas, renunciar a su vida de comodidad y embarcarse en una búsqueda para hallar una solución al sufrimiento (insatisfacción).
   
   </td></tr>
@@ -209,13 +212,17 @@
   
 
   <script>
-    // Carga la API de YouTube
-    const tag = document.createElement('script');
+    // 1. Cargar la API de YouTube
+    var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
+    var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
-    let ytPlayer;
+    // 2. Variables globales
+    var ytPlayer;
+    var videoQueue = null;
+    
+    // 3. Cuando la API esté lista
     function onYouTubeIframeAPIReady() {
       ytPlayer = new YT.Player('youtube-player', {
         events: {
@@ -225,56 +232,60 @@
       });
     }
     
-    function onPlayerReady() {
-      console.log('Reproductor listo');
+    // 4. Cuando el reproductor esté listo
+    function onPlayerReady(event) {
+      console.log("Reproductor listo");
       setupSongLinks();
+      
+      // Reproduce el primer video de la lista si hay uno en cola
+      if (videoQueue) {
+        playVideoById(videoQueue);
+        videoQueue = null;
+      }
     }
     
-    function onPlayerStateChange(event) {
-      // Puedes agregar lógica adicional cuando cambia el estado del reproductor
-    }
-    
+    // 5. Configurar los enlaces de canciones
     function setupSongLinks() {
       document.querySelectorAll('.play-in-frame').forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          const videoId = this.getAttribute('data-video-id') || extractVideoId(this.href);
+          var videoId = this.getAttribute('data-video-id');
           
-          if (videoId && ytPlayer) {
-            ytPlayer.loadVideoById(videoId);
-            document.getElementById('youtube-player').scrollIntoView({
-              behavior: 'smooth',
-              block: 'center'
-            });
+          if (!videoId) {
+            // Extraer ID de YouTube si está en el href
+            var url = this.href;
+            videoId = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)[1];
+          }
+          
+          if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+            playVideoById(videoId);
+          } else {
+            // Si el reproductor no está listo, guarda el video en cola
+            videoQueue = videoId;
+            console.log("Reproductor no listo, encolando video:", videoId);
           }
         });
       });
     }
     
-    function extractVideoId(url) {
-      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-      const match = url.match(regExp);
-      return (match && match[2].length === 11) ? match[2] : null;
+    // 6. Función para reproducir video
+    function playVideoById(videoId) {
+      try {
+        ytPlayer.loadVideoById(videoId);
+        console.log("Reproduciendo:", videoId);
+        document.getElementById('youtube-player').scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      } catch (error) {
+        console.error("Error al reproducir:", error);
+        // Fallback: Cambiar la URL directamente
+        document.getElementById('youtube-player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
+      }
     }
     
-    // Configuración alternativa para enlaces sin API
-    document.addEventListener('DOMContentLoaded', function() {
-      const fallbackPlayer = document.getElementById('youtube-player');
-      const links = document.querySelectorAll('.play-in-frame');
-      
-      links.forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (!ytPlayer) { // Si la API no está cargada
-            e.preventDefault();
-            const videoId = this.getAttribute('data-video-id') || extractVideoId(this.href);
-            if (videoId) {
-              fallbackPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1`;
-              fallbackPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
-        });
-      });
-    });
+    // 7. Manejar cambios de estado (opcional)
+    function onPlayerStateChange(event) {
+      // Puedes agregar lógica adicional aquí
+    }
     </script>
-
- 
