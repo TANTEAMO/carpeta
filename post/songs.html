@@ -1,7 +1,7 @@
 <title>Música para nutrir el alma</title>
 <div>
     <div class="post-header">
-      <h1>Música para nutrir el alma</h1>
+      <h1>Música para nutrir el alma0</h1>
     </div>
     <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
       <div style="flex: 3 1 480px; max-width: 100%; min-width: 240px; position: relative; padding-bottom: 27%;">
@@ -214,6 +214,7 @@
   
 
   <script>
+// Cargar la API de YouTube
 const tag = document.createElement('script');
 tag.src = 'https://www.youtube.com/iframe_api';
 const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -222,6 +223,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let ytPlayer = null;
 
 function onYouTubeIframeAPIReady() {
+    console.log('API de YouTube cargada');
     ytPlayer = new YT.Player('youtube-player', {
         playerVars: {
             listType: 'playlist',
@@ -236,51 +238,57 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+    console.log('Reproductor inicializado:', ytPlayer);
     setupLinks();
 }
 
 function setupLinks() {
+    console.log('Configurando enlaces play-in-frame');
     document.querySelectorAll('.play-in-frame').forEach(link => {
-        // Evitar múltiples listeners
         if (link.dataset.listener) return;
-        
+
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Obtener ID del video
-            let videoId = link.dataset.videoId || extractVideoId(link.href);
-            
+            e.stopPropagation(); // Evitar propagación que pueda interferir
+            console.log('Clic en enlace:', link);
+            console.log('data-video-id:', link.dataset.videoId, 'href:', link.href);
+
+            const videoId = link.dataset.videoId || extractVideoId(link.href);
+            console.log('Video ID obtenido:', videoId);
+
             if (videoId && ytPlayer) {
                 ytPlayer.loadVideoById(videoId);
                 document.getElementById('youtube-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                console.log('Cargando video con ID:', videoId);
             } else {
-                console.warn('No se pudo cargar el video: ID no válido o reproductor no inicializado.');
+                console.warn('Error: ID de video no válido o reproductor no inicializado', { videoId, ytPlayer });
             }
         });
-        
+
         link.dataset.listener = 'true';
     });
 }
 
 function extractVideoId(url) {
-    // Expresión regular para capturar IDs de YouTube desde varios formatos
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
     return match ? match[1] : null;
 }
 
-// Configurar enlaces cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    if (ytPlayer) {
+// Configurar enlaces cuando el DOM esté listo o el contenido cambie
+function initializeLinks() {
+    if (document.getElementById('youtube-player')) {
+        console.log('iframe youtube-player encontrado');
         setupLinks();
     } else {
-        // Si el reproductor no está listo, esperar al evento onPlayerReady
-        window.addEventListener('YTPlayerReady', setupLinks, { once: true });
+        console.warn('iframe youtube-player no encontrado');
     }
-});
+}
 
-// Evento personalizado para cuando el reproductor esté listo
-document.addEventListener('onYouTubeIframeAPIReady', () => {
-    window.dispatchEvent(new Event('YTPlayerReady'));
-});
+// Ejecutar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', initializeLinks);
+
+// Reintentar si el contenido se carga dinámicamente
+const observer = new MutationObserver(initializeLinks);
+observer.observe(document.body, { childList: true, subtree: true });
     </script>
  
