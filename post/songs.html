@@ -4,11 +4,17 @@
       <h1>Música para nutrir el alma1</h1>
     </div>
     <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
-      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: min(20%, 213px); min-width: 100px; height: auto; flex: 1 1 auto;" src="images/guitar.jpg" class="inline-block" />
-      <div style="flex: 3 1 560px; max-width: 100%; min-width: 280px; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-        <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/?listType=playlist&list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <img border="0" data-original-height="1536" data-original-width="1024" style="max-width: min(20%, 213px); min-width: 100px; height: auto; flex: 1 1 auto;" src="images/guitar.jpg" class="inline-block" />
+    
+      
+      <div style="flex: 3 1 560px; max-width: 100%; min-width: 280px; position: relative; padding-bottom: 56.25%;">
+        <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                src="https://www.youtube.com/embed/?enablejsapi=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+    </div>
+      
+     
     </div>
 </div>
     
@@ -213,79 +219,102 @@
 
   <script>
     // 1. Cargar la API de YouTube
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-    // 2. Variables globales
-    var ytPlayer;
-    var videoQueue = null;
-    
-    // 3. Cuando la API esté lista
-    function onYouTubeIframeAPIReady() {
-      ytPlayer = new YT.Player('youtube-player', {
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 2. Variables globales
+let ytPlayer = null;
+let videoQueue = null;
+
+// 3. Cuando la API esté lista
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('youtube-player', {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+            autoplay: 0,
+            enablejsapi: 1,
+            modestbranding: 1,
+            rel: 0
+        },
         events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
+            'onReady': onPlayerReady,
+            'onError': onPlayerError
         }
-      });
-    }
-    
-    // 4. Cuando el reproductor esté listo
-    function onPlayerReady(event) {
-      console.log("Reproductor listo");
-      setupSongLinks();
-      
-      // Reproduce el primer video de la lista si hay uno en cola
-      if (videoQueue) {
+    });
+}
+
+// 4. Cuando el reproductor esté listo
+function onPlayerReady(event) {
+    console.log("Reproductor de YouTube listo");
+    setupSongLinks();
+
+    // Reproduce el video en cola si existe
+    if (videoQueue) {
         playVideoById(videoQueue);
         videoQueue = null;
-      }
     }
-    
-    // 5. Configurar los enlaces de canciones
-    function setupSongLinks() {
-      document.querySelectorAll('.play-in-frame').forEach(link => {
+}
+
+// 5. Configurar los enlaces de canciones
+function setupSongLinks() {
+    document.querySelectorAll('.play-in-frame').forEach(link => {
         link.addEventListener('click', function(e) {
-          e.preventDefault();
-          var videoId = this.getAttribute('data-video-id');
-          
-          if (!videoId) {
-            // Extraer ID de YouTube si está en el href
-            var url = this.href;
-            videoId = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)[1];
-          }
-          
-          if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-            playVideoById(videoId);
-          } else {
-            // Si el reproductor no está listo, guarda el video en cola
-            videoQueue = videoId;
-            console.log("Reproductor no listo, encolando video:", videoId);
-          }
+            e.preventDefault();
+            
+            // Obtener el ID del video
+            let videoId = this.getAttribute('data-video-id');
+            if (!videoId) {
+                // Extraer el ID desde el href si no hay data-video-id
+                const url = this.href;
+                const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+                videoId = match ? match[1] : null;
+            }
+
+            if (!videoId) {
+                console.error("No se pudo extraer el ID del video desde el enlace:", this.href);
+                return;
+            }
+
+            // Reproducir el video si el reproductor está listo, o encolarlo
+            if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
+                playVideoById(videoId);
+            } else {
+                videoQueue = videoId;
+                console.log("Reproductor no listo, encolando video:", videoId);
+            }
         });
-      });
-    }
-    
-    // 6. Función para reproducir video
-    function playVideoById(videoId) {
-      try {
+    });
+}
+
+// 6. Función para reproducir video
+function playVideoById(videoId) {
+    try {
         ytPlayer.loadVideoById(videoId);
-        console.log("Reproduciendo:", videoId);
+        console.log("Reproduciendo video:", videoId);
+        
+        // Desplazar la vista al reproductor
         document.getElementById('youtube-player').scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
+            behavior: 'smooth',
+            block: 'center'
         });
-      } catch (error) {
-        console.error("Error al reproducir:", error);
-        // Fallback: Cambiar la URL directamente
+    } catch (error) {
+        console.error("Error al reproducir el video:", error);
+        // Fallback: Cambiar la URL del iframe directamente
         document.getElementById('youtube-player').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
-      }
     }
-    
-    // 7. Manejar cambios de estado (opcional)
-    function onPlayerStateChange(event) {
-      // Puedes agregar lógica adicional aquí
-    }
+}
+
+// 7. Manejar errores del reproductor
+function onPlayerError(event) {
+    console.error("Error en el reproductor de YouTube:", event.data);
+    // Posibles códigos de error:
+    // 2: Parámetros inválidos
+    // 5: Error relacionado con HTML5
+    // 100: Video no encontrado
+    // 101/150: Video no permitido para reproducción incrustada
+    alert("No se pudo reproducir el video. Es posible que no esté disponible o no permita reproducción incrustada.");
+}
     </script>
