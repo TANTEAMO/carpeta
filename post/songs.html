@@ -13,11 +13,11 @@
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
     </div>
-      
+    <iframe id="youtubeFrame" width="560" height="315" src="https://www.youtube.com/embed/XXXXXXXXXXX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
      
     </div>
 </div>
-    
+<a href="#" onclick="reproducirCancion('https://youtu.be/7Cg-TyfX6U4?si=rW8vb-4dnqYYNNXe')">Reproducir Canción</a>
     <div class="post-section"><h2>A través de los universos</h2>
     
       <p>La música: una vibración esculpida en el tiempo, donde sonido y silencio se entrelazan atravesando universos.</p>
@@ -92,7 +92,7 @@
         <tr><td>Boy George</td><td>Sweet Toxic Love, The Crying Game, More Than Silence</td><td></td></tr>
         <tr><td>Brian Adams</td><td>Kick Ass, On the Road</td><td></td></tr>
         <tr><td>Bramdi Carlile</td><td>The Joke</td><td></td></tr-->
-        <tr><td>Brian Eno</td><td><a href="https://www.youtube.com/watch?v=OlaTeXX3uH8" class="play-in-frame" rel="noopener noreferrer">An Ending (Ascent)</a>, Theme From Creation, Prophecy Theme, Mother Of A Dog, Steal Away</td><td>Ambient</td></tr>
+        <tr><td>Brian Eno</td><td><a href="#" class="play-in-frame" data-video-id="OlaTeXX3uH8" rel="noopener noreferrer">An Ending (Ascent)</a>, Theme From Creation, Prophecy Theme, Mother Of A Dog, Steal Away</td><td>Ambient</td></tr>
         <tr><td>Carpenters</td><td>Please Mr. Postman</td><td></td></tr>
         <tr><td>Calia Cruz</td><td>Burundanga</td><td></td></tr>
       <tr><td>Choir of the Sretensky Monastery</td><td><a href="https://youtu.be/7Cg-TyfX6U4?si=rW8vb-4dnqYYNNXe" class="play-in-frame" rel="noopener noreferrer">Cherubic Hymn</a>*</td><td>Lvovsky, Grigory</td></tr>
@@ -257,3 +257,13 @@ function extractVideoId(url) {
     return match ? match[1] : null;
 }
     </script>
+    <script>
+      function reproducirCancion(urlCancion) {
+        // Aquí puedes modificar la URL para que sea compatible con el reproductor de YouTube si es necesario.
+        // Por ejemplo, extrayendo el ID del video si la URL proporcionada es diferente.
+        // Para este ejemplo simple, asumimos que la URL es directamente utilizable o que no se requiere modificación.
+      
+        var iframe = document.getElementById('youtubeFrame');
+        iframe.src = urlCancion;
+      }
+      </script>
