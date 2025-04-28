@@ -224,61 +224,36 @@ const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let ytPlayer = null;
-let videoQueue = null;
 
 function onYouTubeIframeAPIReady() {
-    console.log('API de YouTube cargada');
     ytPlayer = new YT.Player('youtube-player', {
         playerVars: {
             listType: 'playlist',
             list: 'PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO',
             autoplay: 0,
-            enablejsapi: 1,
-            modestbranding: 1,
-            rel: 0
+            enablejsapi: 1
         },
         events: {
-            'onReady': onPlayerReady,
-            'onError': onPlayerError
+            'onReady': onPlayerReady
         }
     });
 }
 
 function onPlayerReady(event) {
-    console.log('Reproductor de YouTube listo');
-    if (videoQueue) {
-        playVideoById(videoQueue);
-        videoQueue = null;
-    }
-}
-
-function setupSongLinks() {
-    const links = document.querySelectorAll('.play-in-frame');
-    console.log('Enlaces .play-in-frame encontrados:', links.length);
-    if (links.length === 0) {
-        console.warn('No se encontraron enlaces con la clase .play-in-frame. Verifica el HTML.');
-    }
-
-    links.forEach((link, index) => {
-        console.log(`Configurando enlace ${index + 1}:`, link.href, link.getAttribute('data-video-id'));
+    document.querySelectorAll('.play-in-frame').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('Clic detectado en enlace:', this.href);
-
-            let videoId = this.getAttribute('data-video-id');
-            if (!videoId) {
-                const url = this.href;
-                const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
-                videoId = match ? match[1] : null;
+            let videoId = this.getAttribute('data-video-id') || extractVideoId(this.href);
+            if (videoId) {
+                ytPlayer.loadVideoById(videoId);
+                document.getElementById('youtube-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+        });
+    });
+}
 
-            if (!videoId) {
-                console.error('No se pudo extraer el ID del video:', this.href);
-                alert('No se pudo identificar el video. Verifica el enlace.');
-                return;
-            }
-
-            console.log('ID del video extraído:', videoId);
-            if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-                console.log('Reproductor listo, intentando reproducir video...');
+function extractVideoId(url) {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+    return match ? match[1] : null;
+}
     </script>
