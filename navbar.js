@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
   
     const toggleMenu = () => {
-      const open = body.classList.toggle('menu-open');
-      toggle.classList.toggle('active', open);
-      nav.classList.toggle('show', open);
-      nav.classList.toggle('hidden', !open);
+      const isHidden = nav.classList.contains('hidden');
+      nav.classList.toggle('hidden', !isHidden);
+      nav.classList.toggle('show', isHidden);
+      toggle.classList.toggle('active', isHidden);
     };
     toggle.addEventListener('click', toggleMenu);
     document.querySelectorAll('.menu a').forEach(a => {
@@ -47,14 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     const setInitialMenuState = () => {
       if (window.innerWidth <= 820) {
-        nav.classList.add('hidden');
-        nav.classList.remove('show');
-        toggle.classList.remove('active');
-        body.classList.remove('menu-open');
-      } else {
-        nav.classList.remove('hidden', 'show');
-        toggle.classList.remove('active');
-        body.classList.remove('menu-open');
+        if (!nav.classList.contains('show')) {
+          nav.classList.add('hidden');
+          nav.classList.remove('show');
+          toggle.classList.remove('active');
+          body.classList.remove('menu-open');
+        }
       }
     };
     window.addEventListener('resize', setInitialMenuState);

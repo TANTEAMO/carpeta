@@ -171,6 +171,7 @@ main ul li ol {
   border-left: var(--border-light);
   z-index: 1002;
   transition: transform 0.3s ease;
+  transform: translateX(0); /* Visible por defecto */
 }
 
 .nav-container.hidden {
@@ -435,7 +436,7 @@ main ul li ol {
 
 /* Botón hamburguesa */
 .menu-toggle {
-  display: none;
+  display: block;
   cursor: pointer;
   padding: 10px;
   z-index: 1001;
@@ -522,6 +523,12 @@ main ul li ol {
   .nav-container {
     width: 200px;
     padding: 8px;
+    transform: translateX(100%); /* Oculta el menú lateral por defecto */
+    transition: transform 0.3s ease;
+    
+  }
+  .nav-container.show {
+    transform: translateX(0); /* Muestra el menú al activar */
   }
 
   main h1 { font-size: 1.5rem; }
