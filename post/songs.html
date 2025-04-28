@@ -239,6 +239,10 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
+    setupLinks();
+}
+
+function setupLinks() {
     document.querySelectorAll('.play-in-frame').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -255,5 +259,16 @@ function extractVideoId(url) {
     const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
     return match ? match[1] : null;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupLinks();
+    const table = document.querySelector('table.highlight');
+    if (table) {
+        const observer = new MutationObserver(() => {
+            setupLinks();
+        });
+        observer.observe(table, { childList: true, subtree: true });
+    }
+});
     </script>
  
