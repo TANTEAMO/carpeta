@@ -39,8 +39,8 @@
         
         
         <!--tr><td>AC/DC</td><td>Love Song, Ride Song, Rock 'N' Roll Damnation, Kicked In The Teeth</td><td></td></tr-->
-        <tr><td>Al Green</td><td><a href="https://youtu.be/RmJVjzmhH1s?si=luzndJ9tbTJ2DgIX"  class="play-in-frame">Stop & Check Myself</a>  </td><td>Desde el primer golpe del bombo con el clash, la canción te exige detenerte. Los vientos y cuerdas te invitan a la serenidad, al enfoque al interior. Es un llamado a salir del piloto automático, a hacer una pausa en el flujo constante de la vida. Al Green lo afirma en primera persona: '<i>TENGO QUE PARAR Y CHEQUEARME A MÍ MISMO</i>', es el observador hablando. Y el coro lo reafirma desde la subconsciencia, como un eco de verdad interna.</td></tr>
-        <tr><td>Al Di Meola</td><td><a href="https://youtu.be/WfRWVYUZT7E?si=Pb3m2f3ULFkYlkSo" class="play-in-frame" rel="noopener noreferrer">Bianca's Midnight Lullaby</a>, African Night, Orange And Blue, Heru Mertar  Don't Go So Far Away</td><td></td></tr>
+        <tr><td>Al Green</td><td><a href="#" class="play-in-frame" data-video-id="RmJVjzmhH1s">Stop & Check Myself</a>  </td><td>Desde el primer golpe del bombo con el clash, la canción te exige detenerte. Los vientos y cuerdas te invitan a la serenidad, al enfoque al interior. Es un llamado a salir del piloto automático, a hacer una pausa en el flujo constante de la vida. Al Green lo afirma en primera persona: '<i>TENGO QUE PARAR Y CHEQUEARME A MÍ MISMO</i>', es el observador hablando. Y el coro lo reafirma desde la subconsciencia, como un eco de verdad interna.</td></tr>
+        <tr><td>Al Di Meola</td><td><a href="#" class="play-in-frame" data-video-id="WfRWVYUZT7E" rel="noopener noreferrer">Bianca's Midnight Lullaby</a>, African Night, Orange And Blue, Heru Mertar  Don't Go So Far Away</td><td></td></tr>
         <tr><td>Amalia Rodriguez</td><td><a href="https://youtu.be/J2mkW3FKT80?si=1jYsMDU5PaJ7MuUb" class="play-in-frame" rel="noopener noreferrer">Meia-noite e uma guitarra</a></td><td><b>Medianoche y una guitarra</b>: la purga. (1954 por Jorge Fernando)
   Un instante suspendido: la <i>medianoche</i>, el punto medio de la vida, entre lo vivido y lo que queda por vivir.
   La <i>guitarra</i> es el alma desnuda.
@@ -208,30 +208,20 @@
   </div>
   
 
-    <script>
-document.querySelectorAll('a.play-in-frame').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault(); // Evita que el enlace navegue
-    
-    // Extrae el ID del video de la URL de YouTube
-    const youtubeUrl = this.href;
-    let videoId;
-    
-    // Maneja diferentes formatos de URL de YouTube
-    if (youtubeUrl.includes('youtu.be/')) {
-      videoId = youtubeUrl.split('youtu.be/')[1].split('?')[0];
-    } else if (youtubeUrl.includes('youtube.com/watch?v=')) {
-      videoId = youtubeUrl.split('v=')[1].split('&')[0];
-    } else if (youtubeUrl.includes('youtube.com/embed/')) {
-      videoId = youtubeUrl.split('embed/')[1].split('?')[0];
-    }
-    
-    if (videoId) {
-      const iframe = document.getElementById('youtube-player');
-      // Actualiza la fuente del iframe para reproducir el nuevo video
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    }
-  });
-});
-</script>
+  <script>
+    document.querySelectorAll('a.play-in-frame').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // Esto detiene completamente la navegación
+        
+        const videoId = this.getAttribute('data-video-id');
+        const iframe = document.getElementById('youtube-player');
+        
+        // Cambia la fuente del iframe para cargar el nuevo video
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        
+        // Opcional: desplázate suavemente al reproductor
+        iframe.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+    </script>
  
