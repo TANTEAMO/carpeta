@@ -667,6 +667,9 @@ main ul li ol {
     flex-shrink: 0;
     margin-left: auto;
   }
+  .menu-toggle span {
+    margin: 4px 0; /* Ajusta el margen si es necesario */
+  }
 
   .blog-feed {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -725,6 +728,9 @@ main ul li ol {
     width: 100%;
     margin: 0;
   }
+  .menu-toggle span {
+    margin: 3px 0; /* Ajusta el margen si es necesario */
+  }
 
   .cajas {
     grid-template-columns: 1fr;
@@ -752,7 +758,9 @@ main ul li ol {
     width: 180px;
     padding: 5px;
   }
-
+  .menu-toggle span {
+    margin: 2px 0; /* Ajusta el margen si es necesario */
+  }
   /* Ajustes más extremos para pantallas muy pequeñas */
   main h1 { font-size: 1.25rem; }
   main h2 { font-size: 1.125rem; }
