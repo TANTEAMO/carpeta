@@ -61,24 +61,30 @@ a:hover {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 1; /* Permitir que se reduzca si es necesario */
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
+  width: 1.5rem;
+  height: auto;
+  vertical-align: middle; /* Alinea con la línea media del texto */
+  display: inline-block; /* Asegura comportamiento en línea */
+
 }
 
 .site-title {
   background: linear-gradient(45deg, #E8E8E8, #FFFFFF);
-  font-weight: 600;
+  font-weight: 800;
   font-size: 1.5rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  display: flex;
+  align-items: center; /* Alinea verticalmente los elementos internos */
+  gap: 2px; /* Espacio mínimo entre letras y logo */
 }
 .site-title:hover {
   color: #b3d5f8; /* Reemplaza #tu-nuevo-color con el color deseado */
@@ -128,6 +134,14 @@ main h1 {
 }
 main h1.red-line {
   border-bottom: 2px solid red;
+  background-color: rgba(10, 53, 118, 0.4); /* fondo negro semi-transparente */
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  border-radius: 50px;
 }
 
 
@@ -151,6 +165,56 @@ main p {
   margin-bottom: 10px;
   line-height: 1.6;
 }
+/* Estilo para el título destacado */
+a.highlighted-title {
+  background-color: rgba(255, 255, 255, 0.15); /* Fondo más limpio y sutil */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(3px);
+  color: #ffffff;
+  width: 100%; 
+  padding: 0.6rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto hover para el título destacado */
+a.highlighted-title:hover {
+  background-color: rgba(27, 59, 108, 0.7);
+  border-bottom: 2px solid rgba(48, 86, 144, 0.6);
+}
+
+/* Estilo para el enlace con línea roja */
+a.red-line {
+  background-color: rgba(121, 166, 237, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(3px);
+  color: #ffffff;
+  width: 100%;
+  padding: 0.6rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+    text-decoration: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto hover para el enlace con línea roja */
+a.red-line:hover {
+  background-color: rgba(48, 86, 144, 0.5);
+  cursor: pointer;
+  border-bottom: 2px solid rgba(200, 70, 70, 0.6);
+}
+
+
 
 /* Listas */
 main ul {
@@ -190,6 +254,8 @@ main ul li ol {
   z-index: 1002;
   transition: transform 0.3s ease;
   transform: translateX(0); /* Visible por defecto */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .nav-container.hidden {
@@ -202,7 +268,7 @@ main ul li ol {
 
 .menu {
   list-style: none;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.39);
 }
 
 .menu li {
@@ -532,15 +598,32 @@ main ul li ol {
   .slogan-container {
     display: none; /* Oculta el slogan en móviles */
   }
-
+/* Botones de idioma */
   .language-buttons {
-    margin-left: auto; /* Empuja los botones de idioma a la derecha */
+    display: flex;
+  gap: 5px; /* Reducir espacio entre botones */
+  align-items: center;
+  flex-shrink: 0; /* Evitar que los botones se compriman demasiado */
   }
+  /* Botón de idioma individual */
+.language-btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 2px 4px; /* Más compacto */
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.75rem; /* Tamaño de fuente más pequeño */
+}
 
   /* Asegúrate de que el botón de hamburguesa tenga suficiente espacio */
   .menu-toggle {
-    display: block;
-    margin-left: auto; /* Empuja el botón de hamburguesa lo más a la derecha posible */
+    display: flex;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+    flex-shrink: 0; /* Evitar compresión */
+    margin-left: auto; /* Empujar al extremo derecho */
   }
 
   .blog-feed {

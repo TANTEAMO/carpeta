@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = `
       <header class="main-header">
         <div class="logo-container">
-          <img src="images/komype-logo2.png" alt="Logo Tantema" class="logo">
-          <a href="index.html" class="site-title">KOMYPE</a>
+          
+          <a href="index.html" class="site-title">K<img src="images/komype-logo2.png" alt="Logo Tantema" class="logo">MYPE</a>
         </div>
         <div class="slogan-container">
     <div class="slogan"></div>
