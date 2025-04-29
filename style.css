@@ -126,6 +126,10 @@ main h1 {
   border-bottom: 2px solid rgb(118, 164, 195);
   padding-bottom: 10px;
 }
+main h1.red-line {
+  border-bottom: 2px solid red;
+}
+
 
 main h2 {
   font-size: 1.5rem;
@@ -812,13 +816,28 @@ main ul li ol {
 .slogan {
   font-family: 'Roboto', sans-serif; /* Mismo tipo de fuente, pero diferente peso */
   font-weight: 300; /* Ligero */
-  font-size: 18px; /* Un tamaño más pequeño */
-  color: #dcdcdc; /* Color plateado sutil */
-
-
-
+  font-size: 16px; /* Un tamaño más pequeño */
   color: #ffffff;
- 
   padding: 5px; /* Para separar el texto del borde */
   border-radius: 5px; /* Esquinas redondeadas */
+}
+.language-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Espaciado entre botones */
+  align-items: center;
+}
+
+.language-btn {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.language-btn:hover {
+  background-color: #ffffff;
+  color: #333333;
 }
