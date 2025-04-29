@@ -520,6 +520,7 @@ main ul li ol {
 @media (max-width: 820px) {
   .main-header {
     padding: 10px 8px;
+    justify-content: flex-start; /* Alinea los elementos al inicio */
   }
 
   main {
@@ -527,6 +528,19 @@ main ul li ol {
     margin: 60px 0 20px; /* Sin márgenes laterales */
     padding: 10px;
     width: 100%;
+  }
+  .slogan-container {
+    display: none; /* Oculta el slogan en móviles */
+  }
+
+  .language-buttons {
+    margin-left: auto; /* Empuja los botones de idioma a la derecha */
+  }
+
+  /* Asegúrate de que el botón de hamburguesa tenga suficiente espacio */
+  .menu-toggle {
+    display: block;
+    margin-left: auto; /* Empuja el botón de hamburguesa lo más a la derecha posible */
   }
 
   .blog-feed {
@@ -614,6 +628,9 @@ main ul li ol {
 }
 
 @media (max-width: 600px) {
+  .site-title {
+    font-size: 1.2rem; /* Reduce aún más el título en pantallas muy pequeñas */
+  }
   main {
     margin: 50px 0 15px;
     padding: 8px;
@@ -681,6 +698,13 @@ main ul li ol {
 
   .highlight {
     font-size: 0.8rem;
+  }
+  .language-buttons {
+    gap: 5px; /* Reduce el espacio entre los botones de idioma en pantallas más pequeñas */
+  }
+  .language-btn {
+    padding: 2px 3px; /* Reduce el padding de los botones de idioma */
+    font-size: 0.8rem; /* Reduce el tamaño de la fuente de los botones de idioma */
   }
 }
 
