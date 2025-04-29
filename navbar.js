@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
     document.getElementById('korean').addEventListener('click', () => {
-      window.location.href = 'index-ko.html';
+      window.location.href = 'index-kr.html';
     });
   
     document.getElementById('english').addEventListener('click', () => {
