@@ -19,7 +19,8 @@
 <body>
     <div>
         <main>
-            <section style="position: relative; width: 100%; min-height: 950px; overflow: hidden; background-color: #f4f4f4;">
+            <!-- Añadida clase intro-section para poder ocultar/mostrar -->
+            <section class="intro-section" style="position: relative; width: 100%; min-height: 950px; overflow: hidden; background-color: #f4f4f4;">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;">
                   <section class="post-header" style="max-width: 1200px; margin: 0 auto; padding: 60px 20px; text-align: center;">
                     <h1 style="font-size: 2.5em; margin-bottom: 20px;">Our Services</h1>
@@ -155,6 +156,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
+            const blogFeed = document.getElementById('blog-feed');
+            const postContainer = document.getElementById('post-container');
+            const introSection = document.querySelector('.intro-section');
+
             try {
                 const res = await fetch('posts.json');
                 if (!res.ok) throw new Error('Error al cargar los posts');
@@ -163,7 +168,6 @@
                 // Filtrar posts con label "explora"
                 const filteredPosts = posts.filter(post => post.label === 'explora');
 
-                const blogFeed = document.getElementById('blog-feed');
                 blogFeed.innerHTML = filteredPosts.map(post => `
                     <article class="post-preview" data-post="${post.post}">
                         <img src="${post.image}" alt="${post.title}" class="post-image">
@@ -185,7 +189,10 @@
                         if (!postRes.ok) throw new Error('Post no encontrado');
                         const postHTML = await postRes.text();
 
-                        const postContainer = document.getElementById('post-container');
+                        // Ocultar sección de introducción
+                        introSection.style.display = 'none';
+                        
+                        // Ocultar el feed y mostrar el contenido del post
                         blogFeed.style.display = 'none';
                         postContainer.innerHTML = `
                             <button id="back-button-top" class="back-button">← Volver</button>
@@ -228,6 +235,10 @@
 
                         // Volver desde arriba o abajo
                         const volver = () => {
+                            // Mostrar sección de introducción nuevamente
+                            introSection.style.display = 'block';
+                            
+                            // Ocultar el post y mostrar el feed
                             postContainer.style.display = 'none';
                             postContainer.innerHTML = '';
                             blogFeed.style.display = 'grid';

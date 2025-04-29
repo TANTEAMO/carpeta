@@ -80,7 +80,16 @@ a:hover {
   background-clip: text;
   color: transparent;
 }
+#page-intro {
+  transition: opacity 0.5s ease, height 0.5s ease;
+  overflow: hidden;
+}
 
+#page-intro.hidden {
+  opacity: 0;
+  height: 0;
+  pointer-events: none;
+}
 /* Contenido principal */
 main {
   max-width: 1200px; /* Ancho estándar para PC */
@@ -109,7 +118,7 @@ main h1, main h2, main h3, main h4 {
 main h1 {
   font-size: 1.75rem;
   text-align: center;
-  border-bottom: 2px solid rgb(231, 76, 60);
+  border-bottom: 2px solid rgb(118, 164, 195);
   padding-bottom: 10px;
 }
 
@@ -121,7 +130,7 @@ main h3 {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-color);
-  border-bottom: 2px solid rgb(189, 186, 186);
+  border-bottom: 2px solid rgb(198, 211, 230);
   padding-bottom: 5px;
 }
 
@@ -299,32 +308,34 @@ main ul li ol {
 }
 
 .cajas {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+  gap: 20px;
   margin: 10px 0;
   width: 100%;
+  align-items: stretch; /* Esto asegura que todas las cajas tengan la misma altura */
 }
 
 .cajas-box {
-  flex: 1;
-  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   word-break: break-word;
   overflow-wrap: anywhere;
-  width: 100%;
+  height: 100%;
+  box-sizing: border-box; /* Para evitar que el padding afecte la altura final */
 }
 
 .caja-a { background-color: #f4f4f4; }
-.caja-b { background-color: #e8f0fe; }
-.caja-c {
-  background-color: #fdf1d6;
-  max-width: 500px;
-  margin: auto;
-}
+.caja-b { background-color: #e1ecfb; }
+.caja-c { background-color: #edf3f4; }
+
+
+
+
 
 .quote {
   background: linear-gradient(#2C3E50, rgba(44, 62, 80, 0.8));
