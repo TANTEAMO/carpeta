@@ -508,6 +508,7 @@ main ul li ol {
   cursor: pointer;
   padding: 10px;
   z-index: 1001;
+  flex-direction: column;
 }
 
 .menu-toggle span {
@@ -668,7 +669,7 @@ main ul li ol {
     margin-left: auto;
   }
   .menu-toggle span {
-    margin: 4px 0; /* Ajusta el margen si es necesario */
+    margin: 3px 0; /* Ajusta el margen si es necesario */
   }
 
   .blog-feed {
@@ -729,6 +730,10 @@ main ul li ol {
     margin: 0;
   }
   .menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
     margin: 3px 0; /* Ajusta el margen si es necesario */
   }
 
