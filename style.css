@@ -66,13 +66,17 @@ a:hover {
 }
 
 .logo {
-  width: 1.5rem;
+  width: 1.1em;
   height: auto;
   vertical-align: middle; /* Alinea con la línea media del texto */
   display: inline-block; /* Asegura comportamiento en línea */
-
 }
-
+h1 .logo {
+  width: 0.9em; /* Tamaño más pequeño para el logo en <h1> */
+  height: auto;
+  vertical-align: -0.1em; /* Subir ligeramente el logo */
+  display: inline-block;
+}
 .site-title {
   background: linear-gradient(45deg, #E8E8E8, #FFFFFF);
   font-weight: 800;
