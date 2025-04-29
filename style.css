@@ -176,10 +176,10 @@ a.highlighted-title {
   -webkit-backdrop-filter: blur(3px);
   color: #ffffff;
   width: 100%; 
-  padding: 4rem;
+  padding: 3rem;
   text-align: center;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: clamp(0.8em, 2.5vw, 1.2em);
   border-radius: 8px;
   margin-bottom: 1rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.15);
@@ -200,10 +200,10 @@ a.red-line {
   -webkit-backdrop-filter: blur(3px);
   color: #ffffff;
   width: 100%;
-  padding: 4rem;
+  padding: 3rem;
   text-align: center;
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: clamp(0.8em, 2.5vw, 1.2em);
   border-radius: 8px;
   margin-bottom: 1rem;
     text-decoration: none;
