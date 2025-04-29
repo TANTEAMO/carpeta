@@ -816,7 +816,7 @@ main ul li ol {
 .slogan {
   font-family: 'Roboto', sans-serif; /* Mismo tipo de fuente, pero diferente peso */
   font-weight: 300; /* Ligero */
-  font-size: 16px; /* Un tamaño más pequeño */
+  font-size: 14px; /* Un tamaño más pequeño */
   color: #ffffff;
   padding: 5px; /* Para separar el texto del borde */
   border-radius: 5px; /* Esquinas redondeadas */
@@ -832,7 +832,7 @@ main ul li ol {
   background-color: transparent;
   color: #ffffff;
   border: 1px solid #ffffff;
-  padding: 5px 10px;
+  padding: 2px 5px;
   cursor: pointer;
   border-radius: 5px;
 }

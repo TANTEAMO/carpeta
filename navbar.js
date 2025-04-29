@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <a href="index.html" class="site-title">KOMYPE</a>
         </div>
         <div class="slogan-container">
-    <div class="slogan">Crecemos Juntos</div>
+    <div class="slogan"></div>
     <div class="language-buttons">
       <button class="language-btn" id="spanish">ESP</button>
       <button class="language-btn" id="korean">KOR</button>
