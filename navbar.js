@@ -51,6 +51,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 820) toggleMenu();
       });
     });
+    const languageButtonsContainer = document.querySelector('.language-buttons');
+  const menuToggle = document.querySelector('.menu-toggle');
+
+  const checkAndHideLanguageButtons = () => {
+    if (window.innerWidth <= 820 && languageButtonsContainer) {
+      const header = document.querySelector('.main-header');
+      // Calcula si el ancho de los botones de idioma más un margen razonable
+      // es mayor que el espacio disponible antes del botón de hamburguesa.
+      // Ajusta el valor de 100 (margen) si es necesario.
+      if (header && menuToggle && (languageButtonsContainer.offsetWidth + 100 > (menuToggle.offsetLeft - header.offsetLeft))) {
+        languageButtonsContainer.style.display = 'none';
+      } else {
+        languageButtonsContainer.style.display = 'flex'; // O el display que tenga por defecto
+      }
+    } else if (languageButtonsContainer) {
+      languageButtonsContainer.style.display = 'flex'; // Asegura que se muestren en pantallas más grandes
+    }
+  };
+
+  // Llama a la función al cargar la página y al cambiar el tamaño de la ventana
+  checkAndHideLanguageButtons();
+  window.addEventListener('resize', checkAndHideLanguageButtons);
+
     const setInitialMenuState = () => {
       if (window.innerWidth <= 820) {
         if (!nav.classList.contains('show')) {
