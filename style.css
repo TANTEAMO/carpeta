@@ -239,7 +239,7 @@ main ul li ol {
   position: fixed;
   right: 0;
   top: 60px;
-  width: 167px;
+  width: 60px;
   padding: 10px;
   background: rgba(202, 201, 201, 0.178);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
@@ -247,8 +247,9 @@ main ul li ol {
   z-index: 1002;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform: translateX(100%);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(3px);
+  overflow: visible;
 }
 
 .nav-container.show {
@@ -277,6 +278,8 @@ main ul li ol {
   text-align: right;
   cursor: pointer;
   color: white;
+  position: relative;
+  white-space: nowrap;
 }
 
 .menu li:hover {
@@ -687,8 +690,8 @@ main ul li ol {
   }
 
   .nav-container {
-    width: 200px;
-    padding: 8px;
+    width: 55px;
+    padding: 2px;
     transform: translateX(100%);
   }
 
@@ -769,8 +772,8 @@ main ul li ol {
   }
 
   .nav-container {
-    width: 180px;
-    padding: 5px;
+    width: 55px;
+    padding: 2px;
   }
 
   .menu-toggle span {
@@ -815,9 +818,9 @@ main ul li ol {
     opacity: 1;
     position: fixed;
     right: 0;
-    top: 60px;
-    width: 167px;
-    padding: 10px;
+    top: 45px;
+    width: 60px;
+    padding: 8px;
     background: rgba(202, 201, 201, 0.178);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
     border-left: var(--border-light);
@@ -840,6 +843,29 @@ main ul li ol {
     margin: 8px 0;
     padding: 8px;
     text-align: right;
+    position: relative;
+    white-space: nowrap;
+  }
+  .menu li::after {
+    content: attr(data-text);
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(56, 56, 56, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    margin-right: 8px;
+  }
+  
+  .menu li:hover::after {
+    opacity: 1;
+    right: calc(100% + 5px);
   }
 }
 
