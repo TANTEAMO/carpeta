@@ -102,7 +102,6 @@ h1 .logo {
   background-image: none !important;
   background-clip: unset !important;
   -webkit-background-clip: unset !important;
-
 }
 
 #page-intro {
@@ -184,7 +183,7 @@ a.red-line {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   color: #ffffff;
-  width: 100%; 
+  width: 100%;
   padding: 2rem;
   text-align: center;
   font-weight: 600;
@@ -236,6 +235,7 @@ main ul li ol {
 
 /* Menú lateral */
 .nav-container {
+  display: none; /* Oculta por defecto */
   position: fixed;
   right: 0;
   top: 60px;
@@ -245,18 +245,22 @@ main ul li ol {
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
   border-left: var(--border-light);
   z-index: 1002;
-  transition: transform 0.3s ease;
-  transform: translateX(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(100%);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(3px);
 }
 
-.nav-container.hidden {
-  transform: translateX(100%);
+.nav-container.show {
+  display: block; /* Muestra cuando está activa */
+  transform: translateX(0);
+  opacity: 1;
 }
 
-.nav-container.show {
-  transform: translateX(0);
+.nav-container.hidden {
+  display: none; /* Oculta cuando tiene .hidden */
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 .menu {
@@ -671,6 +675,7 @@ main ul li ol {
     flex-shrink: 0;
     margin-left: auto;
   }
+
   .menu-toggle span {
     margin: 3px 0; /* Ajusta el margen si es necesario */
   }
@@ -732,6 +737,7 @@ main ul li ol {
     width: 100%;
     margin: 0;
   }
+
   .menu-toggle span {
     display: block;
     width: 25px;
@@ -766,9 +772,11 @@ main ul li ol {
     width: 180px;
     padding: 5px;
   }
+
   .menu-toggle span {
     margin: 2px 0; /* Ajusta el margen si es necesario */
   }
+
   /* Ajustes más extremos para pantallas muy pequeñas */
   main h1 { font-size: 1.25rem; }
   main h2 { font-size: 1.125rem; }
@@ -798,6 +806,43 @@ main ul li ol {
     height: 400px !important;
   }
 }
+
+/* Nueva media query para pantallas anchas */
+@media (min-width: 821px) {
+  .nav-container {
+    display: block; /* Visible por defecto */
+    transform: translateX(0); /* En posición */
+    opacity: 1;
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 167px;
+    padding: 10px;
+    background: rgba(202, 201, 201, 0.178);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+    border-left: var(--border-light);
+    z-index: 1002;
+  }
+
+  .nav-container.hidden {
+    display: none; /* Respeta .hidden para ocultar */
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column; /* Vertical por defecto */
+    background: rgba(0, 0, 0, 0.39);
+  }
+
+  .menu li {
+    margin: 8px 0;
+    padding: 8px;
+    text-align: right;
+  }
+}
+
 .search-area {
   margin: 2rem 0;
   display: flex;
