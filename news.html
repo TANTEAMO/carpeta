@@ -22,7 +22,7 @@
   <div class="container">
     <main>
       <section class="intro-section" style="position: relative; width: 100%; min-height: 60vh; overflow: hidden;">
-        <img src="images/plant.jpg" alt="Energy construction plant" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(99%); object-position: center;">
+        <img src="images/birds.jpg" alt="birds" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(99%); object-position: center;">
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: rgb(255, 255, 255); text-align: center; padding: 15px; box-sizing: border-box;">
           <h1>
             K<img src="images/komype-logo2.png" alt="Logo Tantema" class="logo" style="vertical-align: -1;">MYPE · News · Noticias
@@ -50,38 +50,30 @@
        
         <div class="cajas-box caja-a">
           <h1>Finance</h1>          
-          <div id="tipoCambio">Cargando...</div>
-          <a href="https://bbva.pe" class="">BBVA</a>
-    <script>
-        fetch('https://api.frankfurter.app/latest?from=USD&to=PEN')
-            .then(response => response.json())
-            .then(data => {
-                const tipoCambioPEN = data.rates.PEN;
-                document.getElementById('tipoCambio').innerText = `1 USD = ${tipoCambioPEN} PEN`;
-            })
-            .catch(error => {
-                document.getElementById('tipoCambio').innerText = 'Error al cargar el tipo de cambio';
-                console.error('Error:', error);
-            });
-    </script>
+          
+          <a href="https://cuantoestaeldolar.pe/" class="" target="_blank">Dolar</a>
+          <a href="https://bbva.pe" class="" target="_blank">BBVA</a>
+          <a href="https://www.viabcp.com/canales/banca-por-internet" class="" target="_blank">BCP</a>
+   
           
           
         </div>
         <div class="cajas-box caja-b">
-          <h1>Noticias</h1>
-          <a href="https://elcomercio.pe" class="section-button">El Comercio</a>
+          <h1>Servicios</h1>
+          <a href="https://mi.claro.com.pe/" class="section-button" target="_blank">Claro</a>
+          <a href="https://elcomercio.pe" class="section-button" target="_blank">El Comercio</a>
          
         </div>
       
       <div class="cajas-box caja-c">
         <h1>IAs</h1>
-         <a href="https://chatgpt.com/" class="section-button">ChatGPT</a>
-         <a href="https://grok.com/" class="section-button">Grok</a>
-         <a href="https://gemini.google.com/" class="section-button">Gemini</a>
-         <a href="https://chat.deepseek.com/" class="section-button">Deepseek</a>
-         <a href="https://gemini.google.com/" class="section-button">Gemini</a>
-         <a href="https://claude.ai/" class="section-button">Clude</a>
-         <a href="https://chat.qwen.ai/" class="section-button">Qwen</a>
+         <a href="https://chatgpt.com/" class="section-button" target="_blank">ChatGPT</a>
+         <a href="https://grok.com/" class="section-button" target="_blank">Grok</a>
+         <a href="https://gemini.google.com/" class="section-button" target="_blank">Gemini</a>
+         <a href="https://chat.deepseek.com/" class="section-button" target="_blank">Deepseek</a>
+         <a href="https://gemini.google.com/" class="section-button" target="_blank">Gemini</a>
+         <a href="https://claude.ai/" class="section-button" target="_blank">Clude</a>
+         <a href="https://chat.qwen.ai/" class="section-button" target="_blank">Qwen</a>
         </div>
     </div>
   </div>
