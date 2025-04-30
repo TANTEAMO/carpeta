@@ -32,7 +32,15 @@
               <input type="text" name="q" placeholder="Buscar en Google..." required>
               <input type="submit" value="Buscar">
             </form>
-            <a href="index.html" class="red-line">Impulso real para empresas con visión global → <span class="language-btn" style="font-size: 0.7em;">ESP</span></a>
+            <div class="quote" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; width: 100%;">
+              <div style="flex: 3 1 480px; max-width: 100%; min-width: 240px; position: relative; padding-bottom: 27%;">
+                  <iframe id="youtube-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                          src="https://www.youtube.com/embed/videoseries?list=PLLKpxsS4-8Nk54hR0u8m1foUvwneWZRDO&enablejsapi=1&autoplay=0" 
+                          frameborder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowfullscreen></iframe>
+              </div>
+          </div>
             <a href="index-kr.html" class="highlighted-title">한국 | 페루, 함께 성장하는 비즈니스 파트너십 → <span class="language-btn" style="font-size: 0.7em;">KOR</span></a>
           </div>
         </div>
@@ -41,15 +49,17 @@
       <div class="cajas">
        
         <div class="cajas-box caja-a">
-          <h1>Cambio del Dólar (SUNAT)</h1>
-          
+          <h1>Dólar (SUNAT)</h1>          
           <p>Valor actual: <span id="dolar-a-sol">Cargando...</span> soles</p>
           
           <script>
-            fetch('https://api.apis.net.pe/v2/sunat/tipo-cambio')
+            const apiKey = 'TU_API_KEY_AQUI';  // Sustituye con tu API Key
+            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+          
+            fetch(url)
               .then(res => res.json())
               .then(data => {
-                const valorDolar = data.compra;  // Obtener el valor de compra (dólar a soles)
+                const valorDolar = data.conversion_rates.PEN;
                 document.getElementById('dolar-a-sol').textContent = valorDolar.toFixed(2);
               })
               .catch(err => {
@@ -62,7 +72,7 @@
         </div>
         <div class="cajas-box caja-b">
           <h1>Noticias</h1>
-          <p>Empowering businesses to thrive in new markets with tailored solutions and expert local support.</p>
+          <p>El Comercio</p>
           <a href="growth" class="section-button">Discover Growth Opportunities</a>
         </div>
       
