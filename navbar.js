@@ -26,10 +26,25 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="nav-container hidden">
         <nav>
           <ul class="menu">
-            <a href="index.html"><li>INICIO</li></a>
-            <a href="services.html"><li>SERVICES</li></a>
-            <a href="growth.html"><li>GROWTH</li></a>
-            <a href="contact.html"><li>CONTACT</li></a>
+            <a href="index.html"><li>HOME <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-home" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -4;">
+  <path d="M3 9l9-7 9 7"/><path d="M9 22V12h6v10"/> 
+</svg>
+</li></a>
+            <a href="solutions.html"><li>SOLUTIONS <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-puzzle" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -8;">
+  <path d="M8 2a2 2 0 0 1 4 0v2h2a2 2 0 0 1 0 4h-2v2h2a2 2 0 0 1 0 4h-2v2a2 2 0 0 1-4 0v-2H6a2 2 0 0 1 0-4h2v-2H6a2 2 0 0 1 0-4h2V2z"/>
+</svg>
+</li></a>
+
+<a href="news.html"><li>NEWS <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-newspaper" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -8;">
+  <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM5 19V5h14v14H5zM7 7h10v2H7V7zm0 4h6v2H7v-2z"/>
+</svg>
+</li></a>
+
+
+            <a href="contact.html"><li>CONTACT <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-phone" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -6;">
+  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.12 19.51 19.51 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.2 1.45.7 2.87 1.5 4.17a2 2 0 0 1-.45 2.37l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.37-.45c1.3.8 2.72 1.3 4.17 1.5A2 2 0 0 1 22 16.92z"/>
+</svg>
+</li></a>
           </ul>
         </nav>
       </div>`;

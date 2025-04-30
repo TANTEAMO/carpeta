@@ -97,9 +97,12 @@ h1 .logo {
 }
 
 .site-title:hover {
-  color: #b3d5f8;
-  background-clip: unset;
-  -webkit-background-clip: unset;
+  color: #b3d5f8 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+
 }
 
 #page-intro {
@@ -236,7 +239,7 @@ main ul li ol {
   position: fixed;
   right: 0;
   top: 60px;
-  width: 150px;
+  width: 167px;
   padding: 10px;
   background: rgba(202, 201, 201, 0.178);
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
@@ -794,4 +797,30 @@ main ul li ol {
     width: 100% !important;
     height: 400px !important;
   }
+}
+.search-area {
+  margin: 2rem 0;
+  display: flex;
+  gap: 0.5rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-area input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.search-area input[type="submit"] {
+  background-color: #0072ce;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
 }
