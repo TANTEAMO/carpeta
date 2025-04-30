@@ -50,23 +50,20 @@
        
         <div class="cajas-box caja-a">
           <h1>Dólar (SUNAT)</h1>          
-          <p>Valor actual: <span id="dolar-a-sol">Cargando...</span> soles</p>
-          
-          <script>
-            const apiKey = 'TU_API_KEY_AQUI';  // Sustituye con tu API Key
-            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
-          
-            fetch(url)
-              .then(res => res.json())
-              .then(data => {
-                const valorDolar = data.conversion_rates.PEN;
-                document.getElementById('dolar-a-sol').textContent = valorDolar.toFixed(2);
-              })
-              .catch(err => {
-                console.error('Error al obtener el tipo de cambio:', err);
-                document.getElementById('dolar-a-sol').textContent = 'Error';
-              });
-          </script>
+          <div id="tipoCambio">Cargando...</div>
+
+    <script>
+        fetch('https://api.frankfurter.app/latest?from=USD&to=PEN')
+            .then(response => response.json())
+            .then(data => {
+                const tipoCambioPEN = data.rates.PEN;
+                document.getElementById('tipoCambio').innerText = `1 USD = ${tipoCambioPEN} PEN`;
+            })
+            .catch(error => {
+                document.getElementById('tipoCambio').innerText = 'Error al cargar el tipo de cambio';
+                console.error('Error:', error);
+            });
+    </script>
           
           
         </div>
