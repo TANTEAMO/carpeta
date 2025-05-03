@@ -6,6 +6,20 @@
   <title>KOMYPE - Contact</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Estilos para transparencia en el formulario -->
+  <style>
+    .form-section input,
+    .form-section textarea {
+      background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco con 80% de opacidad */
+      transition: background-color 0.2s ease, border-color 0.2s ease, ring 0.2s ease;
+    }
+
+    .form-section input:focus,
+    .form-section textarea:focus {
+      background-color: rgba(255, 255, 255, 0.9); /* Ligeramente más opaco al enfocar */
+      border-color: #4f46e5; /* Consistente con focus:ring-indigo-500 */
+    }
+  </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-17SDCHQMC8"></script>
   <script>
@@ -30,7 +44,6 @@
           </h1>
           <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
             <span class="highlighted-title">
-
               <p class="text-lg text-gray-600 mt-2">Completa el formulario para cualquier consulta.</p>
           
             <section class="form-section max-w-lg mx-auto">
@@ -51,32 +64,14 @@
               </form>
             </section>
           
-        </span>
-            <a href="solutions.html" class="red-line">Estrategia, alianza y visión para tu éxito. → <span class="language-btn" style="font-size: 0.7em;">Soluciones</span></a>
+            </span>
+          
            
           </div>
         </div>
       </section>
       <div class="post-section">
-      <div class="cajas">
-       
-        <a class="cajas-box caja-a" href="solutions.html">
-          <h1>Soluciones · Portafolio</h1>
-          <p>Consultoría estratégica para impulsar alianzas sólidas y potenciar el éxito empresarial.</p>
-          
-        </a>
-        <a class="cajas-box caja-b" href="news.html" >
-          <h1>Noticias</h1>
-          <p>Empowering businesses to thrive in new markets with tailored solutions and expert local support.</p>
-          
-        </a>
       
-      <a class="cajas-box caja-c" href="contact.html" >
-        <h1>Contact Us</h1>
-        <p>Ready to get started? Let’s connect and create new opportunities for your business.</p>
-          
-      </a>
-    </div>
   </div>
       
       <!--section class="blog-feed" id="blog-feed"></section-->
