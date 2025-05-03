@@ -380,7 +380,7 @@ main ul li ol {
 }
 
 .cajas {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin: 10px 0;
@@ -389,6 +389,8 @@ main ul li ol {
 }
 
 .cajas-box {
+  flex: 1;
+  min-width: 0; /* Evita que el contenido desborde */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -399,6 +401,9 @@ main ul li ol {
   overflow-wrap: anywhere;
   height: 100%;
   box-sizing: border-box;
+}
+.cajas-box a:hover {
+  text-decoration: underline; /* Subrayado al pasar el ratón */
 }
 
 .caja-a { background-color: #f4f4f4; }
