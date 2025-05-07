@@ -106,7 +106,7 @@
   const blogFeed = document.getElementById('blog-feed');
   const postContainer = document.getElementById('post-container');
   const introSection = document.querySelector('.intro-section');
-
+  const postSection = document.querySelector('.post-section');
 
   // Observar cambios en postContainer para detectar inserción de songs.html
   const observer = new MutationObserver((mutations) => {
@@ -157,7 +157,7 @@
 
             // Ocultar secciones intro y post
             introSection.style.display = 'none';
-         
+            postSection.style.display = 'none';
             
             // Ocultar el feed y mostrar el contenido del post
             blogFeed.style.display = 'none';
@@ -167,81 +167,7 @@
               <button id="back-button-bottom" class="back-button">← Volver</button>
             `;
             postContainer.style.display = 'block';
-            
-            preview.addEventListener('click', async (e) => {
-  e.preventDefault();
-  const postFile = preview.dataset.post;
-  if (!postFile) return;
 
-  try {
-    const postRes = await fetch(postFile);
-    if (!postRes.ok) throw new Error('Post no encontrado');
-    const postHTML = await postRes.text();
-
-    // Ocultar secciones intro y feed
-    introSection.style.display = 'none';
-    blogFeed.style.display = 'none';
-    
-    // Mostrar el contenido del post
-    postContainer.innerHTML = `
-      <button id="back-button-top" class="back-button">← Volver</button>
-      ${postHTML}
-      <button id="back-button-bottom" class="back-button">← Volver</button>
-    `;
-    postContainer.style.display = 'block';
-
-    // Enviar vista de página a Google Analytics
-    const postData = posts.find(post => post.post === postFile);
-    if (postData && window.gtag) {
-      gtag('event', 'page_view', {
-        page_title: postData.title,
-        page_location: `${window.location.origin}/news/${postData.post}`,
-        page_path: `/news/${postData.post}`
-      });
-    }
-
-    // Cargar gráficos si existen
-    if (postData?.charts?.length) {
-      postData.charts.forEach(chart => {
-        const script = document.createElement('script');
-        script.text = `
-          setTimeout(() => {
-            const canvas = document.getElementById('${chart.id}');
-            if (canvas) {
-              new Chart(canvas.getContext('2d'), {
-                type: '${chart.type}',
-                data: ${JSON.stringify(chart.data)},
-                options: ${JSON.stringify(chart.options)}
-              });
-            }
-          }, 100);
-        `;
-        document.body.appendChild(script);
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    const volver = () => {
-      // Mostrar secciones intro y feed
-      introSection.style.display = 'block';
-      blogFeed.style.display = 'grid';
-      postContainer.style.display = 'none';
-      postContainer.innerHTML = '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      // Recargar todos los feeds
-      blogFeed.innerHTML = '';
-      loadLocalPosts().then(() => loadNewsFeed());
-    };
-
-    document.getElementById('back-button-top').addEventListener('click', volver);
-    document.getElementById('back-button-bottom').addEventListener('click', volver);
-  } catch (error) {
-    console.error('Error al cargar el post:', error);
-    postContainer.innerHTML = '<p class="error">Error al cargar el post.</p>';
-  }
-});
-            
             // Cargar gráficos si existen
             const postData = posts.find(post => post.post === postFile);
             if (postData?.charts?.length) {
@@ -266,15 +192,15 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             const volver = () => {
-       // Mostrar secciones intro y feed
-  introSection.style.display = 'block';
-  blogFeed.style.display = 'grid';
-  postContainer.style.display = 'none';
-  postContainer.innerHTML = '';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Recargar todos los feeds
-  blogFeed.innerHTML = ''; // Limpiar feeds
-  loadLocalPosts().then(() => loadNewsFeed()); // Cargar locales y luego externos
+              // Mostrar secciones intro y post nuevamente
+              introSection.style.display = 'block';
+              postSection.style.display = 'block';
+              
+              // Ocultar el post y mostrar el feed
+              postContainer.style.display = 'none';
+              postContainer.innerHTML = '';
+              blogFeed.style.display = 'grid';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             };
 
             document.getElementById('back-button-top').addEventListener('click', volver);
