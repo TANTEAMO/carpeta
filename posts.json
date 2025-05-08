@@ -9,14 +9,7 @@
       "label": "explora",
       "charts": []
     },
-    {
-      "title": "Chinchero",
-      "description": "Análisis y perspectivas",
-      "image": "images/tanque.jpg",
-      "post": "post/atencion.html",
-      "label": "explora",
-      "charts": []
-    },
+
     {
       "title": "La Mejor Camioneta 4x4 para tu Proyecto en Perú",
       "description": "Guía comparativa para elegir con inteligencia y proteger tu inversión",
@@ -47,6 +40,14 @@
           }
         }
       ]
+    },
+    {
+      "title": "Hipotecas ",
+      "description": "Revisa tu contrato de hipoteca paso a paso",
+      "image": "images/xxx.jpg",
+      "post": "post/hipoteca.html",
+      "label": "explora",
+      "charts": []
     }
    
   ]
