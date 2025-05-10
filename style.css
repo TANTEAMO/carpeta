@@ -542,23 +542,25 @@ main ul li ol {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
+    
 }
 
 .form-section input, .form-section textarea {
-  border: 1px solid #d1d5db;
+  border: 1px solid #ffffff;
   padding: 0.5rem;
   border-radius: 0.25rem;
   width: 100%;
+  opacity: 0.3; /* 0 = completamente transparente, 1 = completamente opaco */
 }
 
 .form-section input:focus, .form-section textarea:focus {
   outline: none;
-  border-color: #4f46e5;
+  border-color: #f0f0f7;
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
 
 .form-section button {
-  background-color: #4f46e5;
+  background-color: #445daa;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
